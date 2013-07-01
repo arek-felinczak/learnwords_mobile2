@@ -1,16 +1,19 @@
 Category = Backbone.Model.extend({
-	urlRoot: '/category',
+	
 	defaults: {
 		Name: '',
 		Id: 0,
-		Active: true
+		Public: true,
+		Owner: ''
 	},
+	
 	validate: function(attributes){
 		if(attributes.Name == null || attributes.Name.length == 0){
 			return "Category name can't be empty";
 		}
 		return true;
 	},
+	
 	initialize: function(){
 		this.bind("error", function(model, error){
 			// use jsconsole in future
@@ -25,7 +28,10 @@ Category = Backbone.Model.extend({
 
 CategoryCollection = Backbone.Collection.extend({
     model:Category,
-    url:"../categories"
+    url:"http://vocabulary.cba.pl/rest_api.php/categories",
+    initialize:function(){
+        console.log('Start load category list');
+    },
 });
 
 

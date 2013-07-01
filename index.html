@@ -3,105 +3,56 @@
   <head>
     <meta charset="utf-8">
 
-    <title></title>
+    <title>Learn words</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-
+	<link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Place favicon.ico in the root directory -->
-
-    <link rel="stylesheet" href="css/app.css">
+    <script type="text/javascript" src="js/lib/zepto.js"></script>    
+    <script type="text/javascript" src="js/lib/underscore.js"></script> 
+    <script type="text/javascript" src="js/lib/backbone.js"></script>
+    <script type="text/javascript" src="js/lib/handlebars.js"></script>
+    
+    <script type="text/javascript" src="js/Model/category.js"></script> 
+    <script type="text/javascript" src="js/View/categoryView.js"></script>     
+    <script type="text/javascript" src="js/router.js"></script> 
   </head>
   <body>
-    <x-view id="app">
-      <x-view class="home">
-        <x-view class="homesub">
-          <header>
-            <h1>Home</h1>
-          </header>
-
-          <p>Welcome to Vocabulary trainer page.</p>
-
-          <p>
-            This page will help you improve your vocabulary. You can learn new words from categorized lists, check your spelling, do tests. 
-			Thanks to diki.pl dictionary integration it is easy to check idioms, example sentences or pronunciation. 
-          </p>
-          <p>
-            Click on Category button to move to learning section.
-          </p>
-        </x-view>
-
-        <x-listview class="category-list">
-          <header>
-            <h1>Vocabulary categories</h1>
-          </header>
-        </x-listview>
-
-        <x-view class="details">
-          <header><h1>Details</h1></header>          
-          This item has the title "<span class="title"></span>"
-        </x-view>
-      </x-view>
-
-      <x-view class="add">
+  	<div class='panel'>
 		<header>
-			<h1>Add new word</h1>
-        </header>
-		
-		<label>Category </label>
-		<br />
-		<select name="CategoryId" id="CategoryId" style='margin: 0 0 8px;' >
-			<% for(var i=0; i < categories.length; i++) { %>
-					<%=categories[i].Name%>
-				<option value="<%=categories[i].Id%>">
-				</option>
-			<% } %>
-		</select>
-		<br />
-		<label>Word </label>
-		<br />
-		<input type="text" name="word" id="word" style='margin: 0 0 8px;' />
-		<br />
-		<label>Translation </label>
-		<br />
-		<input type="text" name="translation" id="translation" style='margin: 0 0 8px;' />
-		<br />
-		<label>Synonim </label>
-		<br />
-		<input type="text" name="synonim" id="synonim" style='margin: 0 0 8px;' />
-		<br />
-		<input type="hidden" name="author" id="author" />
-		<input type="button" class="button" id="submitNewWord" value="Submit" onclick="categoryRemoteAdapter.addWord($('#CategoryId').val(), $('#word').val(), $('#translation').val(), $('#synonim').val());"/>
-      </x-view>
-
-	   <x-listview id="list2">
-          <header>
-            <h1>Hello</h1>
-          </header>
-        </x-listview>
-	  
-        <x-view id="sync">
-          <h1>Sync dictionary</h1>
-          <button>Press me!</button>
-          <p>
-            Add progress bar here. Redirect after sync is finished.
-          </p>
-        </x-view>
-
-      <footer>
+			<h1>Home</h1>
+		</header>
+		<p>Welcome to Vocabulary trainer page.</p>
+		<p>
+			This page will help you improve your vocabulary. You can learn new words from categorized lists, check your spelling, do tests. 
+			Thanks to diki.pl dictionary integration it is easy to check idioms, example sentences or pronunciation. 
+		</p>
+		<p>
+			Click on Category button to move to learning section.
+		</p>
+  	</div>
+    <div id="CategoryListPanel" class='panel'>
+    	<section>
+    		<header>
+	        	<h1>Vocabulary categories</h1>
+	        </header>
+	        <ul id="CategoryList">
+	        	
+			<script id="categories-template" type="text/x-handlebars-template">
+  				{{#each categories}}
+					<li>
+						<a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a>
+					</li>
+				{{/each}}
+			</script>
+				
+	        </ul>
+    	</section>   	
+        
+    </div>
+    <footer>
         <button data-view=".home">Home</button>
-        <button data-view="#sync">Sync dictionary</button>
-        <button data-view=".add">Add word</button>
-      </footer>
-    </x-view>
-
-    <div class="loading">Loading...</div>
-
-    <!-- Using require.js, a module system for javascript, include the
-         js files. This loads "main.js", which in turn can load other
-         files, all handled by require.js:
-         http://requirejs.org/docs/api.html#jsfiles -->
-    <script type="text/javascript"
-            data-main="js/init.js"
-            src="js/lib/require.js"></script>
+    	<button data-view="#sync">Sync dictionary</button>
+    </footer>
   </body>
 </html>

@@ -1,32 +1,15 @@
- CategoriesView = Backbone.View.extend({
-       initialize: function(){
-              this.model.bind("reset", this.render, this);
-       },
-		
-       render: function(){
-              var template = _.template( $("#categoriesTemplate").html(), { categories: this.model.models } );
-              this.$el.html( template );
-              
-       },
-        
-		events: {
+ CategoryItemsView = Backbone.View.extend({
+      
+	 render:function (eventName) {
+	    var source = $("#categories-template").html();
+	    var template = Handlebars.compile(source);
+	    
+	    var vm = {categories: this.model.models, count: this.model.models.length};
+	    var html = template(vm);
+	    return html;
+	 }
+	 
+	 /* events: {
             "click input[type=button]": "doSearch"
-        },
-    });
-
-
- CategoryView = Backbone.View.extend({
-       initialize: function(){
-              this.model.bind("reset", this.render, this);
-       },
-		
-       render: function(){
-              var template = _.template( $("#categoryTemplate").html(), { categories: this.model.models } );
-              this.$el.html( template );
-              
-       },
-        
-		events: {
-            "click input[type=button]": "doSearch"
-        },
+        },*/
     });

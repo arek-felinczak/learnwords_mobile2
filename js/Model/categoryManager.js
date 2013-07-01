@@ -1,6 +1,5 @@
 var categoryRemoteAdapter = {
     server: "https://learnwords.firebaseio.com",
-
     getItems: function(id, page, callback) {
         if (callback) {
             return this.loadDictionary(this.getItemsFromCategory(JSON.parse(localStorage.categories), id, page, callback));
