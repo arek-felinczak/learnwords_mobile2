@@ -1,29 +1,29 @@
 Category = Backbone.Model.extend({
 	
-	defaults: {
-		Name: '',
-		Id: 0,
-		Public: true,
-		Owner: ''
-	},
-	
-	validate: function(attributes){
-		if(attributes.Name == null || attributes.Name.length == 0){
-			return "Category name can't be empty";
-		}
-		return true;
-	},
-	
-	initialize: function(){
-		this.bind("error", function(model, error){
-			// use jsconsole in future
-			alert(error);
-		});
-		this.on("change:Name", function(model){
-			var name = model.get("Name");
-			alert("Changed my name to " + name );
-		});
-	}
+    defaults: {
+        Name: '',
+        Id: 0,
+        Public: true,
+        Owner: ''
+    },
+
+    validate: function(attributes){
+        if(attributes.Name === null || attributes.Name.length == 0){
+            return "Category name can't be empty";
+        }
+        return true;
+    },
+
+    initialize: function(){
+        this.bind("error", function(model, error){
+            // use jsconsole in future
+            alert(error);
+        });
+        this.on("change:Name", function(model){
+            var name = model.get("Name");
+            alert("Changed my name to " + name );
+        });
+    }
 });
 
 CategoryCollection = Backbone.Collection.extend({

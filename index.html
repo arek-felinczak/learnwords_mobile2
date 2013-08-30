@@ -14,41 +14,58 @@
     <script type="text/javascript" src="js/lib/handlebars.js"></script>
     
     <script type="text/javascript" src="js/Model/category.js"></script> 
+    <script type="text/javascript" src="js/Model/items.js"></script> 
     <script type="text/javascript" src="js/View/categoryView.js"></script>     
+    <script type="text/javascript" src="js/View/itemsView.js"></script>     
     <script type="text/javascript" src="js/router.js"></script> 
   </head>
   <body>
-  	<div class='panel'>
-		<header>
-			<h1>Home</h1>
-		</header>
-		<p>Welcome to Vocabulary trainer page.</p>
-		<p>
-			This page will help you improve your vocabulary. You can learn new words from categorized lists, check your spelling, do tests. 
-			Thanks to diki.pl dictionary integration it is easy to check idioms, example sentences or pronunciation. 
-		</p>
-		<p>
-			Click on Category button to move to learning section.
-		</p>
-  	</div>
+    <div class='panel'>
+        <header>
+            <h1>Home</h1>
+        </header>
+        <p>Welcome to Vocabulary trainer page.</p>
+        <p>
+            This page will help you improve your vocabulary. You can learn new words from categorized lists, check your spelling, do tests. 
+            Thanks to diki.pl dictionary integration it is easy to check idioms, example sentences or pronunciation. 
+        </p>
+        <p>
+            Click on Category button to move to learning section.
+        </p>
+    </div>
     <div id="CategoryListPanel" class='panel'>
     	<section>
-    		<header>
-	        	<h1>Vocabulary categories</h1>
-	        </header>
-	        <ul id="CategoryList">
-	        	
-			<script id="categories-template" type="text/x-handlebars-template">
-  				{{#each categories}}
-					<li>
-						<a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a>
-					</li>
-				{{/each}}
-			</script>
+            <header>
+                <h1>Vocabulary categories</h1>
+            </header>
+	        <ul id="CategoryList">	        	
+                    <script id="categories-template" type="text/x-handlebars-template">
+                        {{#each categories}}
+                            <li>
+                                <a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a>
+                            </li>
+                        {{/each}}
+                    </script>
 				
 	        </ul>
     	</section>   	
-        
+    </div>  
+    <div id="ItemsListPanel" class='panel'>
+    	<section>
+            <header>
+                <h1>Words list</h1>
+            </header>
+	        <ul id="ItemsList">	        	
+                    <script id="items-template" type="text/x-handlebars-template">
+                        {{#each items}}
+                            <li>
+                                <a href="#item/{{this.attributes.Word}}"> {{this.attributes.Word}} </a>
+                            </li>
+                        {{/each}}
+                    </script>
+				
+	        </ul>
+    	</section>   	
     </div>
     <footer>
         <button data-view=".home">Home</button>

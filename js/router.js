@@ -20,9 +20,17 @@ var AppRouter = Backbone.Router.extend({
     },
  
     category:function (id) {
-        //this.category = this.wineList.get(id);
-        //this.wineView = new WineView({model:this.wine});
-        //$('#content').html(this.wineView.render().el);
+        this.itemsList = new ItemsCollection();
+        this.itemsList.url += id;
+        this.itemsView = new ItemsView({model:this.itemsList});
+       
+        var ctv = this.itemsView;
+        this.itemsList.fetch({
+            success: function () {
+                $('ul#ItemsList').html(ctv.render());
+                $('div#ItemsListPanel').show();
+       	    }
+        });
     }
 });
 	

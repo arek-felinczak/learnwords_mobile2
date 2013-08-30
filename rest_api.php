@@ -1,14 +1,13 @@
 <?php
 
-error_reporting(E_ALL);
-require_once 'Slim/Slim.php';
- 
+include_once 'Slim/Slim.php';
+
 $app = new Slim();
- 
+
 $app->get('/categories', 'getCategories');
-$app->get('/categories/:id',  'getCategory');
 //$app->get('/wines/search/:query', 'findByName');
-//$app->post('/wines', 'addWine');
+$app->get('/categories/:id', 'getCategory');
+$app->get('/items/:id', 'getCategoryItems');
 //$app->put('/wines/:id', 'updateWine');
 //$app->delete('/wines/:id', 'deleteWine');
  
@@ -21,7 +20,6 @@ function getCategories() {
         $db = getConnection();
         $stmt = $db->query($sql);
         $cats = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $db = null;
         echo json_encode($cats);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
@@ -36,8 +34,22 @@ function getCategory($id) {
         $stmt->bindParam("id", $id);
         $stmt->execute();
         $cat = $stmt->fetchObject();
-        $db = null;
         echo json_encode($cat);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getCategoryItems($id) {
+    $sql = "SELECT * FROM Item WHERE CategoryId=:id";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+        $items = $stmt->fetch();
+        
+        echo json_encode($items);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
