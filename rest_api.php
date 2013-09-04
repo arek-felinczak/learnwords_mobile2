@@ -135,8 +135,8 @@ function getConnection() {
     $dbpass="08QQQqqq";
     $dbname="vocabulary_cba_pl";
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+    $dbh->exec("set names utf8");
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;
 }
- 
 ?>
