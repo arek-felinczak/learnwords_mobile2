@@ -47,7 +47,7 @@ function getCategoryItems($id) {
         $stmt = $db->prepare($sql);
         $stmt->bindParam("id", $id);
         $stmt->execute();
-        $items = $stmt->fetch();
+        $items = $stmt->fetchAll();
         
         echo json_encode($items);
     } catch(PDOException $e) {
