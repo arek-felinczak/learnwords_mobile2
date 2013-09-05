@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta charset="utf-8">
-
     <title>Learn words</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -12,11 +11,11 @@
     <script type="text/javascript" src="js/lib/underscore.js"></script> 
     <script type="text/javascript" src="js/lib/backbone.js"></script>
     <script type="text/javascript" src="js/lib/handlebars.js"></script>
-    
     <script type="text/javascript" src="js/Model/category.js"></script> 
     <script type="text/javascript" src="js/Model/items.js"></script> 
     <script type="text/javascript" src="js/View/categoryView.js"></script>     
-    <script type="text/javascript" src="js/View/itemsView.js"></script>     
+    <script type="text/javascript" src="js/View/itemsView.js"></script>
+    <script type="text/javascript" src="js/View/itemView.js"></script>    
     <script type="text/javascript" src="js/router.js"></script> 
   </head>
   <body>
@@ -56,15 +55,23 @@
                 <h1>Words list</h1>
             </header>
 	        <ul id="ItemsList">	        	
-                    <script id="items-template" type="text/x-handlebars-template">
-                        {{#each category}}
-                            <li>
-                                <a href="#item/{{this.attributes.Word}}"> {{this.attributes.Word}} </a>
-                            </li>
-                        {{/each}}
-                    </script>
-				
+                <script id="items-template" type="text/x-handlebars-template">
+                    {{#each category}}
+                        <li>
+                            <span style="width: 40%; background-color: yellow;"> {{this.attributes.Word}} </span>
+                            <span> <a href="#item/{{this.attributes.Id}}">{{this.attributes.Translation1}}</a> </span>
+                        </li>
+                    {{/each}}
+                </script>				
 	        </ul>
+    	</section>   	
+    </div>
+    <div id="ItemViev" class='panel'>
+    	<section>
+            <header>
+                <h1>Diki view</h1>
+            </header>
+	        <iframe id='DictionaryItemView' src='' />	        	
     	</section>   	
     </div>
     <footer>

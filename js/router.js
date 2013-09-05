@@ -3,7 +3,8 @@
 var AppRouter = Backbone.Router.extend({ 
     routes: {
         "" : "categoryList",
-        "category/:id" : "category"
+        "category/:id" : "category",
+        "item/:id" : "item"
     },
  
     categoryList:function () {
@@ -13,6 +14,7 @@ var AppRouter = Backbone.Router.extend({
         var ctv = this.categoryListView;
         this.categoryList.fetch({
         	success: function () {
+                $('div.panel').hide();
         		$('ul#CategoryList').html(ctv.render());
         		$('div#CategoryListPanel').show();
        	    }
@@ -20,15 +22,24 @@ var AppRouter = Backbone.Router.extend({
     },
  
     category:function (id) {
-        this.itemsList = new ItemsCollection();
-        this.itemsList.url += id;
-        this.itemsView = new ItemsView({model:this.itemsList});
-       
-        var ctv = this.itemsView;
-        this.itemsList.fetch({
+        var itemsList = new ItemsCollection();
+        itemsList.url += id;
+        var itemsView = new ItemsView({model:itemsList});
+        itemsList.fetch({
             success: function () {
-                $('ul#ItemsList').html(ctv.render());
+                $('div.panel').hide();
+                $('ul#ItemsList').html(itemsView.render());
                 $('div#ItemsListPanel').show();
+       	    }
+        });
+    },
+    
+    item:function (id) {
+        var item = new Item({id: id});
+        item.fetch({
+            success: function () {
+                $('div.panel').hide();
+                new ItemView({model:item}).render();
        	    }
         });
     }

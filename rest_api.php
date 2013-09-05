@@ -8,6 +8,7 @@ $app->get('/categories', 'getCategories');
 //$app->get('/wines/search/:query', 'findByName');
 $app->get('/categories/:id', 'getCategory');
 $app->get('/items/:id', 'getCategoryItems');
+$app->get('/item/:id', 'getItem');
 //$app->put('/wines/:id', 'updateWine');
 //$app->delete('/wines/:id', 'deleteWine');
  
@@ -48,6 +49,21 @@ function getCategoryItems($id) {
         $stmt->bindParam("id", $id);
         $stmt->execute();
         $items = $stmt->fetchAll();
+        
+        echo json_encode($items);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getItem($id) {
+    $sql = "SELECT * FROM Item WHERE id=:id";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+        $items = $stmt->fetch();
         
         echo json_encode($items);
     } catch(PDOException $e) {

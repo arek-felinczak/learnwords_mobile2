@@ -11,7 +11,7 @@ Category = Backbone.Model.extend({
         if(attributes.Name === null || attributes.Name.length == 0){
             return "Category name can't be empty";
         }
-        return true;
+        return false;
     },
 
     initialize: function(){
@@ -28,7 +28,7 @@ Category = Backbone.Model.extend({
 
 CategoryCollection = Backbone.Collection.extend({
     model:Category,
-    url:"http://vocabulary.cba.pl/rest_api.php/categories",
+    url:"/rest_api.php/categories",
     initialize:function(){
         console.log('Start load category list');
     },

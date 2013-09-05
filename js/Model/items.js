@@ -1,5 +1,6 @@
 Item = Backbone.Model.extend({
-   
+    urlRoot: "/rest_api.php/item/",
+    
     defaults: {
         CategoryId: 0,
         Word: '',
@@ -12,7 +13,7 @@ Item = Backbone.Model.extend({
         if(attributes.CategoryId == 0){
             return "Category link can't be empty";
         }
-        return true;
+        return false;
     },
     initialize: function(){
         this.bind("error", function(model, error){
@@ -24,6 +25,6 @@ Item = Backbone.Model.extend({
 
 ItemsCollection = Backbone.Collection.extend({
     model: Item,
-    url: "http://vocabulary.cba.pl/rest_api.php/items/",
-    page: 0
+    url: "/rest_api.php/items/",
+    page: 0,
 });
