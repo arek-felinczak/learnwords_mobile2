@@ -132,7 +132,7 @@ function findByName($query) {
 function getConnection() {
     $dbhost="mysql.cba.pl:3306";
     $dbuser="afelin";
-    $dbpass="08QQQqqq";
+    $dbpass="";
     $dbname="vocabulary_cba_pl";
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
     $dbh->exec("set names utf8");
