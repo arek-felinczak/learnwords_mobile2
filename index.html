@@ -20,7 +20,7 @@
     <script type="text/javascript" src="js/router.js"></script> 
   </head>
   <body>
-      <!-- Fixed navbar -->
+    <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -59,73 +59,61 @@
     </div>
 
     <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar">View navbar docs &raquo;</a>
-        </p>
-      </div>
-
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class='panel'>
+                <p>Welcome to Vocabulary trainer page.</p>
+                <p>
+                    This page will help you improve your vocabulary. You can learn new words from categorized lists, check your spelling, do tests. 
+                    Thanks to diki.pl dictionary integration it is easy to check idioms, example sentences or pronunciation. 
+                </p>
+                <p>
+                    Click on Category button to move to learning section.
+                </p>
+            </div>
+            <div id="CategoryListPanel" class='panel'>
+                <section>
+                    <header>
+                        <h1>Vocabulary categories</h1>
+                    </header>
+                    <ul id="CategoryList">	        	
+                        <script id="categories-template" type="text/x-handlebars-template">
+                            {{#each categories}}
+                                <li>
+                                    <a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a>
+                                </li>
+                            {{/each}}
+                        </script>
+                    </ul>
+                </section>   	
+            </div>  
+            <div id="ItemsListPanel" class='panel'>
+                <section>
+                    <header>
+                        <h1>Words list</h1>
+                    </header>
+                    <ul id="ItemsList">	        	
+                        <script id="items-template" type="text/x-handlebars-template">
+                            {{#each category}}
+                                <li>
+                                    <span style="width: 40%; background-color: yellow;"> {{this.attributes.Word}} </span>
+                                    <span> <a href="#item/{{this.attributes.Id}}">{{this.attributes.Translation1}}</a> </span>
+                                </li>
+                            {{/each}}
+                        </script>				
+                    </ul>
+                </section>   	
+            </div>
+            <div id="ItemViev" class='panel'>
+                <section>
+                    <header>
+                        <h1>Diki view</h1>
+                    </header>
+                    <iframe id='DictionaryItemView' src='' />	        	
+                </section>   	
+            </div>
+        </div>
     </div> <!-- /container -->
-    <div class='panel'>
-        <header>
-            <h1>Home</h1>
-        </header>
-        <p>Welcome to Vocabulary trainer page.</p>
-        <p>
-            This page will help you improve your vocabulary. You can learn new words from categorized lists, check your spelling, do tests. 
-            Thanks to diki.pl dictionary integration it is easy to check idioms, example sentences or pronunciation. 
-        </p>
-        <p>
-            Click on Category button to move to learning section.
-        </p>
-    </div>
-    <div id="CategoryListPanel" class='panel'>
-    	<section>
-            <header>
-                <h1>Vocabulary categories</h1>
-            </header>
-	        <ul id="CategoryList">	        	
-                    <script id="categories-template" type="text/x-handlebars-template">
-                        {{#each categories}}
-                            <li>
-                                <a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a>
-                            </li>
-                        {{/each}}
-                    </script>
-				
-	        </ul>
-    	</section>   	
-    </div>  
-    <div id="ItemsListPanel" class='panel'>
-    	<section>
-            <header>
-                <h1>Words list</h1>
-            </header>
-	        <ul id="ItemsList">	        	
-                <script id="items-template" type="text/x-handlebars-template">
-                    {{#each category}}
-                        <li>
-                            <span style="width: 40%; background-color: yellow;"> {{this.attributes.Word}} </span>
-                            <span> <a href="#item/{{this.attributes.Id}}">{{this.attributes.Translation1}}</a> </span>
-                        </li>
-                    {{/each}}
-                </script>				
-	        </ul>
-    	</section>   	
-    </div>
-    <div id="ItemViev" class='panel'>
-    	<section>
-            <header>
-                <h1>Diki view</h1>
-            </header>
-	        <iframe id='DictionaryItemView' src='' />	        	
-    	</section>   	
-    </div>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
