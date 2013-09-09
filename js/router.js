@@ -14,7 +14,7 @@ var AppRouter = Backbone.Router.extend({
         this.categoryList.fetch({
         	success: function () {
                 $('div.panel').hide();
-        		$('ul#CategoryList').html(ctv.render());
+        		$('#CategoryList').html(ctv.render());
         		$('div#CategoryListPanel').show();
        	    }
         });

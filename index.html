@@ -10,8 +10,7 @@
     <!-- Place favicon.ico in the root directory -->
   </head>
   <body>
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
+       <div class="navbar navbar-inverse">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -39,67 +38,70 @@
               </ul>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
       </div>
     </div>
-
     <div class="container">
-        <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <div id="CategoryListPanel" class='panel'>
-                <section>
-                    <header>
-                        <h3>Vocabulary categories</h3>
-                    </header>
-                    <ul id="CategoryList">	        	
-                        <script id="categories-template" type="text/x-handlebars-template">
-                            {{#each categories}}
-                                <li>
-                                    <a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a>
-                                </li>
-                            {{/each}}
-                        </script>
-                    </ul>
-                </section>   	
-            </div>  
-            <div id="ItemsListPanel" class='panel'>
-                <section>
-                    <header>
-                        <h3>Words list</h3>
-                    </header>
-                    <ul id="ItemsList">	        	
-                        <script id="items-template" type="text/x-handlebars-template">
-                            {{#each category}}
-                                <li>
-                                    <span style="width: 40%; background-color: yellow;"> {{this.attributes.Word}} </span>
-                                    <span> <a href="#item/{{this.attributes.Id}}">{{this.attributes.Translation1}}</a> </span>
-                                </li>
-                            {{/each}}
-                        </script>				
-                    </ul>
-                </section>   	
-            </div>
-            <div id="ItemViev" class='panel'>
-                <section>
-                    <header>
-                        <h3>Diki view</h3>
-                    </header>
-                    <iframe id='DictionaryItemView' src=''></iframe>	        	
-                </section>   	
-            </div>
+    </div>  
+    <div class="container">
+        <div id="CategoryListPanel" class='panel'>
+            <section>
+                <div id="CategoryList">
+                <script id="categories-template" type="text/x-handlebars-template">
+                    {{#each categories}}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>
+                                <a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a>
+                            </p>
+                        </div>
+                    </div>  
+                    {{/each}}
+                </script>
+                </div>
+            </section>   	
+        </div>  
+        <div id="ItemsListPanel" class='panel'>
+            <section>
+                <header>
+                    <h4>Words list</h4>
+                </header>
+                <ul id="ItemsList">	        	
+                    <script id="items-template" type="text/x-handlebars-template">
+                        {{#each category}}
+                            <li>
+                                <span style="width: 40%; background-color: yellow;"> {{this.attributes.Word}} </span>
+                                <span> <a href="#item/{{this.attributes.Id}}">{{this.attributes.Translation1}}</a> </span>
+                            </li>
+                        {{/each}}
+                    </script>				
+                </ul>
+            </section>   	
+        </div>
+        <div id="ItemViev" class='panel'>
+            <section>
+                <header>
+                    <h4>Diki view</h4>
+                </header>
+                <iframe id='DictionaryItemView' src=''></iframe>	        	
+            </section>   	
         </div>
     </div> <!-- /container -->
+    <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>  
     <script type="text/javascript">
         window.learnwordsConfig = {
-            restUrl: "http://vocabulary.cba.pl/rest_api.php"
+            restUrl: "http://vocabulary.cba.pl"
         };
-    </script>  
-    <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>    
+    </script>
     <script type="text/javascript" src="js/lib/underscore.js"></script> 
     <script type="text/javascript" src="js/lib/backbone.js"></script>
     <script type="text/javascript" src="js/lib/handlebars.js"></script>
