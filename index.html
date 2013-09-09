@@ -8,16 +8,6 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Place favicon.ico in the root directory -->
-    <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>    
-    <script type="text/javascript" src="js/lib/underscore.js"></script> 
-    <script type="text/javascript" src="js/lib/backbone.js"></script>
-    <script type="text/javascript" src="js/lib/handlebars.js"></script>
-    <script type="text/javascript" src="js/Model/category.js"></script> 
-    <script type="text/javascript" src="js/Model/items.js"></script> 
-    <script type="text/javascript" src="js/View/categoryView.js"></script>     
-    <script type="text/javascript" src="js/View/itemsView.js"></script>
-    <script type="text/javascript" src="js/View/itemView.js"></script>    
-    <script type="text/javascript" src="js/router.js"></script> 
   </head>
   <body>
     <!-- Fixed navbar -->
@@ -61,20 +51,10 @@
     <div class="container">
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">
-            <div class='panel'>
-                <p>Welcome to Vocabulary trainer page.</p>
-                <p>
-                    This page will help you improve your vocabulary. You can learn new words from categorized lists, check your spelling, do tests. 
-                    Thanks to diki.pl dictionary integration it is easy to check idioms, example sentences or pronunciation. 
-                </p>
-                <p>
-                    Click on Category button to move to learning section.
-                </p>
-            </div>
             <div id="CategoryListPanel" class='panel'>
                 <section>
                     <header>
-                        <h1>Vocabulary categories</h1>
+                        <h3>Vocabulary categories</h3>
                     </header>
                     <ul id="CategoryList">	        	
                         <script id="categories-template" type="text/x-handlebars-template">
@@ -90,7 +70,7 @@
             <div id="ItemsListPanel" class='panel'>
                 <section>
                     <header>
-                        <h1>Words list</h1>
+                        <h3>Words list</h3>
                     </header>
                     <ul id="ItemsList">	        	
                         <script id="items-template" type="text/x-handlebars-template">
@@ -107,13 +87,28 @@
             <div id="ItemViev" class='panel'>
                 <section>
                     <header>
-                        <h1>Diki view</h1>
+                        <h3>Diki view</h3>
                     </header>
-                    <iframe id='DictionaryItemView' src='' />	        	
+                    <iframe id='DictionaryItemView' src=''></iframe>	        	
                 </section>   	
             </div>
         </div>
     </div> <!-- /container -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        window.learnwordsConfig = {
+            restUrl: "http://vocabulary.cba.pl/rest_api.php"
+        };
+    </script>  
+    <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>    
+    <script type="text/javascript" src="js/lib/underscore.js"></script> 
+    <script type="text/javascript" src="js/lib/backbone.js"></script>
+    <script type="text/javascript" src="js/lib/handlebars.js"></script>
+    <script type="text/javascript" src="js/Model/category.js"></script> 
+    <script type="text/javascript" src="js/Model/items.js"></script> 
+    <script type="text/javascript" src="js/View/categoryView.js"></script>     
+    <script type="text/javascript" src="js/View/itemsView.js"></script>
+    <script type="text/javascript" src="js/View/itemView.js"></script>    
+    <script type="text/javascript" src="js/router.js"></script> 
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>

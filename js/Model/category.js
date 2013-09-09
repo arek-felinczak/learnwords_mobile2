@@ -28,7 +28,7 @@ Category = Backbone.Model.extend({
 
 CategoryCollection = Backbone.Collection.extend({
     model:Category,
-    url:"/rest_api.php/categories",
+    url: window.learnwordsConfig.restUrl + "/rest_api.php/categories",
     initialize:function(){
         console.log('Start load category list');
     },

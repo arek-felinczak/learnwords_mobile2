@@ -1,4 +1,3 @@
-  
 // Router
 var AppRouter = Backbone.Router.extend({ 
     routes: {
@@ -8,7 +7,6 @@ var AppRouter = Backbone.Router.extend({
     },
  
     categoryList:function () {
-	$.support.cors = true;
         this.categoryList = new CategoryCollection();
         this.categoryListView = new CategoryItemsView({model:this.categoryList});
        

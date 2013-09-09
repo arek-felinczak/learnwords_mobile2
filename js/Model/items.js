@@ -1,5 +1,5 @@
 Item = Backbone.Model.extend({
-    urlRoot: "/rest_api.php/item/",
+    urlRoot: window.learnwordsConfig.restUrl + "/rest_api.php/item/",
     
     defaults: {
         CategoryId: 0,
@@ -25,6 +25,6 @@ Item = Backbone.Model.extend({
 
 ItemsCollection = Backbone.Collection.extend({
     model: Item,
-    url: "/rest_api.php/items/",
+    url: window.learnwordsConfig.restUrl + "/rest_api.php/items/",
     page: 0,
 });
