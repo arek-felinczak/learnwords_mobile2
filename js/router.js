@@ -4,7 +4,7 @@ var AppRouter = Backbone.Router.extend({
         "" : "categoryList",
         "categories" : "categoryList",
         "category/:id" : "category",
-        "item/:id" : "item"
+        "item/:id/:nr" : "item"
     },
  
     categoryList:function () {
@@ -34,12 +34,12 @@ var AppRouter = Backbone.Router.extend({
         });
     },
     
-    item:function (id) {
+    item:function (id, nr) {
         var item = new Item({id: id});
         item.fetch({
             success: function () {
                 $('div.panel').hide();
-                new ItemView({model:item}).render();
+                new ItemView({model:item, nr:nr}).render();
        	    }
         });
     }

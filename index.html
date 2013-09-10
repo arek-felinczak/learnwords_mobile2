@@ -53,36 +53,38 @@
             <div id="CategoryListPanel" class='panel'>
                 <section>
                     <h4 id="CategoryName"> Words list from category: </h4>
-                        <div id="CategoryList">
-                           <script id="categories-template" type="text/x-handlebars-template">
-                                <table class="table">
-                                {{#each categories}}
-                                    <tr>
-                                        <td><a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a></td>
-                                    </tr>
-                                {{/each}}
-                                </table>
-                           </script>
+                        <div id="CategoryList">                           
                         </div>
+                        <script id="categories-template" type="text/x-handlebars-template">
+                            <table class="table">
+                            {{#each categories}}
+                                <tr>
+                                    <td><a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a></td>
+                                </tr>
+                            {{/each}}
+                            </table>
+                       </script>
                 </section>   	
             </div>  
             <div id="ItemsListPanel" class='panel'>
                 <section>
                     <h4 id="CategoryNameHeader"></h4>
-                    <div id="ItemsList">	        	
-                        <script id="items-template" type="text/x-handlebars-template">
-                            <table class="table">
-                            {{#each category}}
-                            <tr>
-                                <td>{{this.attributes.Word}}</td>
-                                <td><a href="#item/{{this.attributes.Id}}">{{this.attributes.Translation1}}</a></td>
-                                <td> <span class="glyphicon glyphicon-plus-sign"></span> </td>
-                                <td> <span class="glyphicon glyphicon-remove-circle"></span> </td>
-                            </tr>
-                            {{/each}}
-                            </table>
-                        </script>				
+                    <div id="ItemsList">
                     </div>
+                    <script id="items-template" type="text/x-handlebars-template">
+                        <table class="table">
+                        {{#each category}}
+                        <tr>
+                            <td>{{setIndex @index}}.</td>
+                            <td>{{this.attributes.Word}}</td>
+                            <td><a href="#item/{{this.attributes.Id}}/1">{{this.attributes.Translation1}}</a></td>
+                            <td><a href="#item/{{this.attributes.Id}}/2">{{this.attributes.Translation2}}</a></td>
+                            <td> <span class="glyphicon glyphicon-plus-sign"></span> </td>
+                            <td> <span class="glyphicon glyphicon-remove-circle"></span> </td>
+                        </tr>
+                        {{/each}}
+                        </table>
+                    </script>
                 </section>   	
             </div>
             <div id="ItemViev" class='panel container'>
@@ -97,13 +99,23 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.0/jquery.xdomainrequest.min.js"></script>
         <script type="text/javascript">
             window.learnwordsConfig = {
-            restUrl: "http://vocabulary.cba.pl"
+                restUrl: "http://vocabulary.cba.pl",
+                diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
+                forvo: "http://pl.forvo.com/word/{0}/#en"
             };
             if (!window.console) window.console = {};
+            if (!window.localStorage['engineLink']) 
+                window.localStorage['engineLink'] = window.learnwordsConfig.diki;
         </script>
         <script type="text/javascript" src="js/lib/underscore.js"></script> 
         <script type="text/javascript" src="js/lib/backbone.js"></script>
         <script type="text/javascript" src="js/lib/handlebars.js"></script>
+        <script type="text/javascript">
+            Handlebars.registerHelper('setIndex', function(value){
+                return Number(value + 1);
+            });
+        </script>
+        <script type="text/javascript" src="js/lib/commons.js"></script>
         <script type="text/javascript" src="js/Model/category.js"></script> 
         <script type="text/javascript" src="js/Model/items.js"></script> 
         <script type="text/javascript" src="js/View/categoryView.js"></script>     
@@ -111,5 +123,6 @@
         <script type="text/javascript" src="js/View/itemView.js"></script>    
         <script type="text/javascript" src="js/router.js"></script> 
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        
     </body>
 </html>

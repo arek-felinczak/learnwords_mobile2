@@ -46,7 +46,7 @@ function getCategory($id) {
 }
 
 function getCategoryItems($id) {
-    $sql = "SELECT * FROM Item WHERE CategoryId=:id";
+    $sql = "SELECT * FROM Item WHERE CategoryId=:id ORDER BY id DESC";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);

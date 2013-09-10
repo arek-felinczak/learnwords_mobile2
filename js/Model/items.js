@@ -6,8 +6,7 @@ Item = Backbone.Model.extend({
         Word: '',
         Translation1: '',
         Translation2: '',
-        Id: 0,
-        Link: ''
+        Id: 0
     },
     validate: function(attributes){
         if(attributes.CategoryId == 0){
