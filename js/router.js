@@ -2,6 +2,7 @@
 var AppRouter = Backbone.Router.extend({ 
     routes: {
         "" : "categoryList",
+        "categories" : "categoryList",
         "category/:id" : "category",
         "item/:id" : "item"
     },
