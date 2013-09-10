@@ -15,7 +15,7 @@ var AppRouter = Backbone.Router.extend({
         this.categoryList.fetch({
         	success: function () {
                 $('div.panel').hide();
-        		$('#CategoryList').html(ctv.render());
+        		$('div#CategoryList').html(ctv.render());
         		$('div#CategoryListPanel').show();
        	    }
         });
@@ -28,7 +28,7 @@ var AppRouter = Backbone.Router.extend({
         itemsList.fetch({
             success: function () {
                 $('div.panel').hide();
-                $('ul#ItemsList').html(itemsView.render());
+                $('div#ItemsList').html(itemsView.render());
                 $('div#ItemsListPanel').show();
        	    }
         });
