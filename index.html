@@ -32,6 +32,10 @@
                                 <li><a href="#">Offline mode (todo)</a></li>
                                 <li><a href="#repetition-list">Repetition list</a></li>
                                 <li class="divider"></li>
+                                <li class="dropdown-header">Speech engine</li>
+                                <li><a href="#" onClick="window.localStorage['engineLink']=window.learnwordsConfig.diki;">Diki.pl</a></li>
+                                <li><a href="#" onClick="window.localStorage['engineLink']=window.learnwordsConfig.forvo;">Forvo.pl</a></li>
+                                <li class="divider"></li>
                                 <li class="dropdown-header">Contribute</li>
                                 <li><a href="#add-word-form">Add word</a></li>
                                 <li><a href="#add-category-form">Add category (admin only)</a></li>
@@ -59,7 +63,7 @@
                             <table class="table">
                             {{#each categories}}
                                 <tr>
-                                    <td><a href="#category/{{this.attributes.Id}}"> {{this.attributes.Name}} </a></td>
+                                <td><a href="#category/{{this.attributes.Id}}" onclick='AppRouter.CategoryId={{this.attributes.Id}};'> {{this.attributes.Name}} </a></td>
                                 </tr>
                             {{/each}}
                             </table>

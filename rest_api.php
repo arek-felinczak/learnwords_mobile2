@@ -75,7 +75,7 @@ function getItem($id) {
     }
 }
 
-function addWine() {
+function addWord() {
     $request = Slim::getInstance()->request();
     $wine = json_decode($request->getBody());
     $sql = "INSERT INTO wine (name, grapes, country, region, year, description) VALUES (:name, :grapes, :country, :region, :year, :description)";
