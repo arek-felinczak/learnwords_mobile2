@@ -4,7 +4,7 @@
 	    var source = $("#categories-template").html();
 	    var template = Handlebars.compile(source);
 	    
-	    var vm = {categories: this.model.models, count: this.model.models.length};
+	    var vm = {categories: this.model.toJSON()};
 	    var html = template(vm);
 	    return html;
 	 }

@@ -52,8 +52,6 @@
             </div>
         </div>
         <div class="container">
-        </div>  
-        <div class="container">
             <div id="CategoryListPanel" class='panel'>
                 <section>
                     <h4 id="CategoryName"> Words list from category: </h4>
@@ -63,7 +61,7 @@
                             <table class="table">
                             {{#each categories}}
                                 <tr>
-                                <td><a href="#category/{{this.attributes.Id}}" onclick='AppRouter.CategoryId={{this.attributes.Id}};'> {{this.attributes.Name}} </a></td>
+                                <td><a href="#category/{{Id}}" onclick='AppRouter.CategoryId={{Id}};'> {{Name}} </a></td>
                                 </tr>
                             {{/each}}
                             </table>
@@ -80,9 +78,9 @@
                         {{#each category}}
                         <tr>
                             <td>{{setIndex @index}}.</td>
-                            <td>{{this.attributes.Word}}</td>
-                            <td><a href="#item/{{this.attributes.Id}}/1">{{this.attributes.Translation1}}</a></td>
-                            <td><a href="#item/{{this.attributes.Id}}/2">{{this.attributes.Translation2}}</a></td>
+                            <td>{{Word}}</td>
+                            <td><a href="#item/{{CategoryId}}/{{Id}}/1">{{Translation1}}</a></td>
+                            <td><a href="#item/{{CategoryId}}/{{Id}}/2">{{Translation2}}</a></td>
                             <td> <span class="glyphicon glyphicon-plus-sign"></span> </td>
                             <td> <span class="glyphicon glyphicon-remove-circle"></span> </td>
                         </tr>
@@ -91,9 +89,13 @@
                     </script>
                 </section>   	
             </div>
-            <div id="ItemViev" class='panel container'>
+            <div id="ItemViev" class='panel'>
                 <section>
-                    <div class="row" style="border: 1px solid silver">
+                    <div class="row" style='margin: 0px'>
+                        <ul id="itemPager" class="pager">
+                            <li><a id="prev" href="#"> &larr; Previous </a></li>
+                            <li><a id="next" href="#"> Next &rarr; </a></li>
+                        </ul>
                         <iframe id='DictionaryItemView' src='' frameBorder="0" style="width:100%; min-height: 480px;"></iframe>	 
                     </div>        	
                 </section>   	

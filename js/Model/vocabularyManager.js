@@ -5,38 +5,52 @@
  */
 
 VocabularyManager = function () { 
-    this.categoryList = function(useCache) {
-        if (useCache === undefined) useCache = true;
+    this.categoryList = function(callback) {
         var categoryList = new CategoryCollection();
         var defer = categoryList.fetch({
-            cache: useCache,
+            success: callback !== undefined ? callback : function() {}
         });        
         return defer;
     };
     
-    this.category = function(id) {
-        $.when(this.categoryList).then(
+    this.category = function(id, callback) {
+        return $.when(this.categoryList()).then(
             function(model) {
-                return _.find(model.models, function(obj) {
+                var category = _.find(model.models, function(obj) {
                     return obj.attributes.Id === id.toString();
                 });
+                if (callback !== undefined) callback(category);
+                return category;
             }
         );
     };
     
-    this.itemList = function (useCache) {
-        if (useCache === undefined)
-            useCache = true;
+    this.itemList = function (id, callback) {
         var itemsList = new ItemsCollection();
-        return itemsList.fetch({
-            cache: true
+        itemsList.setCategoryId(id);
+        var defer = itemsList.fetch({
+            success: callback !== undefined ? callback : function() {}
         });
+        return defer;
     };
     
-    this.item = function(id) {
-        var item = new Item({id: id});
-        return item.fetch({
-            cache: true
-        });
+    this.item = function(catId, id, callback) {
+        return $.when(this.itemList(catId)).then(
+            function(model) {
+                var item = _.find(model.models, function(obj) {
+                    return obj.attributes.Id === id.toString();
+                });
+                if (callback !== undefined)
+                    callback(item);
+                return item;
+            }
+        );
     };
+    
+    this.indexOfById = function(id, array) {
+        var item = _.find(model.models, function(obj) {
+            return obj.attributes.Id === id.toString();
+        });
+        
+    }
 };

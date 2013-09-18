@@ -4,7 +4,7 @@ var AppRouter = Backbone.Router.extend({
         "": "categoryList",
         "categories" : "categoryList",
         "category/:id" : "category",
-        "item/:id/:nr" : "item"
+        "item/:catId/:id/:nr" : "item"
     },
     manager: new VocabularyManager(),
     
@@ -21,36 +21,51 @@ var AppRouter = Backbone.Router.extend({
     },
  
     category:function (id) {
-        var itemsList = new ItemsCollection();
-        itemsList.url += id;
-        var itemsView = new ItemsView({model:itemsList});
-        itemsList.fetch({
-            cache: true,
-            success: function () {
-                $('div.panel').hide();
-                $('ul.navbar-nav li.active').removeClass('active');
-                $('ul.navbar-nav a#currentCategoryNav').parent().addClass('active');
-                $('div#ItemsList').html(itemsView.render());
-                $('div#ItemsListPanel').show();
-       	    }
+        this.manager.itemList(id, function(categoryModel) {
+            $('div.panel').hide();
+            $('div#ItemsList').html(new ItemsView({model: categoryModel}).render());
+            $('div#ItemsListPanel').show();
         });
-        var defer = this.manager.categoryList();
-        $.when(defer).then(function(model) {
-            var cat = _.find(model.models, function(obj) {
-                return obj.attributes.Id === id.toString();
-            });
-            $('#currentCategoryNav').text(cat.attributes.Name).attr('href', '#category/' + cat.attributes.Id);
+        this.categoryNavBar(id);
+    },
+    categoryNavBar:function(id) {
+        var defer = this.manager.category(id);
+        $.when(defer).then(function(cat) {
+            $('#currentCategoryNav').text(cat.get('Name')).attr('href', '#category/' + cat.get('Id'))
+            $('ul.navbar-nav li.active').removeClass('active');
+            $('ul.navbar-nav a#currentCategoryNav').parent().addClass('active');
         });
     },
     
-    item:function (id, nr) {
-        var item = new Item({id: id});
-        item.fetch({
-            cache: true,
-            success: function () {
-                $('div.panel').hide();
-                new ItemView({model:item, nr:nr}).render();
-       	    }
+    item:function (catId, id, nr) {
+        var self = this;
+        var deferItem = this.manager.item(catId, id, function(item) {
+            $('div.panel').hide();
+            new ItemView({model: item}).render(nr);
+            return item;
+        });
+        var defer = this.manager.itemList(catId);
+        $.when(deferItem, defer).then(function(item, items) {
+            var index = item.collection.indexOf(item);
+            // previous button
+            var prevDomElement = $("ul#itemPager li a#prev");
+            var prev = items.at(index - 1);
+            if (prev === null) {
+                $(prevDomElement).removeAttr('href').parent().addClass('disabled');               
+            } else {
+                $(prevDomElement).attr('href', '#item/' + item.get('CategoryId') + '/' + prev.get('Id') + '/1')
+                    .parent().removeClass('disabled');
+            }
+            // next button
+            var nextDomElement = $("ul#itemPager li a#next");
+            var next = items.at(index + 1);
+            if (next === null) {
+                $(nextDomElement).removeAttr('href').parent().addClass('disabled');
+            } else {
+                $(nextDomElement).attr('href', '#item/' + item.get('CategoryId') + '/' + next.get('Id') + '/1')
+                    .parent().removeClass('disabled');
+            }
+            self.categoryNavBar(item.get('CategoryId'));
         });
     }
 });

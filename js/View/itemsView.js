@@ -4,7 +4,7 @@ ItemsView = Backbone.View.extend({
 	    var source = $("#items-template").html();
 	    var template = Handlebars.compile(source);
 	    
-	    var vm = {category: this.model.models, count: this.model.models.length};
+	    var vm = {category: this.model.toJSON(), count: this.model.models.length};
 	    var html = template(vm);
         return html;
 	 }

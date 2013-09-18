@@ -1,7 +1,7 @@
 ItemView = Backbone.View.extend({
       
-	 render:function () {
-        var word = this.options.nr === "1" ? this.model.attributes.Translation1 : this.model.attributes.Translation2;
+	 render:function (nr) {
+        var word = nr === "1" ? this.model.get('Translation1') : this.model.get('Translation2');
         var url = this.buildLink(word, window.localStorage['engineLink']);
         $("iframe#DictionaryItemView").attr('src', url);
         $('div#ItemViev').show();
