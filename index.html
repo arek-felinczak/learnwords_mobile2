@@ -27,18 +27,18 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
+                            <a href="#options" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Offline mode (todo)</a></li>
-                                <li><a href="#repetition-list">Repetition list</a></li>
+                                <li><a href="#repetition-list">Repetition list (todo)</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Speech engine</li>
                                 <li><a href="#" onClick="window.localStorage['engineLink']=window.learnwordsConfig.diki;">Diki.pl</a></li>
                                 <li><a href="#" onClick="window.localStorage['engineLink']=window.learnwordsConfig.forvo;">Forvo.pl</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Contribute</li>
-                                <li><a href="#add-word-form">Add word</a></li>
-                                <li><a href="#add-category-form">Add category (admin only)</a></li>
+                                <li><a href="#add-word-form">Add word (todo)</a></li>
+                                <!--li><a href="#add-category-form">Add category (admin only)</a></li-->
                             </ul>
                         </li>
                     </ul>
@@ -99,7 +99,7 @@
                 </section>   	
             </div>
         </div> <!-- /container -->
-        <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery-1.10.2.js"></script>
         <script type="text/javascript">
             window.learnwordsConfig = {
                 restUrl: "http://vocabulary.cba.pl",
@@ -112,6 +112,7 @@
         </script>
         <script type="text/javascript" src="js/lib/underscore.js"></script> 
         <script type="text/javascript" src="js/lib/backbone.js"></script>
+        <script type="text/javascript" src="js/lib/backbone.cacheit.js"></script>
         <script type="text/javascript" src="js/lib/handlebars.js"></script>
         <script type="text/javascript">
             Handlebars.registerHelper('setIndex', function(value){
@@ -123,9 +124,9 @@
         <script type="text/javascript" src="js/Model/items.js"></script> 
         <script type="text/javascript" src="js/View/categoryView.js"></script>     
         <script type="text/javascript" src="js/View/itemsView.js"></script>
-        <script type="text/javascript" src="js/View/itemView.js"></script>    
+        <script type="text/javascript" src="js/View/itemView.js"></script>
+        <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/lib/backbone.fetch-cache.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>        
     </body>
 </html>

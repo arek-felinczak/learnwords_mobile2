@@ -4,7 +4,8 @@ String.prototype.format = function (args) {
         newStr = newStr.replace('{' + key + '}', args[key]);
     }
     return newStr;
-},
+};
+
 
 function var_dump(obj) {
 	var result = [];

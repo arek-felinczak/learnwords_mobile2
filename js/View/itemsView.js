@@ -6,7 +6,7 @@ ItemsView = Backbone.View.extend({
 	    
 	    var vm = {category: this.model.models, count: this.model.models.length};
 	    var html = template(vm);
-	    return html;
+        return html;
 	 }
 	 
 	 /* events: {
