@@ -5,21 +5,34 @@ Item = Backbone.Model.extend({
         CategoryId: 0,
         Word: '',
         Translation1: '',
-        Translation2: '',
-        Id: 0
+        Translation2: ''
     },
-    validate: function(attributes){
-        if(attributes.CategoryId == 0){
-            return "Category link can't be empty";
+    
+    initialize: function() {
+        this.validators = {};
+        this.validators.Word = function(value) {
+            return value.length > 0 ? {isValid: true} : {isValid: false, message: "You must enter a word"};
+        };
+        this.validators.Translation1 = function(value) {
+            return value.length > 0 ? {isValid: true} : {isValid: false, message: "You must enter first translation"};
+        };
+        this.validators.CategoryId = function(value) {
+            return value > 0 ? {isValid: true} : {isValid: false, message: "You must choose category"};
+        };
+    },
+    validateItem: function(key) {
+        return (this.validators[key]) ? this.validators[key](this.get(key)) : {isValid: true};
+    },
+    validate: function() {
+        for (var key in this.validators) {
+            if (this.validators.hasOwnProperty(key)) {
+                var check = this.validators[key](this.get(key));
+                if (check.isValid === false) {
+                    return check.message;
+                }
+            }
         }
-        return false;
     },
-    initialize: function(){
-        this.bind("error", function(model, error){
-            // We have received an error, log it, alert it or forget it :)
-            alert( error );
-        });
-	}
 });
 
 ItemsCollection = Backbone.Collection.extend({

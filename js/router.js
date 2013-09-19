@@ -4,7 +4,8 @@ var AppRouter = Backbone.Router.extend({
         "": "categoryList",
         "categories" : "categoryList",
         "category/:id" : "category",
-        "item/:catId/:id/:nr" : "item"
+        "item/:catId/:id/:nr" : "item",
+        "itemAddForm": "wordAddForm"
     },
     manager: new VocabularyManager(),
     
@@ -28,6 +29,7 @@ var AppRouter = Backbone.Router.extend({
         });
         this.categoryNavBar(id);
     },
+    
     categoryNavBar:function(id) {
         var defer = this.manager.category(id);
         $.when(defer).then(function(cat) {
@@ -67,9 +69,18 @@ var AppRouter = Backbone.Router.extend({
             }
             self.categoryNavBar(item.get('CategoryId'));
         });
-    }
+    },
+    
+    wordAddForm:function() {
+        var item = new Item();
+        var defer = this.manager.categoryList();
+        $.when(defer).then(function(modelList) {
+            $('div.panel').hide();
+            $('div#ItemAddForm div.row').html(new ItemFormView({model: item}).render(modelList).el);
+            $('div#ItemAddForm').show();
+        });
+    },   
 });
 	
-
 var app_router = new AppRouter;
 Backbone.history.start();

@@ -1,8 +1,24 @@
 <?php
 
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']) && (
+            $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'POST' ||
+            $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'DELETE' ||
+            $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'PUT' )) {
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Credentials: true");
+        header('Access-Control-Allow-Headers: X-Requested-With');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT'); // http://stackoverflow.com/a/7605119/578667
+        header('Access-Control-Max-Age: 86400');
+    }
+    exit;
+}
+
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');    
+header('Access-Control-Allow-Headers: origin, x-requested-with, content-type');
+header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS');    
 
 include_once 'Slim/Slim.php';
 
@@ -14,12 +30,13 @@ $app->get('/categories/:id', 'getCategory');
 $app->get('/items/:id', 'getCategoryItems');
 $app->get('/item/:id', 'getItem');
 //$app->put('/wines/:id', 'updateWine');
+$app->post('/item', 'addWord');
 //$app->delete('/wines/:id', 'deleteWine');
  
 $app->run();
- 
+
+
 function getCategories() {
-	
     $sql = "select * FROM Category ORDER BY name";
     try {
         $db = getConnection();
@@ -32,7 +49,7 @@ function getCategories() {
 }
  
 function getCategory($id) {
-    $sql = "SELECT * FROM Category WHERE id=:id";
+    $sql = "SELECT * FROM Category WHERE Public=1 AND id=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -46,7 +63,7 @@ function getCategory($id) {
 }
 
 function getCategoryItems($id) {
-    $sql = "SELECT * FROM Item WHERE CategoryId=:id ORDER BY id DESC";
+    $sql = "SELECT * FROM Item WHERE Approved=1 AND CategoryId=:id ORDER BY id DESC";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -77,21 +94,21 @@ function getItem($id) {
 
 function addWord() {
     $request = Slim::getInstance()->request();
-    $wine = json_decode($request->getBody());
-    $sql = "INSERT INTO wine (name, grapes, country, region, year, description) VALUES (:name, :grapes, :country, :region, :year, :description)";
+    $item = json_decode($request->getBody());
+    $sql = "INSERT INTO Item (Id, CategoryId, Word, Translation1, Translation2) "
+            . "VALUES (:Id, :CategoryId, :Word, :Translation1, :Translation2)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("name", $wine->name);
-        $stmt->bindParam("grapes", $wine->grapes);
-        $stmt->bindParam("country", $wine->country);
-        $stmt->bindParam("region", $wine->region);
-        $stmt->bindParam("year", $wine->year);
-        $stmt->bindParam("description", $wine->description);
+        $stmt->bindParam("Id", $item->Id);
+        $stmt->bindParam("Word", $item->Word);
+        $stmt->bindParam("Translation1", $item->Translation1);
+        $stmt->bindParam("Translation2", $item->Translation2);
+        $stmt->bindParam("CategoryId", $item->CategoryId);
         $stmt->execute();
-        $wine->id = $db->lastInsertId();
+        $item->Id = $db->lastInsertId();
         $db = null;
-        echo json_encode($wine);
+        echo json_encode($item);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
