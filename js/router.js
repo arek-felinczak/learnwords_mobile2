@@ -34,6 +34,7 @@ var AppRouter = Backbone.Router.extend({
         var defer = this.manager.category(id);
         $.when(defer).then(function(cat) {
             $('#currentCategoryNav').text(cat.get('Name')).attr('href', '#category/' + cat.get('Id'))
+            $('#CategoryNameHeader').text(cat.get('Name') + ":");
             $('ul.navbar-nav li.active').removeClass('active');
             $('ul.navbar-nav a#currentCategoryNav').parent().addClass('active');
         });

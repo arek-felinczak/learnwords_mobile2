@@ -22,19 +22,13 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#categories">Home</a></li>
                         <li><a id="currentCategoryNav" href="#category/1"> Journey </a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
                             <a href="#options" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Offline mode (todo)</a></li>
                                 <li><a href="#repetition-list">Repetition list (todo)</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Speech engine</li>
-                                <li><a href="#" onClick="window.localStorage['engineLink']=window.learnwordsConfig.diki;">Diki.pl</a></li>
-                                <li><a href="#" onClick="window.localStorage['engineLink']=window.learnwordsConfig.forvo;">Forvo.pl</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Contribute</li>
                                 <li><a href="#itemAddForm"> Add word </a></li>
@@ -54,35 +48,51 @@
         <div class="container">
             <div id="CategoryListPanel" class='panel'>
                 <section>
-                    <h4 id="CategoryName"> Words list from category: </h4>
-                        <div id="CategoryList">                           
-                        </div>
-                        <script id="categories-template" type="text/x-handlebars-template">
-                            <table class="table">
-                            {{#each categories}}
-                                <tr>
+                    <h4> Category list: </h4>
+                    <div id="CategoryList">                           
+                    </div>
+                    <script id="categories-template" type="text/x-handlebars-template">
+                        <table class="table">
+                        {{#each categories}}
+                            <tr>
                                 <td><a href="#category/{{Id}}" onclick='AppRouter.CategoryId={{Id}};'> {{Name}} </a></td>
-                                </tr>
-                            {{/each}}
-                            </table>
-                       </script>
+                            </tr>
+                        {{/each}}
+                        </table>
+                   </script>
                 </section>   	
             </div>  
             <div id="ItemsListPanel" class='panel'>
                 <section>
-                    <h4 id="CategoryNameHeader"></h4>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4 id="CategoryNameHeader"></h4>
+                        </div>   
+                        <div class="col-md-3">
+                            <p><a href="http://www.forvo.com/">Pronunciations by Forvo</a></p> 
+                        </div>
+                    </div> 
                     <div id="ItemsList">
                     </div>
                     <script id="items-template" type="text/x-handlebars-template">
                         <table class="table">
+                        <tr>
+                            <th class="span1"># </th>
+                            <th class="span2">Word</th>
+                            <th class="span2">Translation</th>
+                            <th class="span2">Translation</th>
+                            <th class="span1">Add to favourites</th>                            
+                        </tr>
                         {{#each category}}
                         <tr>
                             <td>{{setIndex @index}}.</td>
                             <td>{{Word}}</td>
-                            <td><a href="#item/{{CategoryId}}/{{Id}}/1">{{Translation1}}</a></td>
+                            <td>
+                                <span onclick="LoadForvoLink('{{Translation1}}', this)"> {{Translation1}} </span>
+                                <a href="#item/{{CategoryId}}/{{Id}}/1">{{Translation1}}</a>
+                            </td>
                             <td><a href="#item/{{CategoryId}}/{{Id}}/2">{{Translation2}}</a></td>
                             <td> <span class="glyphicon glyphicon-plus-sign"></span> </td>
-                            <td> <span class="glyphicon glyphicon-remove-circle"></span> </td>
                         </tr>
                         {{/each}}
                         </table>
@@ -141,24 +151,21 @@
                                  <a href="#" class="btn btn-default save"> Save </a>
                                  <!--a href="#"  class="btn btn-default delete"> Delete </a-->
                              </div>
-                         </div>
-                         
+                         </div>                         
                      </form>
                     </script>
                     <div class="row"></div>
                 </section>   	
             </div>
         </div> <!-- /container -->
+        <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
         <script type="text/javascript" src="js/lib/jquery-1.10.2.js"></script>
         <script type="text/javascript">
             window.learnwordsConfig = {
                 restUrl: "http://vocabulary.cba.pl",
-                diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
-                forvo: "http://pl.forvo.com/word/{0}/#en"
+                forvo: "http://apifree.forvo.com"
             };
             if (!window.console) window.console = {};
-            if (!window.localStorage['engineLink']) 
-                window.localStorage['engineLink'] = window.learnwordsConfig.diki;
         </script>
         <script type="text/javascript" src="js/lib/underscore.js"></script> 
         <script type="text/javascript" src="js/lib/backbone.js"></script>
@@ -177,6 +184,36 @@
         <script type="text/javascript" src="js/View/itemView.js"></script>
         <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>        
+        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript">
+            function Forvo_Ext_Play(path_mp3, path_ogg)
+            {
+                var audioTagSupport = !!(document.createElement('audio').canPlayType);
+                if (audioTagSupport) {
+                    myAudio = new Audio(""); 
+                    canPlayMp3 = ("no" != myAudio.canPlayType("audio/mpeg")) && ("" != myAudio.canPlayType("audio/mpeg"));
+                    canPlayOgg = ("no" != myAudio.canPlayType("audio/ogg")) && ("" != myAudio.canPlayType("audio/ogg"));
+                } else {
+                    canPlayMp3 = false;
+                    canPlayOgg = false;
+                }      
+                if (navigator.userAgent.toLowerCase().indexOf('iphone')!=-1) {
+                    window.location.href=path_mp3;
+                    return false;
+                } else if (canPlayMp3 && navigator.userAgent.toLowerCase().indexOf('chrome')==-1) {
+                    var html='<audio autoplay="true"><source src="'+ path_mp3 +'"></audio>';
+                } else if(canPlayOgg && navigator.userAgent.toLowerCase().indexOf('chrome')==-1) {
+                    var html='<audio autoplay="true"><source src="'+ path_ogg +'"></audio>';
+                } else {
+                    var html='<object type="application/x-shockwave-flash" data="http://www.forvo.com/_ext/ext.swf" height="1" width="1">'
+                        +'<param name="movie" value="http://www.forvo.com/_ext/ext.swf">'
+                        +'<param name="flashvars" value="path='+path_mp3+'&amp;_SERVER_HTTP_HOST=www.forvo.com">'
+                        +'</object>';
+                }
+                var container = document.getElementById('forvo_ext_player');
+                container.innerHTML = html;
+                return true;
+            }
+        </script>
     </body>
 </html>

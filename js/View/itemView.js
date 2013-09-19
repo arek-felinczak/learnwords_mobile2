@@ -70,3 +70,40 @@ ItemFormView = Backbone.View.extend({
 //        return false;
 //    },
 });
+
+function LoadForvoLink(word, htmlObj) {
+    word = word.replace(' ', '_');
+    url = window.learnwordsConfig.forvo.replace('{0}', word);
+    var htmlTemplate = '<a onclick="Forvo_Ext_Play(\'http://apifree.forvo.com/audio/{0}\',\'http://apifree.forvo.com/audio/{1}\');return false;" href="http://www.forvo.com/word/car/" title="Listen to car pronunciation by Forvo"><img border="0" style="border:0; padding:0; margin:0; vertical-align:middle" alt="Listen to car pronunciation by Forvo" src="http://www.forvo.com/_presentation/img/ico_play.gif"></img></a>';
+    var data = {
+        key: 'fecc801770209d5b7b0ed138946d6bd3',
+        format: 'json',
+        action: 'word-pronunciations',
+        word: word,
+        order: 'rate-desc',
+        limit: 1,
+        language: 'en'        
+    };
+    
+    $.getJSON(url, data, function(res) {
+        alert('asd');
+        var res = JSON.parse(res);
+        var args = [attributes.items[0].pathmp3, attributes.items[0].pathogg];
+        $(htmlObj).html(htmlTemplate.replace(new RegExp('\\{'+i+'\\}', 'gi'), args[i]));
+    });
+    
+    var url = 'http://apifree.forvo.com/key/XXXXXXXXXXXXXXXX/format/json/callback/pronounce/action/standard-pronunciation/word/'+encodeURI(word)+'/language/zh';
+        $.ajax({
+            url: url,
+            jsonpCallback: "pronounce",
+            dataType: "jsonp",
+            type: "jsonp",
+            success: function (json) {
+           var mp3 = json.items[0].pathmp3;
+           var ogg = json.items[0].pathogg;
+       },
+        error: function(){
+            console.log("error");
+    }});
+    
+}
