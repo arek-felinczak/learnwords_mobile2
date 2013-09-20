@@ -50,7 +50,16 @@ VocabularyManager = function () {
     this.indexOfById = function(id, array) {
         var item = _.find(model.models, function(obj) {
             return obj.attributes.Id === id.toString();
-        });
-        
+        });        
     }
+    
+    this.itemListBySearch = function(query, callback) {
+        var itemsList = new ItemsCollection();
+        itemsList.setQueryText(query);
+        var defer = itemsList.fetch({
+            success: callback !== undefined ? callback : function() {
+            }
+        });
+        return defer;
+    };
 };

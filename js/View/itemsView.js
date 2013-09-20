@@ -4,7 +4,11 @@ ItemsView = Backbone.View.extend({
 	    var source = $("#items-template").html();
 	    var template = Handlebars.compile(source);
 	    
-	    var vm = {category: this.model.toJSON(), count: this.model.models.length};
+        if (this.model.models.length == 0){
+            return "No items found."
+        }
+        
+        var vm = {category: this.model.toJSON(), count: this.model.models.length};
 	    var html = template(vm);
         return html;
 	 }

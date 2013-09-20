@@ -33,19 +33,17 @@
                                 <li class="dropdown-header">Word details in:</li>
                                 <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki;">Diki.pl</a></li>
                                 <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo;">Forvo.pl</a></li>
-
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Contribute</li>
                                 <li><a href="#itemAddForm"> Add word </a></li>
-                                <!--li><a href="#add-category-form">Add category (admin only)</a></li-->
                             </ul>
                         </li>
                     </ul>
                     <form class="navbar-form navbar-right">
                         <div class="form-group">
-                            <input type="text" placeholder="search" class="form-control">
+                            <input type="text" placeholder="search" id='searchWord' class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-success"> search </button>
+                        <a href="#search" class="btn btn-success"> search </a>
                     </form>
                 </div><!--/.navbar-collapse -->
             </div>

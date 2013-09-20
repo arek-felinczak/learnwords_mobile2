@@ -25,14 +25,14 @@ include_once 'Slim/Slim.php';
 $app = new Slim();
 
 $app->get('/categories', 'getCategories');
-//$app->get('/wines/search/:query', 'findByName');
+$app->get('/items/search/:query', 'findByName');
 $app->get('/categories/:id', 'getCategory');
 $app->get('/items/:id', 'getCategoryItems');
 $app->get('/item/:id', 'getItem');
-//$app->put('/wines/:id', 'updateWine');
 $app->post('/item', 'addWord');
 //$app->delete('/wines/:id', 'deleteWine');
- 
+//$app->put('/wines/:id', 'updateWine'); 
+
 $app->run();
 
 
@@ -113,7 +113,7 @@ function addWord() {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
- 
+/* 
 function updateWine($id) {
     $request = Slim::getInstance()->request();
     $body = $request->getBody();
@@ -149,18 +149,24 @@ function deleteWine($id) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
- 
+*/
+
 function findByName($query) {
-    $sql = "SELECT * FROM wine WHERE UPPER(name) LIKE :query ORDER BY name";
+    $sqlShortPharse = "SELECT * From Item where Word Like :query Or Translation1 Like :query OR  Translation2 Like :query ORDER BY Word LIMIT 0 , 20";
+    $sqlFullText = "SELECT * ,MATCH (Word, Translation1, Translation2) AGAINST (:query) AS relevancy FROM Item  WHERE (MATCH (Word, Translation1, Translation2) AGAINST (:query IN BOOLEAN MODE) > 0) ORDER BY relevancy DESC LIMIT 0 , 20";
     try {
         $db = getConnection();
-        $stmt = $db->prepare($sql);
-        $query = "%".$query."%";
+        if (strlen($query) > 3)
+            $stmt = $db->prepare($sqlFullText);
+        else {
+            $query = $query . "%";
+            $stmt = $db->prepare($sqlShortPharse);
+        }
         $stmt->bindParam("query", $query);
         $stmt->execute();
-        $wines = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $items = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo '{"wine": ' . json_encode($wines) . '}';
+        echo json_encode($items);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
@@ -169,7 +175,7 @@ function findByName($query) {
 function getConnection() {
     $dbhost="mysql.cba.pl:3306";
     $dbuser="afelin";
-    $dbpass="";
+    $dbpass="LEArnwords01";
     $dbname="vocabulary_cba_pl";
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
     $dbh->exec("set names utf8");

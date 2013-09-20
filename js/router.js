@@ -5,7 +5,8 @@ var AppRouter = Backbone.Router.extend({
         "categories" : "categoryList",
         "category/:id" : "category",
         "item/:catId/:id/:nr" : "item",
-        "itemAddForm": "wordAddForm"
+        "itemAddForm": "wordAddForm",
+        "search": "wordSearch"        
     },
     manager: new VocabularyManager(),
     
@@ -80,7 +81,18 @@ var AppRouter = Backbone.Router.extend({
             $('div#ItemAddForm div.row').html(new ItemFormView({model: item}).render(modelList).el);
             $('div#ItemAddForm').show();
         });
-    },   
+    },
+    
+    wordSearch: function() {
+        var query = $.trim($('#searchWord').val());
+        app_router.navigate('#search/' + query,false);
+        var self = this;
+        var deferItem = this.manager.itemListBySearch(query, function(items) {
+            $('div.panel').hide();
+            $('div#ItemsList').html(new ItemsView({model: items}).render());
+            $('div#ItemsListPanel').show();
+        });
+    },
 });
 	
 var app_router = new AppRouter;

@@ -88,5 +88,4 @@ function LoadForvoLink(word, htmlObj) {
         error: function(err){
             var_dump(err);
     }});
-    
 }
