@@ -95,8 +95,7 @@ function getItem($id) {
 function addWord() {
     $request = Slim::getInstance()->request();
     $item = json_decode($request->getBody());
-    $sql = "INSERT INTO Item (Id, CategoryId, Word, Translation1, Translation2) "
-            . "VALUES (:Id, :CategoryId, :Word, :Translation1, :Translation2)";
+    $sql = "INSERT INTO Item (Id, CategoryId, Word, Translation1, Translation2) VALUES (:Id, :CategoryId, :Word, :Translation1, :Translation2)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);

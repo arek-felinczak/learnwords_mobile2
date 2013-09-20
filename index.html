@@ -49,126 +49,9 @@
             </div>
         </div>
         <div class="container">
-            <div id="CategoryListPanel" class='panel panel-default'>
-                <div class="panel-heading">List of categories</div>
-                <div class="panel-body">
-                    <p> Words are grouped into categories. Please select one to load list of words. </p>
-                </div>
-                <ul class="list-group" id='CategoryList'></ul>
-                <script id="categories-template" type="text/x-handlebars-template">
-                    {{#each categories}}
-                        <li class="list-group-item"><a href="#category/{{Id}}" onclick='AppRouter.CategoryId={{Id}};'> {{Name}} </a></li>
-                    {{/each}}
-                </script>
-            </div>
-           
-            <div id="ItemsListPanel" class='panel'>
-                <section>
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h4 id="CategoryNameHeader"></h4>
-                        </div>   
-                        <div class="col-md-3">
-                            <p><a href="http://www.forvo.com/">Pronunciations by Forvo</a></p> 
-                        </div>
-                    </div> 
-                    <div id="ItemsList">
-                    </div>
-                    <script id="items-template" type="text/x-handlebars-template">
-                        <table class="table">
-                        <tr>
-                            <th class="span1"># </th>
-                            <th class="span2">Word</th>
-                            <th class="span2">Translation</th>
-                            <th class="span2"></th>                            
-                            <th class="span2">Translation</th>
-                            <th class="span2"></th>
-                            <th class="span1">Add to favourites</th>                            
-                        </tr>
-                        {{#each category}}
-                        <tr>
-                            <td>{{setIndex @index}}.</td>
-                            <td>{{Word}}</td>
-                            <td> {{Translation1}} </td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default glyphicon glyphicon-play" onclick="LoadForvoLink('{{Translation1}}', this)"> </button>
-                                    <a href="#item/{{CategoryId}}/{{Id}}/1" class="btn btn-default glyphicon glyphicon-new-window"> </a>
-                                </div>
-                            </td>
-                            <td> {{Translation2}} </td>
-                            <td>
-                                {{#if Translation2}}
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default glyphicon glyphicon-play" onclick="LoadForvoLink('{{Translation2}}', this)"> </button>
-                                    <a href="#item/{{CategoryId}}/{{Id}}/2" class="btn btn-default glyphicon glyphicon-new-window"> </a>
-                                </div>
-                                {{/if}}
-                            </td>
-                            <td> <button type="button" class="btn"><span class="glyphicon glyphicon-plus-sign"></span> </button></td>
-                        </tr>
-                        {{/each}}
-                        </table>
-                    </script>
-                </section>   	
-            </div>
-            <div id="ItemViev" class='panel'>
-                <section>
-                    <div class="row" style='margin: 0px'>
-                        <ul id="itemPager" class="pager">
-                            <li><a id="prev" href="#"> &larr; Previous </a></li>
-                            <li><a id="next" href="#"> Next &rarr; </a></li>
-                        </ul>
-                        <iframe id='DictionaryItemView' src='' frameBorder="0" style="width:100%; min-height: 480px;"></iframe>	 
-                    </div>        	
-                </section>   	
-            </div>
-            <div id="ItemAddForm" class='panel'>
-                <section>
-                    <script id="itemsForm-template" type="text/x-handlebars-template">
-                    <legend>Add new translation</legend>
-                    <form role="form" class="form-horizontal">
-                         <fieldset>
-                            <div class="form-group">
-                                <label for="Word" class="col-lg-2 control-label">Word:</label>
-                                <div class="col-lg-10">
-                                    <input type="text" id="Word" name="Word" class="form-control" value="{{Word}}"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Translation1" class="col-lg-2 control-label">Translation:</label>
-                                <div class="col-lg-10">
-                                    <input type="text" id="Translation1" name="Translation1" class="form-control" value="{{Translation1}}"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Translation2" class="col-lg-2 control-label">Translation:</label>
-                                <div class="col-lg-10">
-                                    <input type="text" id="Translation2" name="Translation2" class="form-control" value="{{Translation2}}"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="CategoryId" class="col-lg-2 control-label">Category:</label>
-                                <div class="col-lg-10">
-                                    <select id="CategoryId" class="form-control" name="CategoryId">
-                                        <option value="0">Choose category</option>
-                                        {{#each categories}}
-                                        <option value="{{Id}}">{{Name}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                             </div>
-                         </fieldset>
-                         <div class="form-group">
-                             <div class="col-lg-offset-2 col-lg-10">
-                                 <a href="#" class="btn btn-default save"> Save </a>
-                                 <!--a href="#"  class="btn btn-default delete"> Delete </a-->
-                             </div>
-                         </div>                         
-                     </form>
-                    </script>
-                    <div class="row"></div>
-                </section>   	
+            <div id="alert_placeholder"></div>
+            <div class="row">
+                <div id="content" class="span12"></div>
             </div>
             <footer>
                 <p>
@@ -179,7 +62,6 @@
                     <span> <a href="http://getbootstrap.com"> Bootstrap front-end framework </a> </span>
                 <p>
             </footer>
-           
         </div> <!-- /container -->
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
         <script type="text/javascript" src="js/lib/jquery-1.10.2.js"></script>
@@ -205,42 +87,12 @@
         <script type="text/javascript" src="js/lib/commons.js"></script>
         <script type="text/javascript" src="js/Model/category.js"></script> 
         <script type="text/javascript" src="js/Model/items.js"></script> 
-        <script type="text/javascript" src="js/View/categoryView.js"></script>     
-        <script type="text/javascript" src="js/View/itemsView.js"></script>
-        <script type="text/javascript" src="js/View/itemView.js"></script>
+        <script type="text/javascript" src="js/View/CategoryItemsView.js"></script>     
+        <script type="text/javascript" src="js/View/ItemsView.js"></script>
+        <script type="text/javascript" src="js/View/ItemView.js"></script>
+        <script type="text/javascript" src="js/View/ItemFormView.js"></script>
         <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
-        <script type="text/javascript">
-            // This method is taken from Forvo website
-            function Forvo_Ext_Play(path_mp3, path_ogg)
-            {
-                var audioTagSupport = !!(document.createElement('audio').canPlayType);
-                if (audioTagSupport) {
-                    myAudio = new Audio(); 
-                    canPlayMp3 = ("no" != myAudio.canPlayType("audio/mpeg")) && ("" != myAudio.canPlayType("audio/mpeg"));
-                    canPlayOgg = ("no" != myAudio.canPlayType("audio/ogg")) && ("" != myAudio.canPlayType("audio/ogg"));
-                } else {
-                    canPlayMp3 = false;
-                    canPlayOgg = false;
-                }      
-                if (navigator.userAgent.toLowerCase().indexOf('iphone')!=-1) {
-                    window.location.href=path_mp3;
-                    return false;
-                } else if (canPlayMp3 && navigator.userAgent.toLowerCase().indexOf('chrome')==-1) {
-                    var html='<audio autoplay="true"><source src="'+ path_mp3 +'"></audio>';
-                } else if(canPlayOgg && navigator.userAgent.toLowerCase().indexOf('chrome')==-1) {
-                    var html='<audio autoplay="true"><source src="'+ path_ogg +'"></audio>';
-                } else {
-                    var html='<object type="application/x-shockwave-flash" data="http://www.forvo.com/_ext/ext.swf" height="1" width="1">'
-                        +'<param name="movie" value="http://www.forvo.com/_ext/ext.swf">'
-                        +'<param name="flashvars" value="path='+path_mp3+'&amp;_SERVER_HTTP_HOST=www.forvo.com">'
-                        +'</object>';
-                }
-                var container = document.getElementById('forvo_ext_player');
-                container.innerHTML = html;
-                return true;
-            }
-        </script>
     </body>
 </html>

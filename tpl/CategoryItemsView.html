@@ -1,0 +1,13 @@
+<div class="row">
+    <div id="CategoryListPanel" class='panel panel-default'>
+        <div class="panel-heading"><h4>List of categories</h4></div>
+        <div class="panel-body">
+            <p> Words are grouped into categories. Please select one to load list of words. </p>
+        </div>
+        <ul class="list-group" id='CategoryList'>
+            {{#each categories}}
+                <li class="list-group-item"><a href="#category/{{Id}}" onclick='AppRouter.CategoryId={{Id}};'> {{Name}} </a></li>
+            {{/each}}
+        </ul>
+    </div>
+</div>        
