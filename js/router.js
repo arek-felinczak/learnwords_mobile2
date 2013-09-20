@@ -16,7 +16,7 @@ var AppRouter = Backbone.Router.extend({
             $('div.panel').hide();
             $('ul.navbar-nav li.active').removeClass('active');
             $('ul.navbar-nav li').eq(0).addClass('active');
-            $('div#CategoryList').html(categoryListView.render());
+            $('ul#CategoryList').html(categoryListView.render());
             $('div#CategoryListPanel').show();
         });
     },
@@ -53,7 +53,7 @@ var AppRouter = Backbone.Router.extend({
             // previous button
             var prevDomElement = $("ul#itemPager li a#prev");
             var prev = items.at(index - 1);
-            if (prev === null) {
+            if (prev === undefined) {
                 $(prevDomElement).removeAttr('href').parent().addClass('disabled');               
             } else {
                 $(prevDomElement).attr('href', '#item/' + item.get('CategoryId') + '/' + prev.get('Id') + '/1')
@@ -62,7 +62,7 @@ var AppRouter = Backbone.Router.extend({
             // next button
             var nextDomElement = $("ul#itemPager li a#next");
             var next = items.at(index + 1);
-            if (next === null) {
+            if (next === undefined) {
                 $(nextDomElement).removeAttr('href').parent().addClass('disabled');
             } else {
                 $(nextDomElement).attr('href', '#item/' + item.get('CategoryId') + '/' + next.get('Id') + '/1')

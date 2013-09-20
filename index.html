@@ -30,6 +30,11 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#repetition-list">Repetition list (todo)</a></li>
                                 <li class="divider"></li>
+                                <li class="dropdown-header">Word details in:</li>
+                                <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki;">Diki.pl</a></li>
+                                <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo;">Forvo.pl</a></li>
+
+                                <li class="divider"></li>
                                 <li class="dropdown-header">Contribute</li>
                                 <li><a href="#itemAddForm"> Add word </a></li>
                                 <!--li><a href="#add-category-form">Add category (admin only)</a></li-->
@@ -46,22 +51,19 @@
             </div>
         </div>
         <div class="container">
-            <div id="CategoryListPanel" class='panel'>
-                <section>
-                    <h4> Category list: </h4>
-                    <div id="CategoryList">                           
-                    </div>
-                    <script id="categories-template" type="text/x-handlebars-template">
-                        <table class="table">
-                        {{#each categories}}
-                            <tr>
-                                <td><a href="#category/{{Id}}" onclick='AppRouter.CategoryId={{Id}};'> {{Name}} </a></td>
-                            </tr>
-                        {{/each}}
-                        </table>
-                   </script>
-                </section>   	
-            </div>  
+            <div id="CategoryListPanel" class='panel panel-default'>
+                <div class="panel-heading">List of categories</div>
+                <div class="panel-body">
+                    <p> Words are grouped into categories. Please select one to load list of words. </p>
+                </div>
+                <ul class="list-group" id='CategoryList'></ul>
+                <script id="categories-template" type="text/x-handlebars-template">
+                    {{#each categories}}
+                        <li class="list-group-item"><a href="#category/{{Id}}" onclick='AppRouter.CategoryId={{Id}};'> {{Name}} </a></li>
+                    {{/each}}
+                </script>
+            </div>
+           
             <div id="ItemsListPanel" class='panel'>
                 <section>
                     <div class="row">
@@ -80,19 +82,32 @@
                             <th class="span1"># </th>
                             <th class="span2">Word</th>
                             <th class="span2">Translation</th>
+                            <th class="span2"></th>                            
                             <th class="span2">Translation</th>
+                            <th class="span2"></th>
                             <th class="span1">Add to favourites</th>                            
                         </tr>
                         {{#each category}}
                         <tr>
                             <td>{{setIndex @index}}.</td>
                             <td>{{Word}}</td>
+                            <td> {{Translation1}} </td>
                             <td>
-                                <span onclick="LoadForvoLink('{{Translation1}}', this)"> {{Translation1}} </span>
-                                <a href="#item/{{CategoryId}}/{{Id}}/1">{{Translation1}}</a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default glyphicon glyphicon-play" onclick="LoadForvoLink('{{Translation1}}', this)"> </button>
+                                    <a href="#item/{{CategoryId}}/{{Id}}/1" class="btn btn-default glyphicon glyphicon-new-window"> </a>
+                                </div>
                             </td>
-                            <td><a href="#item/{{CategoryId}}/{{Id}}/2">{{Translation2}}</a></td>
-                            <td> <span class="glyphicon glyphicon-plus-sign"></span> </td>
+                            <td> {{Translation2}} </td>
+                            <td>
+                                {{#if Translation2}}
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default glyphicon glyphicon-play" onclick="LoadForvoLink('{{Translation2}}', this)"> </button>
+                                    <a href="#item/{{CategoryId}}/{{Id}}/2" class="btn btn-default glyphicon glyphicon-new-window"> </a>
+                                </div>
+                                {{/if}}
+                            </td>
+                            <td> <button type="button" class="btn"><span class="glyphicon glyphicon-plus-sign"></span> </button></td>
                         </tr>
                         {{/each}}
                         </table>
@@ -157,15 +172,28 @@
                     <div class="row"></div>
                 </section>   	
             </div>
+            <footer>
+                <p>
+                    <span> &copy; Designed by Arek Felińczak &middot; </span> | 
+                    <span> <a href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code available on Github </a> </span> | 
+                    <span> <a href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
+                    <span> <a href="http://backbonejs.org/"> Backbone framework </a> </span> | 
+                    <span> <a href="http://getbootstrap.com"> Bootstrap front-end framework </a> </span>
+                <p>
+            </footer>
+           
         </div> <!-- /container -->
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
         <script type="text/javascript" src="js/lib/jquery-1.10.2.js"></script>
         <script type="text/javascript">
             window.learnwordsConfig = {
                 restUrl: "http://vocabulary.cba.pl",
-                forvo: "http://apifree.forvo.com"
+                diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
+                forvo: "http://pl.forvo.com/word/{0}/#en"
             };
             if (!window.console) window.console = {};
+            if (!window.localStorage['dictionaryLink'])
+                window.localStorage['dictionaryLink'] = window.learnwordsConfig.diki;
         </script>
         <script type="text/javascript" src="js/lib/underscore.js"></script> 
         <script type="text/javascript" src="js/lib/backbone.js"></script>
@@ -186,11 +214,12 @@
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript">
+            // This method is taken from Forvo website
             function Forvo_Ext_Play(path_mp3, path_ogg)
             {
                 var audioTagSupport = !!(document.createElement('audio').canPlayType);
                 if (audioTagSupport) {
-                    myAudio = new Audio(""); 
+                    myAudio = new Audio(); 
                     canPlayMp3 = ("no" != myAudio.canPlayType("audio/mpeg")) && ("" != myAudio.canPlayType("audio/mpeg"));
                     canPlayOgg = ("no" != myAudio.canPlayType("audio/ogg")) && ("" != myAudio.canPlayType("audio/ogg"));
                 } else {
