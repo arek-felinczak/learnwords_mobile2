@@ -4,62 +4,68 @@
  * and open the template in the editor.
  */
 
-VocabularyManager = function () { 
+VocabularyManager = function () {
+    
+    this.cachedCategoryList = null,
     this.categoryList = function(callback) {
+        if (this.cachedCategoryList !== null) 
+            return callback(this.cachedCategoryList);
+        var self = this;
         var categoryList = new CategoryCollection();
-        var defer = categoryList.fetch({
-            success: callback !== undefined ? callback : function() {}
+        categoryList.fetch({
+            success: function(res){
+                self.cachedCategoryList = res;
+                callback(res);
+            },
+            error: function(err) {var_dump(err);}
         });        
-        return defer;
     };
     
     this.category = function(id, callback) {
-        return $.when(this.categoryList()).then(
-            function(model) {
-                var category = _.find(model.models, function(obj) {
+        this.categoryList(function(model) {
+            callback(                
+                _.find(model.models, function(obj) {
                     return obj.attributes.Id === id.toString();
-                });
-                if (callback !== undefined) callback(category);
-                return category;
-            }
-        );
+            }));
+        });
     };
     
+    this.cachedItemList = [],
     this.itemList = function (id, callback) {
+        if (this.cachedItemList[id] !== undefined)
+            return callback(this.cachedItemList[id]);
+        var self = this;
         var itemsList = new ItemsCollection();
         itemsList.setCategoryId(id);
-        var defer = itemsList.fetch({
-            success: callback !== undefined ? callback : function() {}
+        itemsList.fetch({
+            success: function(res) {
+                self.cachedItemList[id] = res;
+                callback(res);
+            },
+            error: function(err) { var_dump(err); }
         });
-        return defer;
     };
     
     this.item = function(catId, id, callback) {
-        return $.when(this.itemList(catId)).then(
-            function(model) {
-                var item = _.find(model.models, function(obj) {
-                    return obj.attributes.Id === id.toString();
-                });
-                if (callback !== undefined)
-                    callback(item);
-                return item;
-            }
-        );
+        this.itemList(catId, function(model) {
+            var item = _.find(model.models, function(obj) {
+                return obj.attributes.Id === id.toString();
+            });
+            if (callback !== undefined)
+                callback(item);
+            return item;
+        });
     };
     
     this.indexOfById = function(id, array) {
-        var item = _.find(model.models, function(obj) {
+        return _.find(array, function(obj) {
             return obj.attributes.Id === id.toString();
         });        
-    }
+    };
     
     this.itemListBySearch = function(query, callback) {
         var itemsList = new ItemsCollection();
         itemsList.setQueryText(query);
-        var defer = itemsList.fetch({
-            success: callback !== undefined ? callback : function() {
-            }
-        });
-        return defer;
+        itemsList.fetch({success: callback});
     };
 };

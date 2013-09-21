@@ -18,7 +18,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#categories">Learn words</a>
+                    <a class="navbar-brand" href="#categories"> Home </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -64,7 +64,7 @@
             </footer>
         </div> <!-- /container -->
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
-        <script type="text/javascript" src="js/lib/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
         <script type="text/javascript">
             window.learnwordsConfig = {
                 restUrl: "http://vocabulary.cba.pl",
@@ -75,10 +75,9 @@
             if (!window.localStorage['dictionaryLink'])
                 window.localStorage['dictionaryLink'] = window.learnwordsConfig.diki;
         </script>
-        <script type="text/javascript" src="js/lib/underscore.js"></script> 
-        <script type="text/javascript" src="js/lib/backbone.js"></script>
-        <script type="text/javascript" src="js/lib/backbone.cacheit.js"></script>
-        <script type="text/javascript" src="js/lib/handlebars.js"></script>
+        <script type="text/javascript" src="js/lib/underscore-min.js"></script> 
+        <script type="text/javascript" src="js/lib/backbone-min.js"></script>
+        <script type="text/javascript" src="js/lib/handlebars.min.js"></script>
         <script type="text/javascript">
             Handlebars.registerHelper('setIndex', function(value){
                 return Number(value + 1);
@@ -93,6 +92,6 @@
         <script type="text/javascript" src="js/View/ItemFormView.js"></script>
         <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
