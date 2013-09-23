@@ -1,4 +1,4 @@
-Breadcrumb = function() {
+function Breadcrumb() {
     
     this.render = function(model, param) {
         var html = '<ol class="breadcrumb">';
