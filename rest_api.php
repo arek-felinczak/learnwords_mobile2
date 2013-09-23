@@ -151,10 +151,19 @@ function deleteWine($id) {
 */
 
 function findByName($query) {
+    $sqlExactWord = "SELECT * From Item where Word = :query Or Translation1 = :query OR  Translation2 = :query ORDER BY Word LIMIT 0 , 20";
     $sqlShortPharse = "SELECT * From Item where Word Like :query Or Translation1 Like :query OR  Translation2 Like :query ORDER BY Word LIMIT 0 , 20";
     $sqlFullText = "SELECT * ,MATCH (Word, Translation1, Translation2) AGAINST (:query) AS relevancy FROM Item  WHERE (MATCH (Word, Translation1, Translation2) AGAINST (:query IN BOOLEAN MODE) > 0) ORDER BY relevancy DESC LIMIT 0 , 20";
     try {
         $db = getConnection();
+        $stmt = $db->prepare($sqlExactWord);
+        $stmt->bindParam("query", $query);
+        $stmt->execute();
+        $items = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if (count($items) > 0) {
+            echo json_encode($items);
+            return;            
+        }
         if (strlen($query) > 3)
             $stmt = $db->prepare($sqlFullText);
         else {

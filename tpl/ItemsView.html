@@ -1,41 +1,40 @@
-<div class="row">
-    <div id="CategoryListPanel" class='panel panel-default'>
-        <div class="panel-heading"><h4 id="CategoryNameHeader"></h4></div>        
-        <table class="table">
-            <tr>
-                <th class="span1"># </th>
-                <th class="span2">Word</th>
-                <th class="span2">Translation</th>
-                <th class="span2"></th>                            
-                <th class="span2">Translation</th>
-                <th class="span2"></th>
-                <th class="span1">Add to favourites</th>                            
-            </tr>
-            {{#each category}}
-            <tr>
-                <td> {{setIndex @index}}. </td>
-                <td> {{Word}} </td>
-                <td> {{Translation1}} </td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-play" onclick="LoadForvoLink('{{Translation1}}', this)"> </button>
-                        <a href="#item/{{CategoryId}}/{{Id}}/1" class="btn btn-default glyphicon glyphicon-new-window"> </a>
-                    </div>
-                </td>
-                <td> {{Translation2}} </td>
-                <td>
-                    {{#if Translation2}}
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-play" onclick="LoadForvoLink('{{Translation2}}', this)"> </button>
-                        <a href="#item/{{CategoryId}}/{{Id}}/2" class="btn btn-default glyphicon glyphicon-new-window"> </a>
-                    </div>
-                    {{/if}}
-                </td>
-                <td> <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> </button></td>
-            </tr>
-            {{/each}}
-        </table>
-    </div>    
-</div>
-
+<div id="CategoryListPanel" class='panel panel-default'>
+    <div class="panel-heading"><h4 id="CategoryNameHeader"></h4></div>        
+    <table class="table">
+        <tr>
+            <th class="col-lg-1"># </th>
+            <th class="col-lg-4">Word</th>
+            <th class="col-lg-2">Translation</th>
+            <th class="col-lg-1"></th>                            
+            <th class="col-lg-2">Alternative translation</th>
+            <th class="col-lg-1"></th>
+            <th class="col-lg-1">add to fav.</th>                            
+        </tr>
+        {{#each category}}
+        <tr>
+            <td> {{setIndex @index}}. </td>
+            <td> {{Word}} </td>
+            <td onclick="LoadForvoLink('{{Translation1}}', this)" style='cursor: pointer'>
+                <button type="button" class="btn btn-default glyphicon glyphicon-play" > </button>
+                {{Translation1}} 
+            </td>
+            <td>
+                <a href="#item/{{CategoryId}}/{{Id}}/1" class="text-right btn btn-default glyphicon glyphicon-new-window"> </a>
+            </td>
+            <td {{#if Translation2}} onclick="LoadForvoLink('{{Translation2}}', this)" style='cursor: pointer' {{/if}}>
+                {{#if Translation2}}
+                    <button type="button" class="btn btn-default glyphicon glyphicon-play" > </button>
+                    {{Translation2}} 
+                {{/if}}
+            </td>
+            <td>
+                {{#if Translation2}}
+                    <a href="#item/{{CategoryId}}/{{Id}}/1" class="text-right btn btn-default glyphicon glyphicon-new-window"> </a>
+                {{/if}}
+            </td>
+            <td> <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> </button></td>
+        </tr>
+        {{/each}}
+    </table>
+</div>    
 

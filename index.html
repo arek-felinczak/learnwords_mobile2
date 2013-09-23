@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Learn words</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta name="description" content="">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a id="currentCategoryNav" href="#category/1"> Journey </a></li>
+                        <li><a id="DictionaryItemNav" href="#category"> Dictionary </a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
@@ -48,10 +48,11 @@
                 </div><!--/.navbar-collapse -->
             </div>
         </div>
-        <div class="container">
+        <div class="container">            
             <div id="alert_placeholder"></div>
             <div class="row">
-                <div id="content" class="span12"></div>
+                <div id="Breadcrumb"></div>
+                <div id="content"></div>
             </div>
             <footer>
                 <p>
@@ -94,6 +95,7 @@
         <script type="text/javascript" src="js/View/ItemView.js"></script>
         <script type="text/javascript" src="js/View/ItemFormView.js"></script>
         <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
+        <script type="text/javascript" src="js/View/Breadcrumb.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </body>

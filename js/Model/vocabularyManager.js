@@ -7,7 +7,7 @@
 VocabularyManager = function () {
     
     this.cachedCategoryList = null,
-    this.categoryList = function(callback) {
+    this.getCategoryList = function(callback) {
         if (this.cachedCategoryList !== null) 
             return callback(this.cachedCategoryList);
         var self = this;
@@ -21,8 +21,8 @@ VocabularyManager = function () {
         });        
     };
     
-    this.category = function(id, callback) {
-        this.categoryList(function(model) {
+    this.getCategory = function(id, callback) {
+        this.getCategoryList(function(model) {
             callback(                
                 _.find(model.models, function(obj) {
                     return obj.attributes.Id === id.toString();
@@ -31,7 +31,7 @@ VocabularyManager = function () {
     };
     
     this.cachedItemList = [],
-    this.itemList = function (id, callback) {
+    this.getItemList = function (id, callback) {
         if (this.cachedItemList[id] !== undefined)
             return callback(this.cachedItemList[id]);
         var self = this;
@@ -46,8 +46,8 @@ VocabularyManager = function () {
         });
     };
     
-    this.item = function(catId, id, callback) {
-        this.itemList(catId, function(model) {
+    this.getItem = function(catId, id, callback) {
+        this.getItemList(catId, function(model) {
             var item = _.find(model.models, function(obj) {
                 return obj.attributes.Id === id.toString();
             });
