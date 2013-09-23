@@ -67,10 +67,13 @@
         <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
         <script type="text/javascript">
             window.learnwordsConfig = {
-                restUrl: "http://vocabulary.cba.pl",
+                restUrl: window.location.protocol + '//' + window.location.host,
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
                 forvo: "http://pl.forvo.com/word/{0}/#en"
             };
+            if (window.location.host.indexOf('localhost') === 0)
+                window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
+            
             if (!window.console) window.console = {};
             if (!window.localStorage['dictionaryLink'])
                 window.localStorage['dictionaryLink'] = window.learnwordsConfig.diki;

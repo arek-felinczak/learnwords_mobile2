@@ -6,7 +6,7 @@ var AppRouter = Backbone.Router.extend({
         "category/:id" : "category",
         "item/:catId/:id/:nr" : "item",
         "itemAddForm": "wordAddForm",
-        "search": "wordSearch"        
+        "search/:query": "wordSearch"        
     },
     manager: new VocabularyManager(),
     
@@ -28,7 +28,7 @@ var AppRouter = Backbone.Router.extend({
     categoryNavBar:function(id) {
         this.manager.category(id, function(cat) {
             $('#currentCategoryNav').text(cat.get('Name')).attr('href', '#category/' + cat.get('Id'));
-            $('#CategoryNameHeader').text("Home > " + cat.get('Name') + ":");
+            $('#CategoryNameHeader').text("Categories > " + cat.get('Name') + ":");
             $('ul.navbar-nav li.active').removeClass('active');
             $('ul.navbar-nav a#currentCategoryNav').parent().addClass('active');
         });
@@ -79,9 +79,10 @@ var AppRouter = Backbone.Router.extend({
                 app_router.navigate('#', true);
                 return;
             }
-            $('div#ItemsList').html(new ItemsView({model: items}).render());
+            $('div#content').html(new ItemsView({model: items}).render());
+            $('#CategoryNameHeader').text("Search results:");
         });
-    },
+    }
 });
 	
 loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView'], function() {
