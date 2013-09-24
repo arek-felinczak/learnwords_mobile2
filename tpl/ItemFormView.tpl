@@ -1,5 +1,5 @@
 <div id="CategoryListPanel" class='panel panel-default'>
-    <div class="panel-heading"><h4>Add new translation</h4></div>
+    <div class="panel-heading"><strong>Add new translation</strong></div>
     <br />
     <form role="form" class="form-horizontal">
         <fieldset>

@@ -25,7 +25,7 @@ include_once 'Slim/Slim.php';
 $app = new Slim();
 
 $app->get('/categories', 'getCategories');
-$app->get('/items/search/:query', 'findByName');
+$app->post('/items/search', 'findByName');
 $app->get('/categories/:id', 'getCategory');
 $app->get('/items/:id', 'getCategoryItems');
 $app->get('/item/:id', 'getItem');
@@ -150,7 +150,8 @@ function deleteWine($id) {
 }
 */
 
-function findByName($query) {
+function findByName() {
+    $query = trim($_POST['query']);
     $sqlExactWord = "SELECT * From Item where Word = :query Or Translation1 = :query OR  Translation2 = :query ORDER BY Word LIMIT 0 , 20";
     $sqlShortPharse = "SELECT * From Item where Word Like :query Or Translation1 Like :query OR  Translation2 Like :query ORDER BY Word LIMIT 0 , 20";
     $sqlFullText = "SELECT * ,MATCH (Word, Translation1, Translation2) AGAINST (:query) AS relevancy FROM Item  WHERE (MATCH (Word, Translation1, Translation2) AGAINST (:query IN BOOLEAN MODE) > 0) ORDER BY relevancy DESC LIMIT 0 , 20";

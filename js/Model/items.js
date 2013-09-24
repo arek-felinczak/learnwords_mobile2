@@ -43,7 +43,7 @@ ItemsCollection = Backbone.Collection.extend({
     setCategoryId: function(catId) {
         this.url = this.urlTemplate + catId;
     },
-    setQueryText: function(query) {
-        this.url = this.urlTemplate + 'search/' + query;
+    setQueryUrl: function() {
+        this.url = this.urlTemplate + 'search';
     }
 });

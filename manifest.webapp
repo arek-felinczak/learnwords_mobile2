@@ -1,32 +1,29 @@
 {
-  "version": "0.1",
-  "name": "My App",
-  "description": "Your new awesome Open Web App",
-  "launch_path": "/index.html",
-  "icons": {
-    "16": "/img/icons/mortar-16.png",
-    "48": "/img/icons/mortar-48.png",
-    "128": "/img/icons/mortar-128.png"
-  },
-  "developer": {
-    "name": "Your Name",
-    "url": "http://yourawesomeapp.com"
-  },
-  "installs_allowed_from": ["*"],
-  "appcache_path": "/cache.manifest",
-  "locales": {
-    "es": {
-      "description": "Su nueva aplicación impresionante Open Web",
-      "developer": {
-        "url": "http://yourawesomeapp.com"
-      }
-    },
-    "it": {
-      "description": "Il vostro nuovo fantastico Open Web App",
-      "developer": {
-        "url": "http://yourawesomeapp.com"
-      }
-    }
-  },
-  "default_locale": "en"
+	"version": "0.1",
+	"name": "Learnwords - vocabulary builder",
+	"description": "Learnwords will help you improve your vocabulary. All words are grouped into categories and connected to speech engine.",
+	"launch_path": "/index.html",
+//	"appcache_path": "/offline.appcache",
+	"icons": {
+        "16": "/themes/ico_16.png",
+        "48": "/themes/ico_48.png",
+        "128": "/themes/ico.png"
+	},
+	"developer": {
+		"name": "Arek Felinczak",
+		"url": "http://vocabulary.cba.pl/m"
+	},
+	"installs_allowed_from": ["*"],
+	"locales": {
+		"pl": {
+			"description": "Aplikacja wspomagająca wzbogacanie słownictwa. Pozwala na łatwą naukę słów z danej kategorii wraz z wymową.",
+			"developer": {
+				"url": "http://vocabulary.cba.pl/m"
+			}
+		}
+	},
+	"default_locale": "en",
+	"permissions": {
+		"systemXHR": {}
+	}
 }

@@ -65,7 +65,11 @@ VocabularyManager = function () {
     
     this.itemListBySearch = function(query, callback) {
         var itemsList = new ItemsCollection();
-        itemsList.setQueryText(query);
-        itemsList.fetch({success: callback});
+        itemsList.setQueryUrl();
+        itemsList.fetch({data: {query: query}, type: 'POST',
+            success: callback, 
+            error: function(err) {
+                var_dump(err);
+            }});
     };
 };

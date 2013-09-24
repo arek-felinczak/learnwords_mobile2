@@ -22,7 +22,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a id="DictionaryItemNav" href="#category"> Dictionary </a></li>
+                        <li><a id="DictionaryItemNav" href="#categories"> Dictionary </a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
@@ -67,10 +67,12 @@
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
         <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
         <script type="text/javascript">
+            $('#reklamacba').remove();
             window.learnwordsConfig = {
                 restUrl: window.location.protocol + '//' + window.location.host,
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
-                forvo: "http://pl.forvo.com/word/{0}/#en"
+                forvo: "http://pl.forvo.com/word/{0}/#en",
+                transitions: true
             };
             if (window.location.host.indexOf('localhost') === 0)
                 window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";

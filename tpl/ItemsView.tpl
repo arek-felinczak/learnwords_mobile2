@@ -1,38 +1,38 @@
 <div id="CategoryListPanel" class='panel panel-default'>
-    <div class="panel-heading"><h4 id="CategoryNameHeader"></h4></div>        
+    <div class="panel-heading"><strong id="CategoryNameHeader"></strong></div>        
     <table class="table">
-        <tr>
-            <th class="col-lg-1"># </th>
-            <th class="col-lg-4">Word</th>
-            <th class="col-lg-2">Translation</th>
-            <th class="col-lg-1"></th>                            
-            <th class="col-lg-2">Alternative translation</th>
-            <th class="col-lg-1"></th>
-            <th class="col-lg-1">add to fav.</th>                            
-        </tr>
+        <colgroup>
+            <col class="col-lg-6 col-xs-6">
+            <col class="col-lg-6 col-xs-6">
+        </colgroup>
         {{#each category}}
         <tr>
-            <td> {{setIndex @index}}. </td>
-            <td> {{Word}} </td>
-            <td onclick="LoadForvoLink('{{Translation1}}', this)" style='cursor: pointer'>
-                <button type="button" class="btn btn-default glyphicon glyphicon-play" > </button>
-                {{Translation1}} 
-            </td>
             <td>
-                <a href="#item/{{CategoryId}}/{{Id}}/1" class="text-right btn btn-default glyphicon glyphicon-new-window"> </a>
-            </td>
-            <td {{#if Translation2}} onclick="LoadForvoLink('{{Translation2}}', this)" style='cursor: pointer' {{/if}}>
-                {{#if Translation2}}
-                    <button type="button" class="btn btn-default glyphicon glyphicon-play" > </button>
-                    {{Translation2}} 
+                <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> </button> 
+                {{setIndex @index}}. {{Word}}</td>
+            <td> 
+                <div>
+                    <div class="pull-left">
+                        <a href="#item/{{CategoryId}}/{{Id}}/1" class="margin-small text-right btn btn-default glyphicon glyphicon-new-window"> </a>
+                    </div>
+                    <div onclick="LoadForvoLink('{{Translation1}}', this)" style='cursor: pointer;'>
+                        <button type="button" class="margin-small btn btn-default glyphicon glyphicon-play"> </button>
+                        {{Translation1}}
+                    </div>
+                </div>
+               {{#if Translation2}}
+               <div>
+                    <div class="pull-left">
+                        <a href="#item/{{CategoryId}}/{{Id}}/2" class="margin-small text-right btn btn-default glyphicon glyphicon-new-window"> </a>
+                    </div>
+                    <div onclick="LoadForvoLink('{{Translation1}}', this)" style='cursor: pointer;'>
+                        <button type="button" class="margin-small btn btn-default glyphicon glyphicon-play"> </button>
+                        {{Translation2}}
+                    </div> 
+                </div>
                 {{/if}}
+                </div> 
             </td>
-            <td>
-                {{#if Translation2}}
-                    <a href="#item/{{CategoryId}}/{{Id}}/1" class="text-right btn btn-default glyphicon glyphicon-new-window"> </a>
-                {{/if}}
-            </td>
-            <td> <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> </button></td>
         </tr>
         {{/each}}
     </table>

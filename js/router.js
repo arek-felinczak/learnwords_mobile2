@@ -13,18 +13,22 @@ var AppRouter = Backbone.Router.extend({
     
     categoryList:function() {
         var self = this;
+        this.transitionStart();
         this.manager.getCategoryList(function(modelList) {
-            var categoryListView = new window.CategoryItemsView({model: modelList});
+            var categoryListView = new CategoryItemsView({model: modelList});
             $('div#content').html(categoryListView.render());
             self.navBar(modelList);
+            self.transitionStop();
         });
     },
  
     category:function (id) {
         var self = this;
+        this.transitionStart();
         this.manager.getItemList(id, function(categoryModel) {
             $('div#content').html(new ItemsView({model: categoryModel}).render());
             self.manager.getCategory(id, function(cat) {self.navBar(cat)});
+            self.transitionStop();
         });         
     },
     
@@ -34,6 +38,7 @@ var AppRouter = Backbone.Router.extend({
     
     item:function (catId, id, nr) {
         var self = this;
+        this.transitionStart();
         this.manager.getItem(catId, id, function(item) {
             $('div#content').html(new ItemView({model: item}).render(nr));
             self.manager.getItemList(catId, function(items) {
@@ -55,25 +60,29 @@ var AppRouter = Backbone.Router.extend({
                 } else {
                     $(nextDomElement).attr('href', '#item/' + item.get('CategoryId') + '/' + next.get('Id') + '/1')
                         .parent().removeClass('disabled');
-                }
+                }                
                 self.manager.getCategory(catId, function(cat){
                     self.navBar(item, cat);
-                });                
+                });
+                self.transitionStop();
             });
         });
     },
     
     wordAddForm:function() {
+        this.transitionStart();
         var item = new Item();
         var self = this;
         this.manager.getCategoryList(function(modelList) {
             var formView = new ItemFormView({model: item});
             $('div#content').html(formView.render(modelList).el);
+            self.transitionStop();
             self.navBar(formView);
         });
     },
     
     wordSearch: function() {
+        this.transitionStart();
         var query = $.trim($('#searchWord').val());
         app_router.navigate('#search/' + query,false);
         var self = this;
@@ -85,9 +94,21 @@ var AppRouter = Backbone.Router.extend({
             }
             $('div#content').html(new ItemsView({model: items}).render());
             $('#CategoryNameHeader').text("Search results:");
+            self.transitionStop();
             self.navBar(items, query);
         });
-    }
+    },
+    
+    transitionStart: function() {
+        if (window.learnwordsConfig.transitions){
+            $('div.container').fadeOut(50);
+        }
+    },
+    transitionStop: function() {
+        if (window.learnwordsConfig.transitions) {
+            $('div.container').fadeIn(900);
+        }
+   }    
 });
 	
 loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView'], function() {
