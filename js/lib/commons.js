@@ -7,12 +7,12 @@ String.prototype.format = function (args) {
 };
 
 
-function var_dump(obj) {
+function var_dump(mess, obj) {
 	var result = [];
 	$.each(obj, function (key, value) { 
 		result.push('"' + key + '":"' + value + '"'); 
 	});
-	alert( 'var_dump \n' + result.join(',\n') );
+	alert( mess + ' var_dump \n' + result.join(',\n') );
 };
 
 function showAlert(message, alertType) {

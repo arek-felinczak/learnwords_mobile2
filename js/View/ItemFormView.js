@@ -71,6 +71,6 @@ function LoadForvoLink(word, htmlObj) {
                 Forvo_Ext_Play(mp3, ogg);
        },
         error: function(err){
-            var_dump(err);
+            var_dump('Error in LoadForvoLink', err);
     }});
 }

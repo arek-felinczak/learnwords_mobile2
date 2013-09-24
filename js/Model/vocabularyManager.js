@@ -17,7 +17,7 @@ VocabularyManager = function () {
                 self.cachedCategoryList = res;
                 callback(res);
             },
-            error: function(err) {var_dump(err);}
+            error: function(err) {var_dump('Error in VocabularyManager.getCategoryList', err);}
         });        
     };
     
@@ -42,7 +42,7 @@ VocabularyManager = function () {
                 self.cachedItemList[id] = res;
                 callback(res);
             },
-            error: function(err) { var_dump(err); }
+            error: function(err) { var_dump('Error in VocabularyManager.getItemList', err); }
         });
     };
     
@@ -69,7 +69,7 @@ VocabularyManager = function () {
         itemsList.fetch({data: {query: query}, type: 'POST',
             success: callback, 
             error: function(err) {
-                var_dump(err);
+                var_dump('Error in VocabularyManager.itemListBySearch', err);
             }});
     };
 };
