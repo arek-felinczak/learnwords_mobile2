@@ -61,14 +61,11 @@ function Forvo_Ext_Play(path_mp3, path_ogg)
 // Method from backbone-cellar author: (Christophe Coenraets)
 function loadTemplate(views, callback) {
     var deferreds = [];
-        $.each(views, function(index, view) {
-            if (window[view]) {
-                deferreds.push($.get('tpl/' + view + '.tpl', function(data) {
-                    window[view].prototype.template = Handlebars.compile(data);
-                }));
-            } else {
-                alert(view + " not found");
-            }
-        });
-        $.when.apply(null, deferreds).done(callback);
+    window.templates = {};
+    $.each(views, function(index, view) {
+        deferreds.push($.get('tpl/' + view + '.tpl', function(data) {
+            window.templates[view] = Handlebars.compile(data);
+        }));
+    });
+    $.when.apply(null, deferreds).done(callback);
 }

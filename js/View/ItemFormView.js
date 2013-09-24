@@ -1,5 +1,7 @@
-window.ItemFormView = Backbone.View.extend({
+ItemFormView = Backbone.View.extend({
+    
     render: function(categoryList) {
+        this.template = window.templates['ItemFormView'];
         $(this.el).html(this.template({model: this.model.toJSON(), categories: categoryList.toJSON()}));
         return this;
     },
@@ -57,7 +59,6 @@ window.ItemFormView = Backbone.View.extend({
 
 function LoadForvoLink(word, htmlObj) {
     url = window.learnwordsConfig.forvo.replace('{0}', word);
-    // http://api.forvo.com/documentation/pronounced-words-search/
     var url = 'http://apifree.forvo.com/key/fecc801770209d5b7b0ed138946d6bd3/format/json/callback/pronounce/action/standard-pronunciation/word/'+encodeURI(word)+'/language/en/order/rate-desc/limit/2';
         $.ajax({
             url: url,

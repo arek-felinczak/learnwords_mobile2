@@ -1,6 +1,7 @@
 ItemView = Backbone.View.extend({
       
 	 render:function (nr) {
+        this.template = window.templates['ItemView'];
         var word = nr === "1" ? this.model.get('Translation1') : this.model.get('Translation2');
         var url = this.buildLink(word, window.localStorage['dictionaryLink']);
         var vm = {src: url};

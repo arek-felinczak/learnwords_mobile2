@@ -3,7 +3,6 @@
 	"name": "Learnwords - vocabulary builder",
 	"description": "Learnwords will help you improve your vocabulary. All words are grouped into categories and connected to speech engine.",
 	"launch_path": "/index.html",
-//	"appcache_path": "/offline.appcache",
 	"icons": {
         "16": "/themes/ico_16.png",
         "48": "/themes/ico_48.png",
@@ -22,8 +21,5 @@
 			}
 		}
 	},
-	"default_locale": "en",
-	"permissions": {
-		"systemXHR": {}
-	}
+	"default_locale": "en"
 }
