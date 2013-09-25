@@ -2,8 +2,8 @@
     <div class="panel-heading"><strong id="CategoryNameHeader"></strong></div>        
     <table class="table">
         <colgroup>
-            <col class="col-lg-6 col-xs-6">
-            <col class="col-lg-6 col-xs-6">
+            <col class="col-lg-6 col-xs-6"></col>
+            <col class="col-lg-6 col-xs-6"></col>
         </colgroup>
         {{#each category}}
         <tr>

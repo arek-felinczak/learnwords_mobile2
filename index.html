@@ -68,15 +68,22 @@
         <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
         <script type="text/javascript">
             $('#reklamacba').remove();
+            
+            $.ajaxSetup({
+                xhr: function() {return new window.XMLHttpRequest({mozSystem: true});}
+            });
+            //$.ajaxSetup({xhrFields: {mozSystem: true}});
+            
             window.learnwordsConfig = {
                 restUrl: window.location.protocol + '//' + window.location.host,
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
                 forvo: "http://pl.forvo.com/word/{0}/#en",
                 transitions: true
             };
-            if (window.location.host.indexOf('localhost') === 0)
+            if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
                 window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
             
+            window.debug_mode = true;
             if (!window.console) window.console = {};
             if (!window.localStorage['dictionaryLink'])
                 window.localStorage['dictionaryLink'] = window.learnwordsConfig.diki;

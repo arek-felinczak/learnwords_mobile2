@@ -63,9 +63,18 @@ function loadTemplate(views, callback) {
     var deferreds = [];
     window.templates = {};
     $.each(views, function(index, view) {
-        deferreds.push($.get('tpl/' + view + '.tpl', function(data) {
-            window.templates[view] = Handlebars.compile(data);
-        }));
+        $.ajax({
+            url: 'tpl/' + view + '.tpl',
+            type: "GET",
+            dataType: "text",
+            success: function(data) {
+                window.templates[view] = Handlebars.compile(data);
+            },
+            error: function(xhr) {
+                console.log('Error loading template ' + view);
+                alert(xhr.responseText);
+            }
+        });
     });
     $.when.apply(null, deferreds).done(callback);
 }

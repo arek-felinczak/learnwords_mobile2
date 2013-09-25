@@ -6,8 +6,4 @@ ItemsView = Backbone.View.extend({
 	    var html = this.template(vm);
         return html;
 	 }
-	 
-	 /* events: {
-            "click input[type=button]": "doSearch"
-        },*/
-    });
+});
