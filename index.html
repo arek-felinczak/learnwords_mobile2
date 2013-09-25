@@ -69,10 +69,11 @@
         <script type="text/javascript">
             $('#reklamacba').remove();
             
+            $.support.cors = true;
             $.ajaxSetup({
-                xhr: function() {return new window.XMLHttpRequest({mozSystem: true});}
+                xhr: function() {return new window.XMLHttpRequest({mozSystem: true});},
+                crossDomain: true,                 
             });
-            //$.ajaxSetup({xhrFields: {mozSystem: true}});
             
             window.learnwordsConfig = {
                 restUrl: window.location.protocol + '//' + window.location.host,

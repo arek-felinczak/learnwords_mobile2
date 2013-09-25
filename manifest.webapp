@@ -20,10 +20,5 @@
 				"url": "http://vocabulary.cba.pl/m"
 			}
 		}
-	},
-	"default_locale": "en",
-	//"permissions": {
-	//	"systemXHR": {}
-	//},
-	//"type": "privileged"
+	}
 }
