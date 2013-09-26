@@ -6,15 +6,16 @@
 
 VocabularyManager = function () {
     
-    this.cachedCategoryList = null,
+    this.storage = new Vocabulary.Storage.API().open();
     this.getCategoryList = function(callback) {
-        if (this.cachedCategoryList !== null) 
-            return callback(this.cachedCategoryList);
+        var cached = this.storage.getItem('cachedCategoryList');
+        if (cached !== null) return callback(new CategoryCollection(cached));
         var self = this;
         var categoryList = new CategoryCollection();
         categoryList.fetch({
             success: function(res){
-                self.cachedCategoryList = res;
+                self.storage.addItem('cachedCategoryList', res.models);
+                if (window.debug_mode) console.log('VocabularyManager:getCategoryList ajax success');                
                 callback(res);
             },
             error: function(err) {var_dump('Error in VocabularyManager.getCategoryList', err);}
@@ -22,7 +23,7 @@ VocabularyManager = function () {
     };
     
     this.getCategory = function(id, callback) {
-        this.getCategoryList(function(model) {
+        this.getCategoryList(function(model) {    
             callback(                
                 _.find(model.models, function(obj) {
                     return obj.attributes.Id === id.toString();
@@ -30,16 +31,17 @@ VocabularyManager = function () {
         });
     };
     
-    this.cachedItemList = [],
     this.getItemList = function (id, callback) {
-        if (this.cachedItemList[id] !== undefined)
-            return callback(this.cachedItemList[id]);
+        var cached = this.storage.getItem('cachedItemList:' + id);
+        if (cached !== null)
+            return callback(new CategoryCollection(cached));
         var self = this;
         var itemsList = new ItemsCollection();
         itemsList.setCategoryId(id);
         itemsList.fetch({
             success: function(res) {
-                self.cachedItemList[id] = res;
+                self.storage.addItem('cachedItemList:' + id, res.models);
+                if (window.debug_mode) console.log('VocabularyManager:getCategory ajax success');
                 callback(res);
             },
             error: function(err) { var_dump('Error in VocabularyManager.getItemList', err); }
@@ -72,4 +74,16 @@ VocabularyManager = function () {
                 var_dump('Error in VocabularyManager.itemListBySearch', err);
             }});
     };
+    
+    this.reloadCache = function(force) {
+        if (force === false){
+            if (this.storage.getItem('cachedCategoryList') !== null) return;
+        }
+        var self = this;
+        this.getCategoryList(function(cats){
+            for (cat in cats) {
+                self.getItemList(cat.Id, function(){});
+            }
+        });
+    }
 };

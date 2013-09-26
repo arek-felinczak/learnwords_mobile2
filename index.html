@@ -39,9 +39,9 @@
                     </ul>
                     <form class="navbar-form navbar-right">
                         <div class="form-group">
-                            <input type="text" placeholder="search" id='searchWord' class="form-control">
-                        </div>
-                        <a href="#search" class="btn btn-success"> search </a>
+                            <input type="text" placeholder="search" id='searchWord' style="width:220px; display: inline-block" class="form-control" />
+                            <a href="#search" class="btn btn-success"> search </a>
+                        </div>                        
                     </form>
                 </div><!--/.navbar-collapse -->
             </div>
@@ -50,14 +50,14 @@
             <div id="alert_placeholder"></div>
             <div class="row">
                 <div id="Breadcrumb"></div>
-                <div id="content"></div>
+                <div id="content" style='margin: 4px'></div>
             </div>
             <div class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
                 <span> &copy; Designed by Arek Felińczak &middot; </span> 
-                <span> <a href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code on Github </a> </span> | 
-                <span> <a href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
-                <span> <a href="http://backbonejs.org/"> Backbone framework </a> </span> | 
-                <span> <a href="http://getbootstrap.com"> Bootstrap framework </a> </span>
+                <span> <a target='github' href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code </a> </span> | 
+                <span> <a target='forvo' href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
+                <span> <a target='backbone' href="http://backbonejs.org/"> Backbone </a> </span> | 
+                <span> <a target='bootstrap' href="http://getbootstrap.com"> Bootstrap </a> </span>
             </div>
         </div> <!-- /container -->
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
@@ -70,7 +70,7 @@
             //$.ajaxSettings.crossDomain = true;
             
             // toggle collapsed menu after click
-            $('.nav a').on('click', function() {
+            $('.navbar-collapse a').on('click', function() {
                 if ($(".navbar-collapse").hasClass("in") && $(this).attr('data-toggle') !== "dropdown" ) {
                     $(".navbar-toggle").click();
                 }
@@ -99,6 +99,7 @@
             });
         </script>
         <script type="text/javascript" src="js/lib/commons.js"></script>
+        <script type="text/javascript" src="js/lib/storage.js"></script>
         <script type="text/javascript" src="js/Model/category.js"></script> 
         <script type="text/javascript" src="js/Model/items.js"></script> 
         <script type="text/javascript" src="js/View/CategoryItemsView.js"></script>     

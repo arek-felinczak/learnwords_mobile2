@@ -9,7 +9,7 @@ ul#CategoryList li {
     background-color: #FBFBFB;
 }
 ul#CategoryList li:hover {
-    background-color: #F0F0F0;
+    background-color: #E8E8E8;
 }
 ul#CategoryList a:hover {
     text-decoration: none;
