@@ -7,9 +7,19 @@ var AppRouter = Backbone.Router.extend({
         "item/:catId/:id/:nr" : "item",
         "itemAddForm": "wordAddForm",
         "search": "wordSearch",
-        "search/:query": "wordSearch"
+        "search/:query": "wordSearch",
+        "about": "about",
+        "contact": "contact"
     },
     manager: new VocabularyManager(),
+    
+    about: function() {
+       $('div#content').html(new AboutView().render());
+    },
+    
+    contact:function() {
+        $('div#content').html(new ContactView().render());
+    },
     
     categoryList:function() {
         if (window.debug_mode) console.log('AppRouter:categoryList');
@@ -118,7 +128,7 @@ var AppRouter = Backbone.Router.extend({
    }    
 });
 	
-loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView'], function() {
+loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
     app_router = new AppRouter();
     Backbone.history.start();
 });

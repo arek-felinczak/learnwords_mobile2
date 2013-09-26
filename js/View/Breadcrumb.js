@@ -2,8 +2,6 @@ function Breadcrumb() {
     
     this.render = function(model, param) {
         var html = '<ol class="breadcrumb">';
-        $('ul.navbar-nav li.active').removeClass('active');
-        $('ul.navbar-nav a#DictionaryItemNav').parent().addClass('active');
         
         html += this.renderHome();
         if (model instanceof Category) {
