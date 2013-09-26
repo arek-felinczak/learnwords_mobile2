@@ -2,3 +2,4 @@ nbproject
 nbproject/private/
 build/
 dist/
+nbproject/private/private.xml
