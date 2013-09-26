@@ -12,6 +12,7 @@ var AppRouter = Backbone.Router.extend({
     manager: new VocabularyManager(),
     
     categoryList:function() {
+        if (window.debug_mode) console.log('AppRouter:categoryList');
         var self = this;
         this.transitionStart();
         this.manager.getCategoryList(function(modelList) {
@@ -23,6 +24,7 @@ var AppRouter = Backbone.Router.extend({
     },
  
     category:function (id) {
+        if (window.debug_mode) console.log('AppRouter:category');
         var self = this;
         this.transitionStart();
         this.manager.getItemList(id, function(categoryModel) {
@@ -37,6 +39,7 @@ var AppRouter = Backbone.Router.extend({
     },
     
     item:function (catId, id, nr) {
+        if (window.debug_mode) console.log('AppRouter:item');
         var self = this;
         this.transitionStart();
         this.manager.getItem(catId, id, function(item) {
@@ -70,6 +73,8 @@ var AppRouter = Backbone.Router.extend({
     },
     
     wordAddForm:function() {
+        if (window.debug_mode)
+            console.log('AppRouter:wordAddForm');
         this.transitionStart();
         var item = new Item();
         var self = this;
@@ -82,6 +87,8 @@ var AppRouter = Backbone.Router.extend({
     },
     
     wordSearch: function() {
+        if (window.debug_mode)
+            console.log('AppRouter:wordSearch');
         this.transitionStart();
         var query = $.trim($('#searchWord').val());
         app_router.navigate('#search/' + query,false);
@@ -101,12 +108,12 @@ var AppRouter = Backbone.Router.extend({
     
     transitionStart: function() {
         if (window.learnwordsConfig.transitions){
-            $('div.container').fadeOut(50);
+            $('div#content').fadeOut(10);
         }
     },
     transitionStop: function() {
         if (window.learnwordsConfig.transitions) {
-            $('div.container').fadeIn(900);
+            $('div#content').fadeIn(900);
         }
    }    
 });

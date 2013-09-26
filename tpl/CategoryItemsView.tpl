@@ -5,9 +5,9 @@
     </div>
     <ul class="list-group" id='CategoryList'>
         {{#each categories}}
-            <a href="#category/{{Id}}"> 
+            <a href="#category/{{Id}}">
                 <li class="list-group-item">
-                    {{Name}}
+                    {{Name}} 
                 </li>
             </a>
         {{/each}}

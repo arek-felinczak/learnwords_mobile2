@@ -1,3 +1,16 @@
 .margin-small {
-    margin: 2px
+    margin: 3px
+}
+.margin-medium {
+    margin: 6px
+}
+
+ul#CategoryList li {
+    background-color: #FBFBFB;
+}
+ul#CategoryList li:hover {
+    background-color: #F0F0F0;
+}
+ul#CategoryList a:hover {
+    text-decoration: none;
 }

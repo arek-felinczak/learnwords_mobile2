@@ -25,17 +25,15 @@
                         <li><a id="DictionaryItemNav" href="#categories"> Dictionary </a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="#itemAddForm">Add word</a></li>
+                        <li><a href="#repetition-list">Favourites (todo)</a></li>
+                        <li class="divider"></li>
                         <li class="dropdown">
                             <a href="#options" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#repetition-list">Repetition list (todo)</a></li>
-                                <li class="divider"></li>
                                 <li class="dropdown-header">Word details in:</li>
                                 <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki;">Diki.pl</a></li>
                                 <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo;">Forvo.pl</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Contribute</li>
-                                <li><a href="#itemAddForm"> Add word </a></li>
                             </ul>
                         </li>
                     </ul>
@@ -65,14 +63,19 @@
             </footer>
         </div> <!-- /container -->
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
-        <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script> 
         <script type="text/javascript">
             $('#reklamacba').remove();
             
             $.support.cors = true;
-            $.ajaxSetup({
-                xhr: function() {return new window.XMLHttpRequest({mozSystem: true});},
-                crossDomain: true,                 
+            $.ajaxSettings.xhr = function() {return new window.XMLHttpRequest({mozSystem: true});};
+            $.ajaxSettings.crossDomain = true;
+            
+            // toggle collapsed menu after click
+            $('.nav a').on('click', function() {
+                if ($(".navbar-collapse").hasClass("in") && $(this).attr('data-toggle') !== "dropdown" ) {
+                    $(".navbar-toggle").click();
+                }
             });
             
             window.learnwordsConfig = {
