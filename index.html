@@ -52,15 +52,13 @@
                 <div id="Breadcrumb"></div>
                 <div id="content"></div>
             </div>
-            <footer>
-                <p>
-                    <span> &copy; Designed by Arek Felińczak &middot; </span> | 
-                    <span> <a href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code available on Github </a> </span> | 
-                    <span> <a href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
-                    <span> <a href="http://backbonejs.org/"> Backbone framework </a> </span> | 
-                    <span> <a href="http://getbootstrap.com"> Bootstrap front-end framework </a> </span>
-                <p>
-            </footer>
+            <div class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
+                <span> &copy; Designed by Arek Felińczak &middot; </span> 
+                <span> <a href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code on Github </a> </span> | 
+                <span> <a href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
+                <span> <a href="http://backbonejs.org/"> Backbone framework </a> </span> | 
+                <span> <a href="http://getbootstrap.com"> Bootstrap framework </a> </span>
+            </div>
         </div> <!-- /container -->
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
         <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script> 
@@ -69,7 +67,7 @@
             
             $.support.cors = true;
             $.ajaxSettings.xhr = function() {return new window.XMLHttpRequest({mozSystem: true});};
-            $.ajaxSettings.crossDomain = true;
+            //$.ajaxSettings.crossDomain = true;
             
             // toggle collapsed menu after click
             $('.nav a').on('click', function() {

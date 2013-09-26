@@ -14,3 +14,7 @@ ul#CategoryList li:hover {
 ul#CategoryList a:hover {
     text-decoration: none;
 }
+.navbar {
+    min-height: 30px;
+    padding: 5px
+}
