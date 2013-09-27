@@ -107,6 +107,7 @@
         <script type="text/javascript" src="js/router.js"></script>
         <!-- for adobe cloud build -->
         <script src="phonegap.js"></script>
+        <script type="text/javascript" src="js/lib/fastclick.min.js"></script>
         <script type="text/javascript">
             function rollUpNav(obj){
                 if ($(".navbar-collapse").hasClass("in") && $(obj).attr('data-toggle') !== "dropdown" ) {
@@ -124,32 +125,28 @@
                 };
             });
                         
-            var isTouchDevice = ('onmouseover' in window === false && "ontouchstart" in window);
-            if (isTouchDevice === true) {
-                
-                loadScript('js/lib/fastclick.min.js');
+            var isTouchDevice = "ontouchstart" in window;            
+            if (isTouchDevice === true) {                
                 $(function() {
-                    new FastClick(document.body);
+                    FastClick.attach(document.body);
                 });
-                
                        
                 // for phonegap only
-                function showExitConfirm() {
-                    alert('regiter backbutton event');
+                function showExitConfirm(e) {
                     navigator.notification.confirm(
                         'Do you really want to exit?', // message
                         exitFromApp, // callback to invoke with index of button pressed
                         'Exit', // title
                         'Cancel,OK' // buttonLabels
                     );
+                    return false;
                 };
                 function exitFromApp(buttonIndex) {
                     if (buttonIndex === 2) { navigator.app.exitApp(); }
                 };
-                document.addEventListener("backbutton", showExitConfirm, false);
                 document.addEventListener("deviceready", function(){
-                     alert('PhoneGap loaded.');
-                }, false);
+                    document.addEventListener("backbutton", showExitConfirm, false);
+                }, false);                
             }
         </script>        
     </body>
