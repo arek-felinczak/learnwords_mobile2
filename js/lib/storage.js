@@ -32,10 +32,14 @@ Vocabulary.Storage.LocalStorage  = function () {
         if (window.console) console.log(e);
     };
 
-    this.open = function() {};
+    this.open = function() {
+        if (window.localStorage === null) {
+            window.localStorage = {};
+        }
+    };
 
     this.addItem = function(id, arr) {
-        try { window.localStorage.setItem(id, arr); } 
+        try { window.localStorage[id] = arr; } 
         catch(err) { this.onError(err); }
     };
 
@@ -51,13 +55,13 @@ Vocabulary.Storage.LocalStorage  = function () {
     };
 
     this.getItem = function(id) {			
-        try { return window.localStorage.getItem(id); } 
+        try { return window.localStorage[id]; } 
         catch(err) { this.onError(err); }
         return {};
     };
 
     this.deleteItem = function(id) {
-        try { window.localStorage.removeItem(id); } 
+        try { window.localStorage[id] = null; } 
         catch(err) { this.onError(err); }			
     };	
 };

@@ -1,12 +1,14 @@
 <div id="CategoryListPanel" class='panel panel-default'>
     <div class="panel-heading">
         <strong id="CategoryNameHeader"></strong>
-        <p>Tap on word to play audio file (internet connection needed)</p>
+    </div>
+    <div class="panel-body">
+        <p>Tap on word to play audio file (internet connection needed).</p>
     </div>        
     <table class="table">
         <colgroup>
-            <col class="col-lg-4 col-xs-4"></col>
-            <col class="col-lg-8 col-xs-8"></col>
+            <col class="col-lg-4 col-xs-4" />
+            <col class="col-lg-8 col-xs-8" />
         </colgroup>
         {{#each category}}
         <tr>

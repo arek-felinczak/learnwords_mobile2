@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.learnwords" version="0.1">
-		
     <name>Learnwords - vocabulary builder</name>
     <description>
        Learnwords app will help you improve your english vocabulary. It consits more than 3000 words grouped into categories and connected to speech engine.
@@ -17,7 +16,6 @@
     <preference name="stay-in-webview" value="false" />
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
-    <preference name="exit-on-suspend" value="false" />
     <preference name="show-splash-screen-spinner" value="true" />
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />

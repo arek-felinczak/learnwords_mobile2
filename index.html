@@ -103,8 +103,10 @@
         <script type="text/javascript" src="js/View/ContactView.js"></script>
         <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
         <script type="text/javascript" src="js/View/Breadcrumb.js"></script>
-        <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/router.js"></script>
+        <!-- for adobe cloud build -->
+        <script src="phonegap.js"></script>
         <script type="text/javascript">
             function rollUpNav(obj){
                 if ($(".navbar-collapse").hasClass("in") && $(obj).attr('data-toggle') !== "dropdown" ) {
@@ -121,18 +123,19 @@
                     app_router.navigate('#search', true);
                 };
             });
-            
-            var isMobileBrowserAndNotPhoneGap = (document.location.protocol === "http:");
-            if (isMobileBrowserAndNotPhoneGap === false) {
+                        
+            var isTouchDevice = ('onmouseover' in window === false && "ontouchstart" in window);
+            if (isTouchDevice === true) {
                 
-                loadScript('/js/lib/fastclick.min.js');
+                loadScript('js/lib/fastclick.min.js');
                 $(function() {
-                    FastClick.attach(document.body);
+                    new FastClick(document.body);
                 });
                 
-                loadScript('js/lib/cordova-android.js');                
+                       
                 // for phonegap only
                 function showExitConfirm() {
+                    alert('regiter backbutton event');
                     navigator.notification.confirm(
                         'Do you really want to exit?', // message
                         exitFromApp, // callback to invoke with index of button pressed
@@ -144,6 +147,9 @@
                     if (buttonIndex === 2) { navigator.app.exitApp(); }
                 };
                 document.addEventListener("backbutton", showExitConfirm, false);
+                document.addEventListener("deviceready", function(){
+                     alert('PhoneGap loaded.');
+                }, false);
             }
         </script>        
     </body>
