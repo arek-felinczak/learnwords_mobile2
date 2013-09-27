@@ -35,29 +35,29 @@ Vocabulary.Storage.LocalStorage  = function () {
     this.open = function() {};
 
     this.addItem = function(id, arr) {
-        try { localStorage.setItem(id, arr); } 
+        try { window.localStorage.setItem(id, arr); } 
         catch(err) { this.onError(err); }
     };
 
     this.length = function() {
-        try { return localStorage.length; } 
+        try { return window.localStorage.length; } 
         catch(err) { return 0; }
     };
 
     this.getItems = function() {
-        try { return localStorage; } 
+        try { return window.localStorage; } 
         catch(err) { this.onError(err); }	
         return [];
     };
 
     this.getItem = function(id) {			
-        try { return localStorage.getItem(id); } 
+        try { return window.localStorage.getItem(id); } 
         catch(err) { this.onError(err); }
         return {};
     };
 
     this.deleteItem = function(id) {
-        try { localStorage.removeItem(id); } 
+        try { window.localStorage.removeItem(id); } 
         catch(err) { this.onError(err); }			
     };	
 };

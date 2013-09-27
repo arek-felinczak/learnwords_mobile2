@@ -106,14 +106,18 @@
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript">
-            // toggle collapsed menu after click
-            $('.navbar-collapse a').on('click', function() {
-                if ($(".navbar-collapse").hasClass("in") && $(this).attr('data-toggle') !== "dropdown" ) {
+            function rollUpNav(obj){
+                if ($(".navbar-collapse").hasClass("in") && $(obj).attr('data-toggle') !== "dropdown" ) {
                     $(".navbar-toggle").click();
                 }
+            }
+            // toggle collapsed menu after click
+            $('.navbar-collapse a').on('click', function() {
+                rollUpNav(this);
             });
             $('input#searchWord').keyup(function(e) {
                 if(e.which === 13) { 
+                    rollUpNav(this);
                     app_router.navigate('#search', true);
                 };
             });
@@ -127,9 +131,8 @@
                 });
                 
                 loadScript('js/lib/cordova-android.js');                
-            
                 // for phonegap only
-                function showConfirm() {
+                function showExitConfirm() {
                     navigator.notification.confirm(
                         'Do you really want to exit?', // message
                         exitFromApp, // callback to invoke with index of button pressed
@@ -139,7 +142,8 @@
                 };
                 function exitFromApp(buttonIndex) {
                     if (buttonIndex === 2) { navigator.app.exitApp(); }
-                };   
+                };
+                document.addEventListener("backbutton", showExitConfirm, false);
             }
         </script>        
     </body>
