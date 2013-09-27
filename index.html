@@ -37,12 +37,12 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-right">
+                    <div class="navbar-form navbar-right">
                         <div class="form-group">
-                            <input type="text" placeholder="search" id='searchWord' style="width:220px; display: inline-block" class="form-control" />
-                            <a href="#search" class="btn btn-success"> search </a>
+                            <input type="text" placeholder="search" id='searchWord' style="width:200px; display: inline-block" class="form-control" />
+                            <a href="#search" id="search-link" class="btn btn-success"> search </a>
                         </div>                        
-                    </form>
+                    </div>
                 </div><!--/.navbar-collapse -->
             </div>
         </div>
@@ -51,6 +51,7 @@
             <div class="row">
                 <div id="Breadcrumb"></div>
                 <div id="content" style='margin: 4px'></div>
+                <br /><br />
             </div>
             <div class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
                 <span> &copy; Designed by Arek Felińczak &middot; </span> 
@@ -67,15 +68,7 @@
             
             $.support.cors = true;
             $.ajaxSettings.xhr = function() {return new window.XMLHttpRequest({mozSystem: true});};
-            //$.ajaxSettings.crossDomain = true;
-            
-            // toggle collapsed menu after click
-            $('.navbar-collapse a').on('click', function() {
-                if ($(".navbar-collapse").hasClass("in") && $(this).attr('data-toggle') !== "dropdown" ) {
-                    $(".navbar-toggle").click();
-                }
-            });
-            
+           
             window.learnwordsConfig = {
                 restUrl: window.location.protocol + '//' + window.location.host,
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
@@ -112,5 +105,42 @@
         <script type="text/javascript" src="js/View/Breadcrumb.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            // toggle collapsed menu after click
+            $('.navbar-collapse a').on('click', function() {
+                if ($(".navbar-collapse").hasClass("in") && $(this).attr('data-toggle') !== "dropdown" ) {
+                    $(".navbar-toggle").click();
+                }
+            });
+            $('input#searchWord').keyup(function(e) {
+                if(e.which === 13) { 
+                    app_router.navigate('#search', true);
+                };
+            });
+            
+            var isMobileBrowserAndNotPhoneGap = (document.location.protocol === "http:");
+            if (isMobileBrowserAndNotPhoneGap === false) {
+                
+                loadScript('/js/lib/fastclick.min.js');
+                $(function() {
+                    FastClick.attach(document.body);
+                });
+                
+                loadScript('js/lib/cordova-android.js');                
+            
+                // for phonegap only
+                function showConfirm() {
+                    navigator.notification.confirm(
+                        'Do you really want to exit?', // message
+                        exitFromApp, // callback to invoke with index of button pressed
+                        'Exit', // title
+                        'Cancel,OK' // buttonLabels
+                    );
+                };
+                function exitFromApp(buttonIndex) {
+                    if (buttonIndex === 2) { navigator.app.exitApp(); }
+                };   
+            }
+        </script>        
     </body>
 </html>

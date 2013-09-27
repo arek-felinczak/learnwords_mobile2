@@ -81,3 +81,12 @@ function loadTemplate(views, callback) {
     });
     $.when.apply(null, deferreds).done(callback);
 }
+
+
+function loadScript(path) {
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = path;
+    head.appendChild(script);
+}

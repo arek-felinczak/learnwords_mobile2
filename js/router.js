@@ -101,7 +101,7 @@ var AppRouter = Backbone.Router.extend({
             console.log('AppRouter:wordSearch');
         this.transitionStart();
         var query = $.trim($('#searchWord').val());
-        app_router.navigate('#search/' + query,false);
+        app_router.navigate('#search/' + query, false);
         var self = this;
         this.manager.itemListBySearch(query, function(items) {
             if (items.models.length === 0) {
