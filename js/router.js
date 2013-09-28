@@ -118,7 +118,6 @@ var AppRouter = Backbone.Router.extend({
                     self.navBar(item, cat);
                 });
                 self.transitionStop();
-                view.postRender();
             });
         });
     },
