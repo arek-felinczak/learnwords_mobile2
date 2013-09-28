@@ -18,6 +18,9 @@ function Breadcrumb() {
         else if (model instanceof ItemFormView) {
             html += '<li><a href="#itemAddForm">Add new word form</a></li>';
         }
+        else if (model !== undefined && model !== null) {
+            html += '<li> ' + model + '</li>';
+        }
         
         html += '</ol>';
         return html;

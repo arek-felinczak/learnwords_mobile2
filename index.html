@@ -26,11 +26,12 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="#itemAddForm">Add word</a></li>
-                        <li><a href="#repetition-list">Favourites (todo)</a></li>
+                        <li><a href="#favourites">Favourites</a></li>
                         <li class="divider"></li>
                         <li class="dropdown">
                             <a href="#options" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                                <li><a href="#" onClick="app_router.refreshCache(true); app_router.navigate('#categories', true); return false;">Refresh dictionary</a></li>
                                 <li class="dropdown-header">Word details in:</li>
                                 <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki;">diki.pl</a></li>
                                 <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo;">forvo.pl</a></li>
@@ -137,17 +138,26 @@
                 function showExitConfirm(e) {
                     navigator.notification.confirm(
                         'Do you really want to exit?', // message
-                        exitFromApp, // callback to invoke with index of button pressed
+                        function(e) {if (buttonIndex === 2) { navigator.app.exitApp(); }},
                         'Exit', // title
                         'Cancel,OK' // buttonLabels
                     );
                     return false;
                 };
-                function exitFromApp(buttonIndex) {
-                    if (buttonIndex === 2) { navigator.app.exitApp(); }
+                
+                function showRefreshButton(e) {
+                    navigator.notification.confirm(
+                        'Do you really want to exit?', // message
+                        function(e) {if (buttonIndex === 2) { app_router.refreshCache(true); }},
+                        'Exit', // title
+                        'Cancel,OK' // buttonLabels
+                    );
+                    return false;
                 };
+               
                 document.addEventListener("deviceready", function(){
                     document.addEventListener("backbutton", showExitConfirm, false);
+                    document.addEventListener("menubutton", showRefreshButton, false);
                 }, false);                
             }
         </script>        

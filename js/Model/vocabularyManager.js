@@ -22,6 +22,29 @@ VocabularyManager = function () {
         });        
     };
     
+    this.getFavouritesList = function() {
+        var list = this.storage.getItem('favouritesList');
+        if (list === null) return [];
+        return list;
+    },
+            
+    this.addToFavourites = function(item) {
+        var res = this.getFavouritesList();
+        res.push(item);
+        this.storage.addItem('favouritesList', res);
+        if (window.debug_mode) console.log('VocabularyManager:addToFavourites');
+    },
+            
+    this.removeFromFavourites = function(id) {
+        id = id.toString();
+        var array = this.storage.getItem('favouritesList');
+        var res = jQuery.grep(array, function(value) {
+            return value.Id !== id;
+        });        
+        this.storage.addItem('favouritesList', res);
+        if (window.debug_mode) console.log('VocabularyManager:removeFromFavourites');
+    },
+    
     this.getCategory = function(id, callback) {
         this.getCategoryList(function(model) {    
             callback(                
@@ -80,10 +103,11 @@ VocabularyManager = function () {
             if (this.storage.getItem('cachedCategoryList') !== null) return;
         }
         var self = this;
+        if (window.debug_mode) console.log('VocabularyManager:reloadCache');
         this.getCategoryList(function(cats){
-            for (cat in cats) {
-                self.getItemList(cat.Id, function(){});
-            }
+            cats.models.forEach(function(obj) {
+                self.getItemList(obj.get('Id'), function(){});
+            });
         });
-    }
+    };
 };
