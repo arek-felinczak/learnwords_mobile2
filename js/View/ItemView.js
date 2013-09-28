@@ -11,7 +11,16 @@ ItemView = Backbone.View.extend({
      
      buildLink:function (word, engineUrl) {
          return engineUrl.toString().format({ "0": word});         
-     }      
+     },
+           
+     postRender: function() {
+        if (window.localStorage['dictionaryLink'] === window.learnwordsConfig.getionary) {
+            $('div.search-result').click(function(o){
+                var waveFile = 'speak.wav?text=' + encodeURI(_text.replace(/(<([^>]+)>)/ig, ''));
+                Forvo_Ext_Play(null, null, waveFile);
+            }).css('cursor', 'pointer');
+        }
+     }
 });
 
 ItemFormView = Backbone.View.extend({

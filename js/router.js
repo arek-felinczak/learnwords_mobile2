@@ -53,7 +53,8 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.transitionStart();
         this.manager.getItem(catId, id, function(item) {
-            $('div#content').html(new ItemView({model: item}).render(nr));
+            var view = new ItemView({model: item});
+            $('div#content').html(view.render(nr));
             self.manager.getItemList(catId, function(items) {
                 var index = item.collection.indexOf(item);
                 // previous button
@@ -63,7 +64,7 @@ var AppRouter = Backbone.Router.extend({
                     $(prevDomElement).removeAttr('href').parent().addClass('disabled');
                 } else {
                     $(prevDomElement).attr('href', '#item/' + item.get('CategoryId') + '/' + prev.get('Id') + '/1')
-                            .parent().removeClass('disabled');
+                        .parent().removeClass('disabled');
                 }
                 // next button
                 var nextDomElement = $("ul#itemPager li a#next");
@@ -78,6 +79,7 @@ var AppRouter = Backbone.Router.extend({
                     self.navBar(item, cat);
                 });
                 self.transitionStop();
+                view.postRender();
             });
         });
     },

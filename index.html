@@ -34,8 +34,7 @@
                                 <li class="dropdown-header">Word details in:</li>
                                 <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki;">diki.pl</a></li>
                                 <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo;">forvo.pl</a></li>
-                                <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary_mob;">m.getionary.pl</a></li>
-                                <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary;">getionary.pl</a></li>
+                                <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary;">m.getionary.pl</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -75,8 +74,7 @@
                 restUrl: window.location.protocol + '//' + window.location.host,
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
                 forvo: "http://pl.forvo.com/word/{0}/#en",
-                getionary_mob: 'http://m.getionary.pl/search.html?query={0}',
-                getionary: 'http://www.getionary.pl/szukaj.html?q={0}',
+                getionary: 'http://m.getionary.pl/search.html?query={0}',
                 transitions: true
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
