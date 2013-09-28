@@ -68,8 +68,6 @@ function loadTemplate(views, callback) {
             type: "GET",
             dataType: "text",
             success: function(data) {
-                if (window.debug_mode)
-                    console.log('Template loaded: ' + view);
                 window.templates[view] = Handlebars.compile(data);
             },
             error: function(xhr) {

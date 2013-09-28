@@ -19,7 +19,11 @@
                 <div>
                 <div>
                     <a href="#item/{{CategoryId}}/{{Id}}/1"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
-                    <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
+                    {{#if ../isFavouriteList}}
+                        <button onClick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove();" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
+                    {{else}}
+                        <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden');" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
+                    {{/if}}
                     <span onclick="LoadForvoLink('{{Translation1}}', this)" class="pointer margin-small">{{Translation1}}</span>
                 </div>
                 {{#if Translation2}}

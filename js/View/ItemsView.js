@@ -1,8 +1,8 @@
 ItemsView = Backbone.View.extend({
       
-	 render:function (eventName) {
+	 render:function (isFavouriteList) {
         this.template = window.templates['ItemsView'];
-	    var vm = {category: this.model.toJSON(), count: this.model.models.length};
+	    var vm = {category: this.model.toJSON(), count: this.model.models.length, isFavouriteList: isFavouriteList};
 	    var html = this.template(vm);
         return html;
 	 }
