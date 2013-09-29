@@ -6,9 +6,9 @@ Category = Backbone.Model.extend({
         Public: true,
         Owner: ''
     },
-
+    
     validate: function(attributes){
-        if(attributes.Name === null || attributes.Name.length == 0){
+        if(attributes.Name === null || attributes.Name.length === 0){
             return "Category name can't be empty";
         }
         return false;
@@ -28,7 +28,7 @@ Category = Backbone.Model.extend({
 
 CategoryCollection = Backbone.Collection.extend({
     model: Category,
-    url: window.learnwordsConfig.restUrl + "/rest_api.php/categories",
+    url: window.learnwordsConfig.restUrl + "/rest_api.php/categories"
 });
 
 

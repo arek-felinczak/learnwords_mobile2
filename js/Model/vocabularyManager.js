@@ -98,16 +98,22 @@ VocabularyManager = function () {
             }});
     };
     
-    this.reloadCache = function(force) {
+    this.reloadCache = function(force, callback) {
         if (force === false){
-            if (this.storage.getItem('cachedCategoryList') !== null) return;
+            if (this.storage.getItem('cachedCategoryList') !== null) {
+                callback();
+                return;            
+            };
         }
         var self = this;
-        if (window.debug_mode) console.log('VocabularyManager:reloadCache');
-        this.getCategoryList(function(cats){
-            cats.models.forEach(function(obj) {
-                self.getItemList(obj.get('Id'), function(){});
+        this.storage.addItem('cachedCategoryList', null);
+        this.getCategoryList(function(cats) {
+            if (window.debug_mode) console.log('VocabularyManager:reloadCache');
+            _.rest(cats).models.forEach(function(obj) {
+                self.getItemList(obj.get('Id'), function() {});
             });
+            // last call will trigger callback
+            self.getItemList(_.first(cats).get('Id'), callback);
         });
     };
 };

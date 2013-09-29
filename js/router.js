@@ -19,8 +19,7 @@ var AppRouter = Backbone.Router.extend({
     
     refreshCache: function(force) {
         this.transitionStart();
-        this.manager.reloadCache(force === undefined ? true : force);
-        this.transitionStop();
+        this.manager.reloadCache(force === undefined ? true : force, this.transitionStop);        
     },
     
     favouritesRemove: function(id) {
@@ -41,18 +40,18 @@ var AppRouter = Backbone.Router.extend({
         var list = new ItemsCollection(this.manager.getFavouritesList());
         $('div#content').html(new ItemsView({model: list}).render(true));
         var cat = new Category({Name: 'Favourites', Id: 0});
-        self.navBar(cat);
+        self.navBar('category', cat);
         self.transitionStop();  
     },
     
     about: function() {
        $('div#content').html(new AboutView().render());
-        this.navBar('About');
+        this.navBar('static', 'About');
     },
     
     contact:function() {
         $('div#content').html(new ContactView().render());
-        this.navBar('Contact');
+        this.navBar('static', 'Contact');
     },
     
     categoryList:function() {
@@ -62,7 +61,7 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getCategoryList(function(modelList) {
             var categoryListView = new CategoryItemsView({model: modelList});
             $('div#content').html(categoryListView.render());
-            self.navBar();
+            self.navBar('');
             self.transitionStop();
         });
     },
@@ -78,13 +77,13 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getItemList(id, function(categoryModel) {
             $('div#content').html(new ItemsView({model: categoryModel}).render(false));
-            self.manager.getCategory(id, function(cat) {self.navBar(cat)});
+            self.manager.getCategory(id, function(cat) {self.navBar('category', cat);});
             self.transitionStop();
         });         
     },
     
-    navBar:function(model, param) {
-        $('#Breadcrumb').html(new Breadcrumb().render(model, param));
+    navBar:function(page, model, param) {
+        $('#Breadcrumb').html(new Breadcrumb().render(page, model, param));
     },
     
     item:function (catId, id, nr) {
@@ -102,7 +101,8 @@ var AppRouter = Backbone.Router.extend({
                 if (prev === undefined) {
                     $(prevDomElement).removeAttr('href').parent().addClass('disabled');
                 } else {
-                    $(prevDomElement).attr('href', '#item/' + item.get('CategoryId') + '/' + prev.get('Id') + '/1')
+                    $(prevDomElement).text(' << ' + prev.get('Word'))
+                        .attr('href', '#item/' + item.get('CategoryId') + '/' + prev.get('Id') + '/1')
                         .parent().removeClass('disabled');
                 }
                 // next button
@@ -111,11 +111,12 @@ var AppRouter = Backbone.Router.extend({
                 if (next === undefined) {
                     $(nextDomElement).removeAttr('href').parent().addClass('disabled');
                 } else {
-                    $(nextDomElement).attr('href', '#item/' + item.get('CategoryId') + '/' + next.get('Id') + '/1')
+                    $(nextDomElement).text(next.get('Word') + ' >> ')
+                        .attr('href', '#item/' + item.get('CategoryId') + '/' + next.get('Id') + '/1')
                         .parent().removeClass('disabled');
                 }                
                 self.manager.getCategory(catId, function(cat){
-                    self.navBar(item, cat);
+                    self.navBar('item', item, cat);
                 });
                 self.transitionStop();
             });
@@ -132,7 +133,7 @@ var AppRouter = Backbone.Router.extend({
             var formView = new ItemFormView({model: item});
             $('div#content').html(formView.render(modelList).el);
             self.transitionStop();
-            self.navBar(formView);
+            self.navBar('ItemFormView', formView);
         });
     },
     
@@ -152,18 +153,20 @@ var AppRouter = Backbone.Router.extend({
             $('div#content').html(new ItemsView({model: items}).render(false));
             $('#CategoryNameHeader').text("Search results:");
             self.transitionStop();
-            self.navBar(items, query);
+            self.navBar('itemsCollection', items, query);
         });
     },
     
     transitionStart: function() {
-        if (window.learnwordsConfig.transitions){
-            $('div#content').fadeOut(0);
+        if (window.learnwordsConfig.transitions) {
+            if (navigator.notification) navigator.notification.activityStart();
+            else $('div#app').addClass('blockUI');
         }
     },
     transitionStop: function() {
         if (window.learnwordsConfig.transitions) {
-            $('div#content').fadeIn(600);
+            if (navigator.notification) navigator.notification.activityStop(); 
+            else $('div#app').removeClass('blockUI');
         }
    }    
 });

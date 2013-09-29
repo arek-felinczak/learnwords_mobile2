@@ -32,9 +32,9 @@ function Forvo_Ext_Play(path_mp3, path_ogg, path_wav)
     var audioTagSupport = !!(document.createElement('audio').canPlayType);
     if (audioTagSupport) {
         myAudio = new Audio();
-        canPlayMp3 = ("no" != myAudio.canPlayType("audio/mpeg")) && ("" != myAudio.canPlayType("audio/mpeg"));
-        canPlayOgg = ("no" != myAudio.canPlayType("audio/ogg")) && ("" != myAudio.canPlayType("audio/ogg"));
-        canPlayWav = ("no" != myAudio.canPlayType("audio/wav")) && ("" != myAudio.canPlayType("audio/wav"));
+        canPlayMp3 = ("no" !== myAudio.canPlayType("audio/mpeg")) && ("" !== myAudio.canPlayType("audio/mpeg"));
+        canPlayOgg = ("no" !== myAudio.canPlayType("audio/ogg")) && ("" !== myAudio.canPlayType("audio/ogg"));
+        canPlayWav = ("no" !== myAudio.canPlayType("audio/wav")) && ("" !== myAudio.canPlayType("audio/wav"));
     } else {
         canPlayMp3 = false;
         canPlayOgg = false;

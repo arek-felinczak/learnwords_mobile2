@@ -60,6 +60,7 @@ ItemFormView = Backbone.View.extend({
 });
 
 function LoadForvoLink(word, htmlObj) {
+    app_router.transitionStart();
     url = window.learnwordsConfig.forvo.replace('{0}', word);
     var url = 'http://apifree.forvo.com/key/fecc801770209d5b7b0ed138946d6bd3/format/json/callback/pronounce/action/standard-pronunciation/word/'+encodeURI(word)+'/language/en/order/rate-desc/limit/2';
         $.ajax({
@@ -68,11 +69,14 @@ function LoadForvoLink(word, htmlObj) {
             dataType: "jsonp",
             type: "jsonp",
             success: function (json) {
+                if (window.debug_mode) console.log('LoadForvoLink: ' + JSON.stringify(json));
                 var mp3 = json.items[0].pathmp3;
                 var ogg = json.items[0].pathogg;
                 Forvo_Ext_Play(mp3, ogg);
+                app_router.transitionStop();
        },
-        error: function(err){
+        error: function(err) {
+            app_router.transitionStop();
             var_dump('Error in LoadForvoLink', err);
     }});
 }

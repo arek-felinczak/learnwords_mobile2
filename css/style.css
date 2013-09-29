@@ -1,8 +1,17 @@
 .margin-small {
     margin: 3px
 }
+
+.padding-small {
+    padding: 3px
+}
+
 .margin-medium {
     margin: 6px
+}
+
+.padding-medium {
+    padding: 6px
 }
 
 ul#CategoryList li {
@@ -21,4 +30,24 @@ ul#CategoryList a:hover {
 
 .pointer {
     cursor: pointer;
+}
+
+div.blockUI {
+    opacity:0.3;
+    filter:alpha(opacity=30);
+}
+
+.breadcrumb {
+    margin: 4px;
+    border-color: rgb(221, 221, 221);
+    border-style: solid;
+    border-width: 1px;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.pager {
+    margin: 7px 0px;
 }

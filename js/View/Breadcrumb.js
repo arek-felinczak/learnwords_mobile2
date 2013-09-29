@@ -1,21 +1,21 @@
 function Breadcrumb() {
     
-    this.render = function(model, param) {
+    this.render = function(page, model, param) {
         var html = '<ol class="breadcrumb">';
         
         html += this.renderHome();
-        if (model instanceof Category) {
+        if (page === 'category') {
             html += this.renderCategory(model);
             $('#CategoryNameHeader').text(model.get('Name'));
         }
-        else if (model instanceof Item) {
+        else if (page === 'item') {
             html += this.renderCategory(param);
             html += this.renderItem(model, param);
         }        
-        else if (model instanceof ItemsCollection) {
+        else if (page === 'itemsCollection') {
             html += this.renderSearch(param);            
         }        
-        else if (model instanceof ItemFormView) {
+        else if (page === 'ItemFormView') {
             html += '<li><a href="#itemAddForm">Add new word form</a></li>';
         }
         else if (model !== undefined && model !== null) {
