@@ -18,8 +18,8 @@ var AppRouter = Backbone.Router.extend({
     manager: new VocabularyManager(),
     
     refreshCache: function(force) {
-        this.transitionStart();
-        this.manager.reloadCache(force === undefined ? true : force, this.transitionStop);        
+        this.busyStart();
+        this.manager.reloadCache(force === undefined ? true : force, this.busyStop);        
     },
     
     favouritesRemove: function(id) {
@@ -159,16 +159,20 @@ var AppRouter = Backbone.Router.extend({
     
     transitionStart: function() {
         if (window.learnwordsConfig.transitions) {
-            if (navigator.notification) navigator.notification.activityStart();
-            else $('div#app').addClass('blockUI');
+            $('div#app').addClass('blockUI');
         }
     },
     transitionStop: function() {
         if (window.learnwordsConfig.transitions) {
-            if (navigator.notification) navigator.notification.activityStop(); 
-            else $('div#app').removeClass('blockUI');
+            $('div#app').removeClass('blockUI');
         }
-   }    
+   },
+   busyStart: function() {
+        if (navigator.notification) navigator.notification.activityStart();
+   },
+   busyStop: function() {
+        if (navigator.notification) navigator.notification.activityStop(); 
+   }
 });
 	
 loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
