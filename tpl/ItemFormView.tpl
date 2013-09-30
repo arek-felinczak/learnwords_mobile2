@@ -1,24 +1,25 @@
 <div id="CategoryListPanel" class='panel panel-default'>
-    <div class="panel-heading"><strong>Add new translation</strong></div>
+    <div class="panel-heading"><strong>Add/Edit translation</strong></div>
     <br />
     <form role="form" class="form-horizontal">
         <fieldset>
             <div class="form-group">
+                <input type="hidden" id="Id" name="Id" value="{{model.Id}}"/>
                 <label for="Word" class="col-lg-2 control-label">Word:</label>
                 <div class="col-lg-10">
-                    <input type="text" id="Word" name="Word" class="form-control" value="{{Word}}"/>
+                    <input type="text" id="Word" name="Word" class="form-control" value="{{model.Word}}"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="Translation1" class="col-lg-2 control-label">Translation:</label>
                 <div class="col-lg-10">
-                    <input type="text" id="Translation1" name="Translation1" class="form-control" value="{{Translation1}}"/>
+                    <input type="text" id="Translation1" name="Translation1" class="form-control" value="{{model.Translation1}}"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="Translation2" class="col-lg-2 control-label">Translation:</label>
                 <div class="col-lg-10">
-                    <input type="text" id="Translation2" name="Translation2" class="form-control" value="{{Translation2}}"/>
+                    <input type="text" id="Translation2" name="Translation2" class="form-control" value="{{model.Translation2}}"/>
                 </div>
             </div>
             <div class="form-group">
@@ -27,7 +28,7 @@
                     <select id="CategoryId" class="form-control" name="CategoryId">
                         <option value="0">Choose category</option>
                         {{#each categories}}
-                        <option value="{{Id}}">{{Name}}</option>
+                        <option cat-id="{{Id}}" value="{{Id}}">{{Name}}</option>
                         {{/each}}
                     </select>
                 </div>

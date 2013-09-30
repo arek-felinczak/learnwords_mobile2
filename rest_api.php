@@ -30,8 +30,7 @@ $app->get('/categories/:id', 'getCategory');
 $app->get('/items/:id', 'getCategoryItems');
 $app->get('/item/:id', 'getItem');
 $app->post('/item', 'addWord');
-//$app->delete('/wines/:id', 'deleteWine');
-//$app->put('/wines/:id', 'updateWine'); 
+$app->put('/item', 'updateWord'); 
 
 $app->run();
 
@@ -112,44 +111,28 @@ function addWord() {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
-/* 
-function updateWine($id) {
+
+function updateWord() {
     $request = Slim::getInstance()->request();
     $body = $request->getBody();
-    $wine = json_decode($body);
-    $sql = "UPDATE wine SET name=:name, grapes=:grapes, country=:country, region=:region, year=:year, description=:description WHERE id=:id";
+    $item = json_decode($body);
+    $sql = "UPDATE Item SET CategoryId=:CategoryId, Word=:Word, Translation1=:Translation1, Translation2=:Translation2 WHERE Id=:Id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("name", $wine->name);
-        $stmt->bindParam("grapes", $wine->grapes);
-        $stmt->bindParam("country", $wine->country);
-        $stmt->bindParam("region", $wine->region);
-        $stmt->bindParam("year", $wine->year);
-        $stmt->bindParam("description", $wine->description);
-        $stmt->bindParam("id", $id);
+        $stmt->bindParam("Id", $item->Id);
+        $stmt->bindParam("CategoryId", $item->CategoryId);
+        $stmt->bindParam("Word", $item->Word);
+        $stmt->bindParam("Translation1", $item->Translation1);
+        $stmt->bindParam("Translation2", $item->Translation2);
         $stmt->execute();
         $db = null;
-        echo json_encode($wine);
+        echo json_encode($item);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
  
-function deleteWine($id) {
-    $sql = "DELETE FROM wine WHERE id=:id";
-    try {
-        $db = getConnection();
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam("id", $id);
-        $stmt->execute();
-        $db = null;
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-*/
-
 function findByName() {
     $query = trim($_POST['query']);
     $sqlExactWord = "SELECT * From Item where Word = :query Or Translation1 = :query OR  Translation2 = :query ORDER BY Word LIMIT 0 , 20";

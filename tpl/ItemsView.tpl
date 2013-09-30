@@ -5,32 +5,32 @@
     <div class="panel-body">
         <p>Tap on word to play audio file (internet connection needed).</p>
     </div>        
-    <table class="table">
+    <table id="items-table" class="table">
         <colgroup>
             <col class="col-lg-4 col-xs-4" />
             <col class="col-lg-8 col-xs-8" />
         </colgroup>
         {{#each category}}
         <tr>
-            <td onclick="LoadForvoLink('{{Translation1}}', this)" class="pointer">
+            <td word="{{Translation1}}" class="pointer play-selector">
                 <div class="margin-medium">{{setIndex @index}}. {{Word}}</div>
             </td>
             <td style="vertical-align: middle"> 
                 <div>
                 <div>
-                    <a href="#item/{{CategoryId}}/{{Id}}/1"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
+                    <button href="#item/{{CategoryId}}/{{Id}}/1" class="navigate margin-small text-right btn btn-default glyphicon glyphicon-export"></button>
                     {{#if ../isFavouriteList}}
-                        <button onClick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove();" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
+                        <button word-id="{{Id}}" id='remove-favourites' type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
                     {{else}}
-                        <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden');" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
+                        <button id="add-favourites" word-id="{{Id}}" cat-id="{{CategoryId}}" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
                     {{/if}}
-                    <span onclick="LoadForvoLink('{{Translation1}}', this)" class="pointer btn btn-default btn-sm"> <strong> {{Translation1}} </strong> </span>
+                    <span word="{{Translation1}}" class="play-selector pointer btn btn-default btn-sm"> <strong> {{Translation1}} </strong> </span>
                 </div>
                 {{#if Translation2}}
                 <div>
-                    <a href="#item/{{CategoryId}}/{{Id}}/2"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
+                    <button href="#item/{{CategoryId}}/{{Id}}/2" class="navigate margin-small text-right btn btn-default glyphicon glyphicon-export"></button>
                     <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" style="visibility:hidden;" ></button>
-                    <span onclick="LoadForvoLink('{{Translation2}}', this)" class="pointer btn btn-default btn-sm"> <strong> {{Translation2}} </strong>  </span>
+                    <span word='{{Translation2}}' class="play-selector pointer btn btn-default btn-sm"> <strong> {{Translation2}} </strong>  </span>
                 </div>
                 {{/if}}
                 </div> 

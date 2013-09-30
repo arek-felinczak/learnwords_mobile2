@@ -16,7 +16,7 @@ function Breadcrumb() {
             html += this.renderSearch(param);            
         }        
         else if (page === 'ItemFormView') {
-            html += '<li><a href="#itemAddForm">Add new word form</a></li>';
+            html += '<li><a href="#itemAddForm">Add/Edit word form</a></li>';
         }
         else if (model !== undefined && model !== null) {
             html += '<li> ' + model + '</li>';
@@ -39,7 +39,7 @@ function Breadcrumb() {
     };
     
     this.renderItem = function(model) {
-        var url = "#item/" + model.get('CategoryId') + "/" + model.get('Id') + "/1";
-        return '<li><a href="' + url + '">' + model.get('Word') + '</a></li>';
+        var url = "#itemEditForm/" + model.get('CategoryId') + "/" + model.get('Id');
+        return '<li><a href="' + url + '">' + model.get('Translation1') + '</a></li>';
     };
 };

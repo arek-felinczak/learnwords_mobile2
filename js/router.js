@@ -13,7 +13,8 @@ var AppRouter = Backbone.Router.extend({
         "favourites": "favourites",
         "favouritesAdd/:catId/:id": "favouritesAdd",
         "favouritesRemove/:id": "favouritesRemove",
-        "refreshCache": "refreshCache"
+        "refreshCache": "refreshCache",
+        "itemEditForm/:catId/:id": "wordEditForm",
     },
     manager: new VocabularyManager(),
     
@@ -38,9 +39,11 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.transitionStart();
         var list = new ItemsCollection(this.manager.getFavouritesList());
-        $('div#content').html(new ItemsView({model: list}).render(true));
+        var favListView = new ItemsView({model: list});
+        $('div#content').html(favListView.render(true));
         var cat = new Category({Name: 'Favourites', Id: 0});
         self.navBar('category', cat);
+        favListView.postRender();
         self.transitionStop();  
     },
     
@@ -76,7 +79,9 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.transitionStart();
         this.manager.getItemList(id, function(categoryModel) {
-            $('div#content').html(new ItemsView({model: categoryModel}).render(false));
+            var view = new ItemsView({model: categoryModel});
+            $('div#content').html(view.render(false));
+            view.postRender();
             self.manager.getCategory(id, function(cat) {self.navBar('category', cat);});
             self.transitionStop();
         });         
@@ -96,24 +101,30 @@ var AppRouter = Backbone.Router.extend({
             self.manager.getItemList(catId, function(items) {
                 var index = item.collection.indexOf(item);
                 // previous button
-                var prevDomElement = $("ul#itemPager li a#prev");
+                var prevDomElement = $("button#prev");
                 var prev = items.at(index - 1);
                 if (prev === undefined) {
-                    $(prevDomElement).removeAttr('href').parent().addClass('disabled');
+                    $(prevDomElement).parent().addClass('disabled');
                 } else {
-                    $(prevDomElement).text(' << ' + prev.get('Word'))
-                        .attr('href', '#item/' + item.get('CategoryId') + '/' + prev.get('Id') + '/1')
-                        .parent().removeClass('disabled');
+                    $(prevDomElement).text(' << ' + prev.get('Translation1'))
+                        .click(function(event) {
+                            event.stopPropagation();
+                            app_router.navigate("#item/" + item.get('CategoryId') + "/" + prev.get('Id') + "/" + 1, true);
+                            return false;
+                        }).parent().removeClass('disabled');
                 }
                 // next button
-                var nextDomElement = $("ul#itemPager li a#next");
+                var nextDomElement = $("button#next");
                 var next = items.at(index + 1);
                 if (next === undefined) {
-                    $(nextDomElement).removeAttr('href').parent().addClass('disabled');
+                    $(nextDomElement).parent().addClass('disabled');
                 } else {
-                    $(nextDomElement).text(next.get('Word') + ' >> ')
-                        .attr('href', '#item/' + item.get('CategoryId') + '/' + next.get('Id') + '/1')
-                        .parent().removeClass('disabled');
+                    $(nextDomElement).text(next.get('Translation1') + ' >> ')
+                        .click(function(event) {
+                            event.stopPropagation();
+                            app_router.navigate("#item/" + item.get('CategoryId') + "/" + next.get('Id') + "/" + 1, true);
+                            return false;
+                        }).parent().removeClass('disabled');
                 }                
                 self.manager.getCategory(catId, function(cat){
                     self.navBar('item', item, cat);
@@ -123,7 +134,7 @@ var AppRouter = Backbone.Router.extend({
         });
     },
     
-    wordAddForm:function() {
+    wordAddForm: function() {
         if (window.debug_mode)
             console.log('AppRouter:wordAddForm');
         this.transitionStart();
@@ -134,6 +145,21 @@ var AppRouter = Backbone.Router.extend({
             $('div#content').html(formView.render(modelList).el);
             self.transitionStop();
             self.navBar('ItemFormView', formView);
+        });
+    },
+    
+    wordEditForm: function(catId, id) {
+        if (window.debug_mode) console.log('AppRouter:wordEditForm');
+        this.transitionStart();
+        var self = this;
+        this.manager.getItem(catId, id, function(item){
+            self.manager.getCategoryList(function(modelList) {
+                var formView = new ItemFormView({model: item});
+                $('div#content').html(formView.render(modelList).el);
+                formView.postRender();
+                self.navBar('ItemFormView', formView);
+                self.transitionStop();                
+            });
         });
     },
     
@@ -179,4 +205,5 @@ loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView', 'Abo
     app_router = new AppRouter();
     app_router.refreshCache(false);
     Backbone.history.start();
+    linksAttachOnclick();
 });

@@ -1,8 +1,8 @@
 ContactView = Backbone.View.extend({
     render: function(eventName) {
         this.template = window.templates['ContactView'];
-        $('ul.navbar-nav li.active').removeClass('active');
-        $('ul.navbar-nav li#contact').addClass('active');
+        $('#main-navbar-nav li.active').removeClass('active');
+        $('#main-navbar-nav li#contact').addClass('active');
         var html = this.template({});
         return html;
     }

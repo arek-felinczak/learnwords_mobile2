@@ -2,16 +2,19 @@ Category = Backbone.Model.extend({
 	
     defaults: {
         Name: '',
-        Id: 0,
+        Id: null,
         Public: true,
         Owner: ''
     },
     
-    validate: function(attributes){
-        if(attributes.Name === null || attributes.Name.length === 0){
+    isNew: function() {
+        return this.get('Id') == null;
+    },
+    
+    validate: function(){
+        if(this.attributes.Name === null || this.attributes.Name.length === 0){
             return "Category name can't be empty";
         }
-        return false;
     },
 
     initialize: function(){
@@ -30,13 +33,3 @@ CategoryCollection = Backbone.Collection.extend({
     model: Category,
     url: window.learnwordsConfig.restUrl + "/rest_api.php/categories"
 });
-
-
-// var c = new Category;
-// c.set({ Name: "Test", Active: false }); 
-
-// c.save({Name: 'Test 2'}, {
-	// success: function (model) {
-		// alert(user.toJSON());
-	// }
-// });

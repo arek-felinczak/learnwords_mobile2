@@ -10,59 +10,61 @@
         <!-- Place favicon.ico in the root directory -->
     </head>
     <body>
-        <div class="navbar navbar-inverse">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#categories"> Home </a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li id='categories'><a id="DictionaryItemNav" href="#categories"> Dictionary </a></li>
-                        <li id='favourites'><a href="#favourites">Favourites</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown">
-                            <a href="#options" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" onClick="app_router.refreshCache(true); app_router.navigate('#categories', true); return false;">Refresh dictionary</a></li>
-                                <li class="dropdown-header">Word details in:</li>
-                                <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki;">diki.pl</a></li>
-                                <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo;">forvo.pl</a></li>
-                                <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary;">m.getionary.pl</a></li>
-                            </ul>
-                        </li>
-                        <li id='about'><a href="#about">About</a></li>
-                        <li id='contact'><a href="#contact">Contact</a></li>
-                        <li id='itemAddForm'><a href="#itemAddForm">Add word</a></li>
-                    </ul>
-                    <div class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <input type="text" placeholder="search" id='searchWord' style="width:200px; display: inline-block" class="form-control" />
-                            <a href="#search" id="search-link" class="btn btn-success"> search </a>
-                        </div>                        
+        <div id="page">
+            <div class="navbar navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navigate navbar-brand" href="#categories"> Home </a>
                     </div>
-                </div><!--/.navbar-collapse -->
+                    <div class="navbar-collapse collapse">
+                        <ul id="main-navbar-nav" class="nav navbar-nav">
+                            <li id='categories'><a class="navigate" href="#categories"> Dictionary </a></li>
+                            <li id='favourites'><a class="navigate" href="#favourites">Favourites</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown">
+                                <a href="#options" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="navigate" href="#" onClick="app_router.refreshCache(true); app_router.navigate('#categories', true); return false;">Refresh dictionary</a></li>
+                                    <li class="dropdown-header">Word details in:</li>
+                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; return false;">diki.pl</a></li>
+                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo; return false;">forvo.pl</a></li>
+                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; return false;">m.getionary.pl</a></li>
+                                </ul>
+                            </li>
+                            <li id='about'><a class="navigate" href="#about">About</a></li>
+                            <li id='contact'><a class="navigate" href="#contact">Contact</a></li>
+                            <li id='itemAddForm'><a class="navigate" href="#itemAddForm">Add word</a></li>
+                        </ul>
+                        <div class="navbar-form navbar-right">
+                            <div class="form-group">
+                                <input type="text" placeholder="search" id='searchWord' style="width:200px; display: inline-block" class="form-control" />
+                                <a href="#search" id="search-link" class="navigate btn btn-success"> search </a>
+                            </div>                        
+                        </div>
+                    </div><!--/.navbar-collapse -->
+                </div>
             </div>
+            <div class="container">            
+                <div id="alert_placeholder"></div>
+                <div id="app" class="row">
+                    <div id="Breadcrumb"></div>
+                    <div id="content" style='margin: 4px'></div>
+                    <br /><br />
+                </div>
+                <div class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
+                    <span> &copy; Designed by Arek Felińczak &middot; </span> 
+                    <span> <a target='github' href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code </a> </span><br /> 
+                    <span> <a target='forvo' href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
+                    <span> <a target='diki' href="http://diki.pl/"> Diki.pl </a> </span> | 
+                    <span> <a target='getionary' href="http://getionary.pl/"> Getionary.pl </a> </span>
+                </div>
+            </div> <!-- /container -->
         </div>
-        <div class="container">            
-            <div id="alert_placeholder"></div>
-            <div id="app" class="row">
-                <div id="Breadcrumb"></div>
-                <div id="content" style='margin: 4px'></div>
-                <br /><br />
-            </div>
-            <div class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
-                <span> &copy; Designed by Arek Felińczak &middot; </span> 
-                <span> <a target='github' href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code </a> </span><br /> 
-                <span> <a target='forvo' href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
-                <span> <a target='diki' href="http://diki.pl/"> Diki.pl </a> </span> | 
-                <span> <a target='getionary' href="http://getionary.pl/"> Getionary.pl </a> </span>
-            </div>
-        </div> <!-- /container -->
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
         <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script> 
         <script type="text/javascript">
@@ -87,7 +89,7 @@
                 window.localStorage['dictionaryLink'] = window.learnwordsConfig.diki;
         </script>
         <script type="text/javascript" src="js/lib/underscore-min.js"></script> 
-        <script type="text/javascript" src="js/lib/backbone-min.js"></script>
+        <script type="text/javascript" src="js/lib/backbone.js"></script>
         <script type="text/javascript" src="js/lib/handlebars.min.js"></script>
         <script type="text/javascript">
             Handlebars.registerHelper('setIndex', function(value){

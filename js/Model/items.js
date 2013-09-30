@@ -1,38 +1,27 @@
 Item = Backbone.Model.extend({
-    urlRoot: window.learnwordsConfig.restUrl + "/rest_api.php/item/",
+    urlRoot: window.learnwordsConfig.restUrl + "/rest_api.php/item",
+    url: window.learnwordsConfig.restUrl + "/rest_api.php/item",
     
     defaults: {
         CategoryId: 0,
         Word: '',
         Translation1: '',
-        Translation2: ''
+        Translation2: '',
+        Id: null
     },
     
-    initialize: function() {
-        this.validators = {};
-        this.validators.Word = function(value) {
-            return value.length > 0 ? {isValid: true} : {isValid: false, message: "You must enter a word"};
-        };
-        this.validators.Translation1 = function(value) {
-            return value.length > 0 ? {isValid: true} : {isValid: false, message: "You must enter first translation"};
-        };
-        this.validators.CategoryId = function(value) {
-            return value > 0 ? {isValid: true} : {isValid: false, message: "You must choose category"};
-        };
+    isNew: function() {
+        return this.get('Id') == null;
     },
-    validateItem: function(key) {
-        return (this.validators[key]) ? this.validators[key](this.get(key)) : {isValid: true};
-    },
+    
     validate: function() {
-        for (var key in this.validators) {
-            if (this.validators.hasOwnProperty(key)) {
-                var check = this.validators[key](this.get(key));
-                if (check.isValid === false) {
-                    return check.message;
-                }
-            }
-        }
-    },
+        if (this.get('Word').length < 1)
+            return "Word is required";
+        if (this.get('Translation1').length < 1)
+            return "Translation is required";
+        if (parseInt(this.get('CategoryId')) < 1)
+            return "Category is required";
+    }
 });
 
 ItemsCollection = Backbone.Collection.extend({

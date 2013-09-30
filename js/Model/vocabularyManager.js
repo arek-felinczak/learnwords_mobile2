@@ -57,7 +57,7 @@ VocabularyManager = function () {
     this.getItemList = function (id, callback) {
         var cached = this.storage.getItem('cachedItemList:' + id);
         if (cached !== null)
-            return callback(new CategoryCollection(cached));
+            return callback(new ItemsCollection(cached));
         var self = this;
         var itemsList = new ItemsCollection();
         itemsList.setCategoryId(id);
