@@ -29,11 +29,12 @@ function LoadForvoLink(word) {
         dataType: "jsonp",
         type: "jsonp",
         success: function(json) {
-            if (window.debug_mode)
-                console.log('LoadForvoLink: ' + JSON.stringify(json));
-            var mp3 = json.items[0].pathmp3;
-            var ogg = json.items[0].pathogg;
-            Forvo_Ext_Play(mp3, ogg);
+            if (window.debug_mode) console.log('LoadForvoLink: ' + JSON.stringify(json));
+            if (json.items.length > 0) {
+                var mp3 = json.items[0].pathmp3;
+                var ogg = json.items[0].pathogg;
+                Forvo_Ext_Play(mp3, ogg);
+            }
             app_router.transitionStop();
         },
         error: function(err) {
