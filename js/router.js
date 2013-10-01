@@ -3,14 +3,14 @@ var AppRouter = Backbone.Router.extend({
     routes: {
         "": "categoryList",
         "categories" : "categoryList",
-        "category/:id" : "category",
+        "category/:id/:page" : "category",
         "item/:catId/:id/:nr" : "item",
         "itemAddForm": "wordAddForm",
         "search": "wordSearch",
         "search/:query": "wordSearch",
         "about": "about",
         "contact": "contact",
-        "favourites": "favourites",
+        "favourites/:page": "favourites",
         "favouritesAdd/:catId/:id": "favouritesAdd",
         "favouritesRemove/:id": "favouritesRemove",
         "refreshCache": "refreshCache",
@@ -34,13 +34,13 @@ var AppRouter = Backbone.Router.extend({
         });        
     },
     
-    favourites: function() {
+    favourites: function(page) {
         if (window.debug_mode) console.log('AppRouter:favourites');
         var self = this;
         this.transitionStart();
         var list = new ItemsCollection(this.manager.getFavouritesList());
         var favListView = new ItemsView({model: list});
-        $('div#content').html(favListView.render(true));
+        $('div#content').html(favListView.render(0, page));
         var cat = new Category({Name: 'Favourites', Id: 0});
         self.navBar('category', cat);
         favListView.postRender();
@@ -69,7 +69,7 @@ var AppRouter = Backbone.Router.extend({
         });
     },
  
-    category:function (id) {
+    category:function (id, page) {
         // category = 0 = favourites list
         if (id === "0") {
             this.navigate('#favourites', true);
@@ -80,7 +80,7 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getItemList(id, function(categoryModel) {
             var view = new ItemsView({model: categoryModel});
-            $('div#content').html(view.render(false));
+            $('div#content').html(view.render(id, page));
             view.postRender();
             self.manager.getCategory(id, function(cat) {self.navBar('category', cat);});
             self.transitionStop();

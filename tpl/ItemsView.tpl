@@ -1,3 +1,12 @@
+<div class="col-md-4 center">
+    <ul class="pagination">
+        {{#each pages}}
+            <li class="{{#if active}}active {{/if}}{{#if disabled}}disabled{{/if}}">
+                <a href="{{url}}">{{page}}</a>
+            </li>
+        {{/each}}
+    </ul>
+</div>
 <div id="CategoryListPanel" class='panel panel-default'>
     <div class="panel-heading">
         <strong id="CategoryNameHeader"></strong>
@@ -13,7 +22,7 @@
         {{#each category}}
         <tr>
             <td word="{{Translation1}}" class="pointer play-selector">
-                <div class="margin-medium">{{setIndex @index}}. {{Word}}</div>
+                <div class="margin-medium">{{pagedGridIndex @index ../offset}}. {{Word}}</div>
             </td>
             <td style="vertical-align: middle"> 
                 <div>

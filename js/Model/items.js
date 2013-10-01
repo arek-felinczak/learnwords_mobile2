@@ -28,7 +28,6 @@ ItemsCollection = Backbone.Collection.extend({
     model: Item,
     url: window.learnwordsConfig.restUrl + "/rest_api.php/items/",
     urlTemplate: window.learnwordsConfig.restUrl + "/rest_api.php/items/",
-    page: 0,
     setCategoryId: function(catId) {
         this.url = this.urlTemplate + catId;
     },

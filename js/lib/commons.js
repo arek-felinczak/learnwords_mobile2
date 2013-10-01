@@ -94,3 +94,4 @@ function linksAttachOnclick() {
         return false;
     }));
 }
+

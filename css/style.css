@@ -60,3 +60,14 @@ div.blockUI {
     margin-bottom: 6px;
     margin-top:6px;
 }
+
+.pagination {
+    margin: 4px auto 4px auto;
+}
+
+.center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

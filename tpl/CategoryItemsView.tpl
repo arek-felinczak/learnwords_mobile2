@@ -5,7 +5,7 @@
     </div>
     <ul class="list-group" id='CategoryList'>
         {{#each categories}}
-        <li href="#category/{{Id}}" class="navigate list-group-item">
+        <li href="#category/{{Id}}/1" class="navigate list-group-item">
             {{Name}} 
         </li>
         {{/each}}

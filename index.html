@@ -24,7 +24,7 @@
                     <div class="navbar-collapse collapse">
                         <ul id="main-navbar-nav" class="nav navbar-nav">
                             <li id='categories'><a class="navigate" href="#categories"> Dictionary </a></li>
-                            <li id='favourites'><a class="navigate" href="#favourites">Favourites</a></li>
+                            <li id='favourites'><a class="navigate" href="#favourites/1">Favourites</a></li>
                             <li class="divider"></li>
                             <li class="dropdown">
                                 <a href="#options" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
@@ -92,12 +92,13 @@
         <script type="text/javascript" src="js/lib/backbone.js"></script>
         <script type="text/javascript" src="js/lib/handlebars.min.js"></script>
         <script type="text/javascript">
-            Handlebars.registerHelper('setIndex', function(value){
-                return Number(value + 1);
+            Handlebars.registerHelper('pagedGridIndex', function(value, start){
+                return Number(start + value + 1);
             });
         </script>
         <script type="text/javascript" src="js/lib/commons.js"></script>
         <script type="text/javascript" src="js/lib/storage.js"></script>
+        <script type="text/javascript" src="js/lib/pager.js"></script>
         <script type="text/javascript" src="js/Model/category.js"></script> 
         <script type="text/javascript" src="js/Model/items.js"></script> 
         <script type="text/javascript" src="js/View/CategoryItemsView.js"></script>     
