@@ -1,12 +1,14 @@
+{{#if showPager}}
 <div class="col-md-4 center">
     <ul class="pagination">
         {{#each pages}}
-            <li class="{{#if active}}active {{/if}}{{#if disabled}}disabled{{/if}}">
-                <a href="{{url}}">{{page}}</a>
+            <li onclick="return go('{{url}}');" class="{{#if active}}active {{/if}}{{#if disabled}}disabled{{/if}}">
+                <a onclick="return go('{{url}}');" href="#">{{page}}</a>
             </li>
         {{/each}}
     </ul>
 </div>
+{{/if}}
 <div id="CategoryListPanel" class='panel panel-default'>
     <div class="panel-heading">
         <strong id="CategoryNameHeader"></strong>
@@ -27,7 +29,7 @@
             <td style="vertical-align: middle"> 
                 <div>
                 <div>
-                    <a href="#item/{{CategoryId}}/{{Id}}/1"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
+                    <a onclick="return go('#item/{{CategoryId}}/{{Id}}/1');" href="#"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
                     {{#if ../isFavouriteList}}
                     <button onclick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove(); return false;" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
                     {{else}}
@@ -37,7 +39,7 @@
                 </div>
                 {{#if Translation2}}
                 <div>
-                    <a href="#item/{{CategoryId}}/{{Id}}/2"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
+                    <a onclick="return go('#item/{{CategoryId}}/{{Id}}/2');" href="#"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
                     <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" style="visibility:hidden;" ></button>
                     <button onclick="LoadForvoLink('{{Translation2}}'); return false;" class="pointer btn btn-default btn-sm"> <strong> {{Translation2}} </strong> </button>
                 </div>
@@ -48,13 +50,14 @@
         {{/each}}
     </table>
 </div>    
+{{#if showPager}}
 <div class="col-md-4 center">
     <ul class="pagination">
         {{#each pages}}
-        <li class="{{#if active}}active {{/if}}{{#if disabled}}disabled{{/if}}">
-            <a href="{{url}}">{{page}}</a>
+        <li onclick="return go('{{url}}');" class="{{#if active}}active {{/if}}{{#if disabled}}disabled{{/if}}">
+            <a onclick="return go('{{url}}');" href="#">{{page}}</a>
         </li>
         {{/each}}
     </ul>
 </div>
-
+{{/if}}

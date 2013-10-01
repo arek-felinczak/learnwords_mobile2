@@ -43,7 +43,6 @@ var AppRouter = Backbone.Router.extend({
         $('#content').html(favListView.render(0, page));
         var cat = new Category({Name: 'Favourites', Id: 0});
         self.navBar('category', cat);
-        new FastClick(document.getElementById('content'));
         self.transitionStop();  
     },
     
@@ -65,7 +64,6 @@ var AppRouter = Backbone.Router.extend({
             var categoryListView = new CategoryItemsView({model: modelList});
             $('#content').html(categoryListView.render());
             self.navBar('');
-            new FastClick(document.getElementById('content'));
             self.transitionStop();
         });
     },
@@ -82,9 +80,10 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getItemList(id, function(categoryModel) {
             var view = new ItemsView({model: categoryModel});
             $('#content').html(view.render(id, page));
-            self.manager.getCategory(id, function(cat) {self.navBar('category', cat);});
-            new FastClick(document.getElementById('content'));
-            self.transitionStop();
+            self.manager.getCategory(id, function(cat) {
+                self.navBar('category', cat);
+                self.transitionStop();
+            });            
         });         
     },
     
@@ -130,7 +129,6 @@ var AppRouter = Backbone.Router.extend({
                 self.manager.getCategory(catId, function(cat){
                     self.navBar('item', item, cat);
                 });
-                new FastClick(document.getElementById('content'));
                 self.transitionStop();
             });
         });
@@ -145,7 +143,6 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getCategoryList(function(modelList) {
             var formView = new ItemFormView({model: item});
             $('#content').html(formView.render(modelList).el);
-            new FastClick(document.getElementById('content'));
             self.navBar('ItemFormView', formView);
             self.transitionStop();
         });
@@ -160,7 +157,6 @@ var AppRouter = Backbone.Router.extend({
                 var formView = new ItemFormView({model: item});
                 $('#content').html(formView.render(modelList).el);
                 formView.postRender();
-                new FastClick(document.getElementById('content'));
                 self.navBar('ItemFormView', formView);
                 self.transitionStop();                
             });
@@ -182,28 +178,27 @@ var AppRouter = Backbone.Router.extend({
             }
             $('#content').html(new ItemsView({model: items}).render(-1, 1));
             $('#CategoryNameHeader').text("Search results:");
-            new FastClick(document.getElementById('content'));
             self.navBar('itemsCollection', items, query);
             self.transitionStop();            
         });
     },    
     transitionStart: function() {
-        $('#app').addClass('blockUI').addClass('ui-disabled');
+        //$('#app').addClass('blockUI');
     },
     transitionStop: function() {
-        $('#app').removeClass('blockUI').removeClass('ui-disabled');
+        //$('#app').removeClass('blockUI');
     },
     busyStart: function() {
          if (navigator.notification) 
              navigator.notification.activityStart();
          else 
-             $('#app').addClass('blockUI').addClass('ui-disabled');
+             $('#app').addClass('blockUI');
     },
     busyStop: function() {
          if (navigator.notification) 
              navigator.notification.activityStop(); 
          else 
-             $('#app').removeClass('blockUI').removeClass('ui-disabled');
+             $('#app').removeClass('blockUI');
     }
 });
 	
@@ -211,5 +206,4 @@ loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView', 'Abo
     app_router = new AppRouter();
     app_router.refreshCache(false);
     Backbone.history.start();
-    linksAttachOnclick();
 });

@@ -10,6 +10,9 @@
 .padding-medium {
     padding: 6px
 }
+.nav > li > a {
+    font-size:16px;
+}
 ul#CategoryList li:hover {
     background-color: #E8E8E8;
 }

@@ -7,20 +7,22 @@ ItemsView = Backbone.View.extend({
         
         var pageList = new Vocabulary.Pager(this.model, this.pageLength);
         var page = pageList.getPage(pageNum);
-         
+        
+        var pagerData = pageList.pagerDataSource("#/category/" + catId, pageNum);
         this.template = window.templates['ItemsView'];
 	    var vm = {
             category: page.toJSON(), 
-            pages: pageList.pagerDataSource("#/category/" + catId, pageNum), 
+            pages: pagerData, 
             isFavouriteList: isFavouriteList,
-            offset: (pageNum - 1) * this.pageLength
+            offset: (pageNum - 1) * this.pageLength,
+            showPager: pagerData.length > 3
         };
-        $('#main-navbar-nav li.active').removeClass('active');
-        if (isFavouriteList) {
-            $('#main-navbar-nav li#favourites').addClass('active');
-        } else {
-            $('#main-navbar-nav li#categories').addClass('active');
-        }
+//        $('#main-navbar-nav li.active').removeClass('active');
+//        if (isFavouriteList) {
+//            $('#main-navbar-nav li#favourites').addClass('active');
+//        } else {
+//            $('#main-navbar-nav li#categories').addClass('active');
+//        }
 	    var html = this.template(vm);
         return html;
 	 }

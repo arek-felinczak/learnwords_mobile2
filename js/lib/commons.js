@@ -82,18 +82,13 @@ function loadTemplate(views, callback) {
                 console.log('Error loading template ' + view);
                 alert(xhr.responseText);
             }
-        })
+        });
         deferreds.push(deffer);
     });
     $.when.apply(null, deferreds).done(callback);
 }
 
-function linksAttachOnclick() {
-    $('#page').on('click', "a:not([data-bypass])", (function(event) {
-        var obj = $(event.currentTarget);
-        event.preventDefault();
-        //event.stopPropagation();
-        var link = $(obj).attr('href');
-        app_router.navigate(link, true);
-    }));
+function go(url) {    
+    app_router.navigate(url, true);
+    return false;
 }

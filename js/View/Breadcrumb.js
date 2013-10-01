@@ -16,7 +16,7 @@ function Breadcrumb() {
             html += this.renderSearch(param);            
         }        
         else if (page === 'ItemFormView') {
-            html += '<li><a href="#itemAddForm">Add/Edit word form</a></li>';
+            html += '<li><button class="btn btn-default" onclick="app_router.navigate(\'#itemAddForm\',true);return false;">Add/Edit word form</button></li>';
         }
         else if (model !== undefined && model !== null) {
             html += '<li> ' + model + '</li>';
@@ -27,19 +27,19 @@ function Breadcrumb() {
     },
             
     this.renderHome = function() {
-        return '<li><a href="#">Categories</a></li>';
+        return '<li><button class="btn btn-default" onclick="app_router.navigate(\'#\',true);return false;">Categories</button></li>';
     },
             
     this.renderSearch = function(param) {
-        return '<li><a href="#search">Search</a></li><li><a href="#search">' + param + '</a></li>';
+        return '<li><button class="btn btn-default" onclick="app_router.navigate(\'#search\',true);return false;">Search</button></li>';
     },
     
     this.renderCategory = function(model) {
-        return '<li><a href="#category/' + model.get('Id') + '">' + model.get('Name') + '</a></li>';
+        return '<li><button class="btn btn-default" onclick="app_router.navigate(\'#category/' + model.get('Id') + '/1\',true);return false;">' + model.get('Name') + '</button></li>';
     };
     
     this.renderItem = function(model) {
         var url = "#itemEditForm/" + model.get('CategoryId') + "/" + model.get('Id');
-        return '<li><a href="' + url + '">' + model.get('Translation1') + '</a></li>';
+        return '<li><button class="btn btn-default" onclick="app_router.navigate(\'' + url + '\',true);return false;">' + model.get('Translation1') + '</button></li>';
     };
 };
