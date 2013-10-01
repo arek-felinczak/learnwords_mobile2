@@ -15,8 +15,7 @@ ItemView = Backbone.View.extend({
      
      buildLink:function (word, engineUrl) {
          return engineUrl.toString().format({ "0": word});         
-     },
-        
+     }        
 });
 
 
@@ -39,7 +38,7 @@ function LoadForvoLink(word) {
         },
         error: function(err) {
             app_router.transitionStop();
-            var_dump('Error in LoadForvoLink', err);
+            alert('Error in LoadForvoLink: ' + err.responseText);
         }});
     return false;
 }

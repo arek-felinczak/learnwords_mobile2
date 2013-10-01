@@ -14,7 +14,7 @@ var AppRouter = Backbone.Router.extend({
         "favouritesAdd/:catId/:id": "favouritesAdd",
         "favouritesRemove/:id": "favouritesRemove",
         "refreshCache": "refreshCache",
-        "itemEditForm/:catId/:id": "wordEditForm",
+        "itemEditForm/:catId/:id": "wordEditForm"
     },
     manager: new VocabularyManager(),
     
@@ -40,20 +40,20 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         var list = new ItemsCollection(this.manager.getFavouritesList());
         var favListView = new ItemsView({model: list});
-        $('div#content').html(favListView.render(0, page));
+        $('#content').html(favListView.render(0, page));
         var cat = new Category({Name: 'Favourites', Id: 0});
         self.navBar('category', cat);
-        favListView.postRender();
+        new FastClick(document.getElementById('content'));
         self.transitionStop();  
     },
     
     about: function() {
-       $('div#content').html(new AboutView().render());
+       $('#content').html(new AboutView().render());
         this.navBar('static', 'About');
     },
     
     contact:function() {
-        $('div#content').html(new ContactView().render());
+        $('#content').html(new ContactView().render());
         this.navBar('static', 'Contact');
     },
     
@@ -63,8 +63,9 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getCategoryList(function(modelList) {
             var categoryListView = new CategoryItemsView({model: modelList});
-            $('div#content').html(categoryListView.render());
+            $('#content').html(categoryListView.render());
             self.navBar('');
+            new FastClick(document.getElementById('content'));
             self.transitionStop();
         });
     },
@@ -80,9 +81,9 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getItemList(id, function(categoryModel) {
             var view = new ItemsView({model: categoryModel});
-            $('div#content').html(view.render(id, page));
-            view.postRender();
+            $('#content').html(view.render(id, page));
             self.manager.getCategory(id, function(cat) {self.navBar('category', cat);});
+            new FastClick(document.getElementById('content'));
             self.transitionStop();
         });         
     },
@@ -97,7 +98,7 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getItem(catId, id, function(item) {
             var view = new ItemView({model: item});
-            $('div#content').html(view.render(nr));
+            $('#content').html(view.render(nr));
             self.manager.getItemList(catId, function(items) {
                 var index = item.collection.indexOf(item);
                 // previous button
@@ -129,6 +130,7 @@ var AppRouter = Backbone.Router.extend({
                 self.manager.getCategory(catId, function(cat){
                     self.navBar('item', item, cat);
                 });
+                new FastClick(document.getElementById('content'));
                 self.transitionStop();
             });
         });
@@ -142,9 +144,10 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.manager.getCategoryList(function(modelList) {
             var formView = new ItemFormView({model: item});
-            $('div#content').html(formView.render(modelList).el);
-            self.transitionStop();
+            $('#content').html(formView.render(modelList).el);
+            new FastClick(document.getElementById('content'));
             self.navBar('ItemFormView', formView);
+            self.transitionStop();
         });
     },
     
@@ -155,8 +158,9 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getItem(catId, id, function(item){
             self.manager.getCategoryList(function(modelList) {
                 var formView = new ItemFormView({model: item});
-                $('div#content').html(formView.render(modelList).el);
+                $('#content').html(formView.render(modelList).el);
                 formView.postRender();
+                new FastClick(document.getElementById('content'));
                 self.navBar('ItemFormView', formView);
                 self.transitionStop();                
             });
@@ -176,29 +180,31 @@ var AppRouter = Backbone.Router.extend({
                 app_router.navigate('#', true);
                 return;
             }
-            $('div#content').html(new ItemsView({model: items}).render(false));
+            $('#content').html(new ItemsView({model: items}).render(-1, 1));
             $('#CategoryNameHeader').text("Search results:");
-            self.transitionStop();
+            new FastClick(document.getElementById('content'));
             self.navBar('itemsCollection', items, query);
+            self.transitionStop();            
         });
-    },
-    
+    },    
     transitionStart: function() {
-        if (window.learnwordsConfig.transitions) {
-            $('div#app').addClass('blockUI');
-        }
+        $('#app').addClass('blockUI').addClass('ui-disabled');
     },
     transitionStop: function() {
-        if (window.learnwordsConfig.transitions) {
-            $('div#app').removeClass('blockUI');
-        }
-   },
-   busyStart: function() {
-        if (navigator.notification) navigator.notification.activityStart();
-   },
-   busyStop: function() {
-        if (navigator.notification) navigator.notification.activityStop(); 
-   }
+        $('#app').removeClass('blockUI').removeClass('ui-disabled');
+    },
+    busyStart: function() {
+         if (navigator.notification) 
+             navigator.notification.activityStart();
+         else 
+             $('#app').addClass('blockUI').addClass('ui-disabled');
+    },
+    busyStop: function() {
+         if (navigator.notification) 
+             navigator.notification.activityStop(); 
+         else 
+             $('#app').removeClass('blockUI').removeClass('ui-disabled');
+    }
 });
 	
 loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {

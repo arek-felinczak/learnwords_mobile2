@@ -11,7 +11,7 @@
     </head>
     <body>
         <div id="page">
-            <div class="navbar navbar-inverse">
+            <div id="main-nav" class="navbar navbar-inverse">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,31 +19,31 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navigate navbar-brand" href="#categories"> Home </a>
+                        <a class="navbar-brand" href="#categories"> Home </a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul id="main-navbar-nav" class="nav navbar-nav">
-                            <li id='categories'><a class="navigate" href="#categories"> Dictionary </a></li>
-                            <li id='favourites'><a class="navigate" href="#favourites/1">Favourites</a></li>
+                            <li id='categories'><a href="#categories"> Dictionary </a></li>
+                            <li id='favourites'><a href="#favourites/1">Favourites</a></li>
                             <li class="divider"></li>
-                            <li class="dropdown">
-                                <a href="#options" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
+                            <li id="option-dd" class="dropdown">
+                                <a href="#" data-bypass="1" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="navigate" href="#" onClick="app_router.refreshCache(true); app_router.navigate('#categories', true); return false;">Refresh dictionary</a></li>
+                                    <li><a data-bypass="1" href="#" onClick="app_router.refreshCache(true); app_router.navigate('#categories', true); return false;">Refresh dictionary</a></li>
                                     <li class="dropdown-header">Word details in:</li>
-                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; return false;">diki.pl</a></li>
-                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo; return false;">forvo.pl</a></li>
-                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; return false;">m.getionary.pl</a></li>
+                                    <li><a data-bypass="1" href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; return false;">diki.pl</a></li>
+                                    <li><a data-bypass="1" href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo; return false;">forvo.pl</a></li>
+                                    <li><a data-bypass="1" href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; return false;">m.getionary.pl</a></li>
                                 </ul>
                             </li>
-                            <li id='about'><a class="navigate" href="#about">About</a></li>
-                            <li id='contact'><a class="navigate" href="#contact">Contact</a></li>
-                            <li id='itemAddForm'><a class="navigate" href="#itemAddForm">Add word</a></li>
+                            <li id='about'><a href="#about">About</a></li>
+                            <li id='contact'><a href="#contact">Contact</a></li>
+                            <li id='itemAddForm'><a href="#itemAddForm">Add word</a></li>
                         </ul>
                         <div class="navbar-form navbar-right">
                             <div class="form-group">
                                 <input type="text" placeholder="search" id='searchWord' style="width:200px; display: inline-block" class="form-control" />
-                                <a href="#search" id="search-link" class="navigate btn btn-success"> search </a>
+                                <a href="#search" id="search-link" class="btn btn-success"> search </a>
                             </div>                        
                         </div>
                     </div><!--/.navbar-collapse -->
@@ -77,19 +77,18 @@
                 restUrl: window.location.protocol + '//' + window.location.host,
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
                 forvo: "http://pl.forvo.com/word/{0}/#en",
-                getionary: 'http://m.getionary.pl/search.html?query={0}',
-                transitions: true
+                getionary: 'http://m.getionary.pl/search.html?query={0}'
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
                 window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
             
-            window.debug_mode = true;
+            window.debug_mode = false;
             if (!window.console) window.console = {};
             if (!window.localStorage['dictionaryLink'])
                 window.localStorage['dictionaryLink'] = window.learnwordsConfig.diki;
         </script>
         <script type="text/javascript" src="js/lib/underscore-min.js"></script> 
-        <script type="text/javascript" src="js/lib/backbone.js"></script>
+        <script type="text/javascript" src="js/lib/backbone-min.js"></script>
         <script type="text/javascript" src="js/lib/handlebars.min.js"></script>
         <script type="text/javascript">
             Handlebars.registerHelper('pagedGridIndex', function(value, start){
@@ -98,26 +97,27 @@
         </script>
         <script type="text/javascript" src="js/lib/commons.js"></script>
         <script type="text/javascript" src="js/lib/storage.js"></script>
-        <script type="text/javascript" src="js/lib/pager.js"></script>
+        <script type="text/javascript" src="js/lib/pager.js"></script>     
         <script type="text/javascript" src="js/Model/category.js"></script> 
         <script type="text/javascript" src="js/Model/items.js"></script> 
+        <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
         <script type="text/javascript" src="js/View/CategoryItemsView.js"></script>     
         <script type="text/javascript" src="js/View/ItemsView.js"></script>
         <script type="text/javascript" src="js/View/ItemView.js"></script>
         <script type="text/javascript" src="js/View/ItemFormView.js"></script>
         <script type="text/javascript" src="js/View/AboutView.js"></script>
-        <script type="text/javascript" src="js/View/ContactView.js"></script>
-        <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
+        <script type="text/javascript" src="js/View/ContactView.js"></script>        
         <script type="text/javascript" src="js/View/Breadcrumb.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/lib/fastclick.min.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
         <!-- for adobe cloud build -->
-        <script src="phonegap.js"></script>
-        <script type="text/javascript" src="js/lib/fastclick.min.js"></script>
+        <script src="phonegap.js"></script>        
         <script type="text/javascript">
-            function rollUpNav(obj){
+            function rollUpNav(obj) {                
                 if ($(".navbar-collapse").hasClass("in") && $(obj).attr('data-toggle') !== "dropdown" ) {
                     $(".navbar-toggle").click();
+                    $('#option-dd').removeClass('open');
                 }
             }
             // toggle collapsed menu after click
@@ -130,39 +130,34 @@
                     app_router.navigate('#search', true);
                 };
             });
-                        
-            window.learnwordsConfig.isTouchDevice = "ontouchstart" in window;            
-            if (window.learnwordsConfig.isTouchDevice === true) {                
-                $(function() {
-                    FastClick.attach(document.body);
-                });
-                       
-                // for phonegap only
-                function showExitConfirm(e) {
-                    navigator.notification.confirm(
-                        'Do you want to exit?', // message
-                        function(e) {if (e === 2) { navigator.app.exitApp(); }},
-                        'Exit', // title
-                        'Cancel,OK' // buttonLabels
-                    );
-                    return false;
-                };
-                
-                function showRefreshButton(e) {
-                    navigator.notification.confirm(
-                        'Do you want to refresh data?', // message
-                        function(e) {if (e === 2) { app_router.refreshCache(true); }},
-                        'Exit', // title
-                        'Cancel,OK' // buttonLabels
-                    );
-                    return false;
-                };
-               
-                document.addEventListener("deviceready", function(){
-                    document.addEventListener("backbutton", showExitConfirm, false);
-                    document.addEventListener("menubutton", showRefreshButton, false);
-                }, false);                
-            }
+            
+            new FastClick(document.getElementById('main-nav'));
+
+            // for phonegap only
+            function showExitConfirm(e) {
+                navigator.notification.confirm(
+                    'Do you want to exit?', // message
+                    function(e) {if (e === 2) { navigator.app.exitApp(); }},
+                    'Exit', // title
+                    'Cancel,OK' // buttonLabels
+                );
+                return false;
+            };
+
+            function showRefreshButton(e) {
+                navigator.notification.confirm(
+                    'Do you want to refresh data?', // message
+                    function(e) {if (e === 2) { app_router.refreshCache(true); }},
+                    'Exit', // title
+                    'Cancel,OK' // buttonLabels
+                );
+                return false;
+            };
+
+            document.addEventListener("deviceready", function(){
+                document.addEventListener("backbutton", showExitConfirm, false);
+                document.addEventListener("menubutton", showRefreshButton, false);
+            }, false);                
         </script>        
     </body>
 </html>

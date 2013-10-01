@@ -5,9 +5,11 @@
     </div>
     <ul class="list-group" id='CategoryList'>
         {{#each categories}}
-        <li href="#category/{{Id}}/1" class="navigate list-group-item">
-            {{Name}} 
-        </li>
+        <a href="#category/{{Id}}/1">
+            <li class="list-group-item">
+                {{Name}} 
+            </li>
+        </a>        
         {{/each}}
     </ul>
 </div>        

@@ -20,7 +20,9 @@ function showAlert(message, alertType) {
     if (alertType === 'success') var icon = 'glyphicon-ok-circle';
     if (alertType === 'info') var icon = 'glyphicon-info-sign';
     if (alertType === 'warning') var icon = 'glyphicon-remove-circle';
-    $('#alert_placeholder').append('<div id="alertdiv" class="alert alert-' + alertType + ' fade in"><span class="span1 glyphicon ' + icon + ' "> &nbsp; </span> <a class="close" data-dismiss="alert">×</a> <span> ' + message + ' </span></div>')
+    $('#alert_placeholder').append('<div id="alertdiv" class="alert alert-' + alertType 
+        + ' fade in"><span class="span1 glyphicon ' + icon + ' "> &nbsp; </span> <a class="close" data-dismiss="alert">×</a> <span> ' + message 
+        + ' </span></div>');
     setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
         $("#alertdiv").remove();
     }, 5000);
@@ -87,11 +89,11 @@ function loadTemplate(views, callback) {
 }
 
 function linksAttachOnclick() {
-    $('#page').on('click', ".navigate", (function(event) {
-        event.stopPropagation();
-        var link = $(event.currentTarget).attr('href');
+    $('#page').on('click', "a:not([data-bypass])", (function(event) {
+        var obj = $(event.currentTarget);
+        event.preventDefault();
+        //event.stopPropagation();
+        var link = $(obj).attr('href');
         app_router.navigate(link, true);
-        return false;
     }));
 }
-

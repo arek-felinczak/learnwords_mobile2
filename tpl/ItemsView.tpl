@@ -21,25 +21,25 @@
         </colgroup>
         {{#each category}}
         <tr>
-            <td word="{{Translation1}}" class="pointer play-selector">
+            <td onclick="LoadForvoLink('{{Translation1}}'); return false;" class="pointer">
                 <div class="margin-medium">{{pagedGridIndex @index ../offset}}. {{Word}}</div>
             </td>
             <td style="vertical-align: middle"> 
                 <div>
                 <div>
-                    <button href="#item/{{CategoryId}}/{{Id}}/1" class="navigate margin-small text-right btn btn-default glyphicon glyphicon-export"></button>
+                    <a href="#item/{{CategoryId}}/{{Id}}/1"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
                     {{#if ../isFavouriteList}}
-                        <button word-id="{{Id}}" id='remove-favourites' type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
+                    <button onclick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove(); return false;" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
                     {{else}}
-                        <button id="add-favourites" word-id="{{Id}}" cat-id="{{CategoryId}}" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
+                    <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden'); return false;" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
                     {{/if}}
-                    <span word="{{Translation1}}" class="play-selector pointer btn btn-default btn-sm"> <strong> {{Translation1}} </strong> </span>
+                    <button onclick="LoadForvoLink('{{Translation1}}'); return false;" class="pointer btn btn-default btn-sm"> <strong> {{Translation1}} </strong> </button>
                 </div>
                 {{#if Translation2}}
                 <div>
-                    <button href="#item/{{CategoryId}}/{{Id}}/2" class="navigate margin-small text-right btn btn-default glyphicon glyphicon-export"></button>
+                    <a href="#item/{{CategoryId}}/{{Id}}/2"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
                     <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" style="visibility:hidden;" ></button>
-                    <span word='{{Translation2}}' class="play-selector pointer btn btn-default btn-sm"> <strong> {{Translation2}} </strong>  </span>
+                    <button onclick="LoadForvoLink('{{Translation2}}'); return false;" class="pointer btn btn-default btn-sm"> <strong> {{Translation2}} </strong> </button>
                 </div>
                 {{/if}}
                 </div> 
@@ -48,4 +48,13 @@
         {{/each}}
     </table>
 </div>    
+<div class="col-md-4 center">
+    <ul class="pagination">
+        {{#each pages}}
+        <li class="{{#if active}}active {{/if}}{{#if disabled}}disabled{{/if}}">
+            <a href="{{url}}">{{page}}</a>
+        </li>
+        {{/each}}
+    </ul>
+</div>
 

@@ -1,21 +1,14 @@
 .margin-small {
     margin: 3px
 }
-
 .padding-small {
     padding: 3px
 }
-
 .margin-medium {
     margin: 6px
 }
-
 .padding-medium {
     padding: 6px
-}
-
-ul#CategoryList li {
-    background-color: #FBFBFB;
 }
 ul#CategoryList li:hover {
     background-color: #E8E8E8;
@@ -27,44 +20,38 @@ ul#CategoryList a:hover {
     min-height: 30px;
     padding: 5px
 }
-
 .pointer {
     cursor: pointer;
 }
-
+.pointer:hover {
+    background-color: rgb(232, 232, 232);
+}
 div.blockUI {
     opacity:0.3;
     filter:alpha(opacity=30);
 }
-
 .breadcrumb {
     margin: 4px;
     border-color: rgb(221, 221, 221);
     border-style: solid;
     border-width: 1px;
 }
-
 .navbar {
     margin-bottom: 0px;
 }
-
 .pager {
     margin: 7px 0px;
 }
-
 .list-group-item {
     cursor: pointer;
 }
-
 .alert {
     margin-bottom: 6px;
     margin-top:6px;
 }
-
 .pagination {
     margin: 4px auto 4px auto;
 }
-
 .center {
     float: none;
     margin-left: auto;
