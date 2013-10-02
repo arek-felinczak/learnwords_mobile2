@@ -4,7 +4,7 @@
         <h4> Learnwords is a web site designed for mobile phones</h4>
         <p>
             Learnwords is web application built in HTML5 and Javascript. It is available under
-            <a href='http://learnword.tk/m'> learnword.tk/m </a>.<br />
+            <a href='http://learnwords.tk/m'> learnwords.tk/m </a>.<br />
             It uses Backbone framework, JQuery and Bootstrap on client side and SLIM framework as Rest Server.
             <br />Supported browsers are: <br />
             - Mozilla Firefox <br />

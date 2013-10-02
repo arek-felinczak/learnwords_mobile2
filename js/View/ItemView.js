@@ -42,6 +42,9 @@ function LoadForvoLink(word) {
                 var ogg = json.items[0].pathogg;
                 Forvo_Ext_Play(mp3, ogg);
             }
+            else if (navigator.notification !== undefined) {
+                navigator.notification.beep();
+            }
             app_router.transitionStop();
         },
         error: function(err) {

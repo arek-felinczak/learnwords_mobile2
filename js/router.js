@@ -122,7 +122,7 @@ var AppRouter = Backbone.Router.extend({
             self.manager.getCategoryList(function(modelList) {
                 var formView = new ItemFormView({model: item});
                 self.content = formView.render(modelList);
-                self.navBar('ItemFormView', formView);
+                self.navBar('static', 'edit word');
                 formView.postRender();
                 self.transitionStop();                
             });
