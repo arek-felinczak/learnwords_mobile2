@@ -16,32 +16,51 @@ Vocabulary.Pager = function(collection, size) {
         return pageArray;
     };
     
-    this.pagerDataSource = function(baseUrl, page) {
+    this.pagerDataSource = function(baseUrl, page, attrName) {
         var page = parseInt(page);
+        var numOfPages = this.numOfPages();
         var pagerDs = [];
         //prev
         pagerDs.push({
-            url: baseUrl + "/" + (page === 1 ? 1 : (page - 1)),
+            url: baseUrl.replace('{page}', 1),
             page: ' << ',
             active: false,
-            disabled: page === 1 
+            disabled: page === 1,
+            cssClass: 'btn-info'
+        });
+        var currPage = (page === 1 ? 1 : (page - 1));
+        pagerDs.push({
+            url: baseUrl.replace('{page}', currPage),
+            page: ' < '+ ((this.pageSize === 1 && page > 1) ? this.collection.models[page - 2].get(attrName) : ""),
+            active: false,
+            disabled: page === 1,
+            cssClass: 'btn-info'
         });
         
-        for (i=0; i<this.numOfPages(); i++) {
-            pagerDs.push({
-                url: baseUrl + "/" + (i+1),
-                page: i + 1,
-                active: (i+1) === page,
-                disabled: false
-            });
-        }
-        //next
-        var lastPage = page >= this.numOfPages();
         pagerDs.push({
-            url: baseUrl + "/" + (lastPage ? page : (page + 1)),
+            url: baseUrl.replace('{page}', page),
+            page: page,
+            active: true,
+            disabled: 'disabled',
+            cssClass: 'btn-default'
+        });
+        
+        var lastPage = page >= numOfPages;
+        currPage = (lastPage ? page : (page + 1));
+        pagerDs.push({
+            url: baseUrl.replace('{page}', currPage),
+            page: ' > '+ ((this.pageSize === 1 && page < numOfPages) ? this.collection.models[page].get(attrName) : ""),
+            active: false,
+            disabled: lastPage,
+            cssClass: 'btn-info'
+        });
+                
+        pagerDs.push({
+            url: baseUrl.replace('{page}', numOfPages),
             page: ' >> ',
             active: false,
-            disabled: lastPage
+            disabled: lastPage,
+            cssClass: 'btn-info'
         });
         
         return pagerDs;

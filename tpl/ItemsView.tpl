@@ -2,8 +2,8 @@
 <div class="col-md-4 center">
     <ul class="pagination">
         {{#each pages}}
-            <li onclick="return go('{{url}}');" class="{{#if active}}active {{/if}}{{#if disabled}}disabled{{/if}}">
-                <a onclick="return go('{{url}}');" href="#">{{page}}</a>
+            <li onclick="return go('{{url}}');" class="pointer">
+                <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg"> {{page}} </button>
             </li>
         {{/each}}
     </ul>
@@ -29,7 +29,7 @@
             <td style="vertical-align: middle"> 
                 <div>
                 <div>
-                    <a onclick="return go('#item/{{CategoryId}}/{{Id}}/1');" href="#"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
+                    <a onclick="return go('#item/{{CategoryId}}/{{pagedGridIndex @index ../offset}}/1');" href="#"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
                     {{#if ../isFavouriteList}}
                     <button onclick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove(); return false;" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
                     {{else}}

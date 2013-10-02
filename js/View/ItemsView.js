@@ -1,5 +1,5 @@
 ItemsView = Backbone.View.extend({
-    pageLength: 40,	 
+    pageLength: 30,	 
      
     render:function (catId, catName, pageNum) {
         pageNum = parseInt(pageNum);
@@ -8,7 +8,7 @@ ItemsView = Backbone.View.extend({
         var pageList = new Vocabulary.Pager(this.model, this.pageLength);
         var page = new ItemsCollection(pageList.getPageArray(pageNum));
         
-        var pagerData = pageList.pagerDataSource("#/category/" + catId, pageNum);
+        var pagerData = pageList.pagerDataSource("#/category/" + catId + '/{page}', pageNum);
         this.template = window.templates['ItemsView'];
 	    var vm = {
             category: page.toJSON(), 

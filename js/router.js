@@ -85,12 +85,12 @@ var AppRouter = Backbone.Router.extend({
         });         
     },
     
-    item:function (catId, id, nr) {
+    item:function (catId, pageId, nr) {
         if (window.debug_mode) console.log('AppRouter:item');
         var self = this;
         this.transitionStart();
         this.manager.getItemList(catId, function(items) {
-            var item = self.manager.indexOfById(id, items.models);
+            var item = items.models[pageId - 1];
             var view = new ItemView({model: item});
             self.content = view.render(nr, item);
             self.manager.getCategory(catId, function(cat) {
@@ -122,8 +122,8 @@ var AppRouter = Backbone.Router.extend({
             self.manager.getCategoryList(function(modelList) {
                 var formView = new ItemFormView({model: item});
                 self.content = formView.render(modelList);
-                formView.postRender();
                 self.navBar('ItemFormView', formView);
+                formView.postRender();
                 self.transitionStop();                
             });
         });
@@ -143,7 +143,7 @@ var AppRouter = Backbone.Router.extend({
                 return;
             }
             self.content = new ItemsView({model: items}).render(-1, "Search results", 1);
-            self.navBar('itemsCollection', items, query);
+            self.navBar('static', 'Search results');
             self.transitionStop();            
         });
     },    
