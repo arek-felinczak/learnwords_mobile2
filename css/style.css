@@ -61,3 +61,7 @@ div.blockUI {
     margin-right: auto;
     display: block;
 }
+
+table.table tr td.button {
+    padding: 2px;
+}

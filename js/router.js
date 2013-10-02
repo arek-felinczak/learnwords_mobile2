@@ -85,14 +85,13 @@ var AppRouter = Backbone.Router.extend({
         });         
     },
     
-    item:function (catId, pageId, nr) {
+    item:function (catId, id, nr) {
         if (window.debug_mode) console.log('AppRouter:item');
         var self = this;
         this.transitionStart();
-        this.manager.getItemList(catId, function(items) {
-            var item = items.models[pageId - 1];
+        this.manager.getItem(catId, id, function(item) {
             var view = new ItemView({model: item});
-            self.content = view.render(nr, item);
+            self.content = view.render(nr);
             self.manager.getCategory(catId, function(cat) {
                 self.navBar('item', item, cat);
                 self.transitionStop();

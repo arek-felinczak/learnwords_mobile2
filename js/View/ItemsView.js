@@ -4,11 +4,12 @@ ItemsView = Backbone.View.extend({
     render:function (catId, catName, pageNum) {
         pageNum = parseInt(pageNum);
         var isFavouriteList = parseInt(catId) === 0;
+        var url = "#/category/" + catId + '/{page}';
         
         var pageList = new Vocabulary.Pager(this.model, this.pageLength);
         var page = new ItemsCollection(pageList.getPageArray(pageNum));
         
-        var pagerData = pageList.pagerDataSource("#/category/" + catId + '/{page}', pageNum);
+        var pagerData = pageList.pagerDataSource(url, pageNum);
         this.template = window.templates['ItemsView'];
 	    var vm = {
             category: page.toJSON(), 

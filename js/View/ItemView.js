@@ -1,14 +1,14 @@
 ItemView = Backbone.View.extend({
       
-	 render:function(nr, item) {
+	 render:function(nr) {
+        var item = this.model; 
         var index = item.collection.indexOf(item);
         this.template = window.templates['ItemView'];
         var word = nr === "1" ? this.model.get('Translation1') : this.model.get('Translation2');
         var url = this.buildLink(word, window.localStorage['dictionaryLink']);
         
         var pageList = new Vocabulary.Pager(item.collection, 1);
-        var pager = pageList.pagerDataSource('#item/' + item.get("CategoryId") + '/{page}/1', index + 1, 'Translation1');
-        
+        var pager = pageList.pagerDataSource('#item/' + item.get("CategoryId") + '/{page}/' + nr, index + 1, 'Translation1', true);
         var vm = {
             src: url,
             pager: pager

@@ -18,33 +18,50 @@
     </div>        
     <table id="items-table" class="table">
         <colgroup>
-            <col class="col-lg-4 col-xs-4" />
-            <col class="col-lg-8 col-xs-8" />
+            <col class="col-xs-6" />
+            <col class="col-xs-4" />
+            <col class="col-xs-1" />
+            <col class="col-xs-1" />
         </colgroup>
         {{#each category}}
         <tr>
-            <td onclick="LoadForvoLink('{{Translation1}}'); return false;" class="pointer">
-                <div class="margin-medium">{{pagedGridIndex @index ../offset}}. {{Word}}</div>
+            <td>
+                {{pagedGridIndex @index ../offset}}. {{Word}}
             </td>
-            <td style="vertical-align: middle"> 
-                <div>
-                <div>
-                    <a onclick="return go('#item/{{CategoryId}}/{{pagedGridIndex @index ../offset}}/1');" href="#"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
-                    {{#if ../isFavouriteList}}
-                    <button onclick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove(); return false;" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
-                    {{else}}
-                    <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden'); return false;" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
-                    {{/if}}
-                    <button onclick="LoadForvoLink('{{Translation1}}'); return false;" class="pointer btn btn-default btn-sm"> <strong> {{Translation1}} </strong> </button>
-                </div>
-                {{#if Translation2}}
-                <div>
-                    <a onclick="return go('#item/{{CategoryId}}/{{Id}}/2');" href="#"><button class="margin-small text-right btn btn-default glyphicon glyphicon-export"></button></a>
-                    <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" style="visibility:hidden;" ></button>
-                    <button onclick="LoadForvoLink('{{Translation2}}'); return false;" class="pointer btn btn-default btn-sm"> <strong> {{Translation2}} </strong> </button>
-                </div>
+            <td class="button">
+                {{#if ../isFavouriteList}}
+                <button onclick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove(); return false;" type="button" class="btn btn-default btn-lg margin-small">
+                    <span class="glyphicon glyphicon-minus-sign"></span> remove 
+                </button>
+                {{else}}
+                <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden'); return false;" type="button" class="btn btn-default margin-small">
+                    <span class="glyphicon glyphicon-plus-sign"></span> add
+                </button>
                 {{/if}}
+            </td>
+            <td class="button"> 
+                <div>
+                    <button onclick="LoadForvoLink('{{Translation1}}'); return false;" class="pointer btn btn-default margin-small">
+                        <span class="glyphicon glyphicon-bullhorn"></span> {{Translation1}} 
+                    </button>
+                    {{#if Translation2}}
+                    <br />
+                    <button onclick="LoadForvoLink('{{Translation2}}'); return false;" class="pointer btn btn-default margin-small"> 
+                        <span class="glyphicon glyphicon-bullhorn"></span> {{Translation2}}
+                    </button>
+                    {{/if}}
                 </div> 
+            </td>
+            <td class="button">
+                <button onclick="return go('#item/{{CategoryId}}/{{Id}}/1');" type="button" class="btn btn-default margin-small">
+                    <span class="glyphicon glyphicon-hand-right"></span> open 
+                </button>
+                {{#if Translation2}}
+                <br />
+                <button onclick="return go('#item/{{CategoryId}}/{{Id}}/2');" type="button" class="btn btn-default margin-small">
+                    <span class="glyphicon glyphicon-hand-right"></span> open 
+                </button>
+                {{/if}}
             </td>
         </tr>
         {{/each}}

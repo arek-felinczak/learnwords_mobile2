@@ -7,7 +7,7 @@ Vocabulary.Pager = function(collection, size) {
     this.pageSize = size;
     
     this.numOfPages = function() {
-        return parseInt(this.collection.length / (this.pageSize + 1)) + 1;
+        return Math.ceil(this.collection.length / this.pageSize);
     };
 
     this.getPageArray = function(page) {
@@ -16,19 +16,20 @@ Vocabulary.Pager = function(collection, size) {
         return pageArray;
     };
     
-    this.pagerDataSource = function(baseUrl, page, attrName) {
+    this.pagerDataSource = function(baseUrl, page, attrName, useIdInsteadOfPage) {
         var page = parseInt(page);
         var numOfPages = this.numOfPages();
         var pagerDs = [];
         //prev
         pagerDs.push({
-            url: baseUrl.replace('{page}', 1),
+            url: baseUrl.replace('{page}', useIdInsteadOfPage ? this.collection.models[0].get('Id') : 1),
             page: ' << ',
             active: false,
             disabled: page === 1,
             cssClass: 'btn-info'
         });
         var currPage = (page === 1 ? 1 : (page - 1));
+        currPage = useIdInsteadOfPage ? this.collection.models[currPage - 1].get('Id') : currPage;
         pagerDs.push({
             url: baseUrl.replace('{page}', currPage),
             page: ' < '+ ((this.pageSize === 1 && page > 1) ? this.collection.models[page - 2].get(attrName) : ""),
@@ -38,7 +39,7 @@ Vocabulary.Pager = function(collection, size) {
         });
         
         pagerDs.push({
-            url: baseUrl.replace('{page}', page),
+            url: baseUrl.replace('{page}', useIdInsteadOfPage ? this.collection.models[page - 1].get('Id') : page),
             page: page,
             active: true,
             disabled: 'disabled',
@@ -48,7 +49,7 @@ Vocabulary.Pager = function(collection, size) {
         var lastPage = page >= numOfPages;
         currPage = (lastPage ? page : (page + 1));
         pagerDs.push({
-            url: baseUrl.replace('{page}', currPage),
+            url: baseUrl.replace('{page}', useIdInsteadOfPage ? this.collection.models[currPage - 1].get('Id') : currPage),
             page: ' > '+ ((this.pageSize === 1 && page < numOfPages) ? this.collection.models[page].get(attrName) : ""),
             active: false,
             disabled: lastPage,
@@ -56,7 +57,7 @@ Vocabulary.Pager = function(collection, size) {
         });
                 
         pagerDs.push({
-            url: baseUrl.replace('{page}', numOfPages),
+            url: baseUrl.replace('{page}', useIdInsteadOfPage ? this.collection.models[numOfPages - 1].get('Id') : numOfPages),
             page: ' >> ',
             active: false,
             disabled: lastPage,

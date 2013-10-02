@@ -20,20 +20,21 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" onclick="return go('#categories', this);" href="#"> Home </a>
+                        <a class="navbar-brand" onclick="return go('#categories', this);" href="#categories"> Home </a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul id="main-navbar-nav" class="nav navbar-nav">
                             <li onclick="return go('#favourites/1');" id='favourites'><a href="#">Favourites</a></li>
                             <li class="divider"></li>
                             <li id="option-dd" class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options<b class="caret"></b></a>
+                                <a href="#options" class="dropdown-toggle" data-toggle="dropdown">Options<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" onClick="app_router.refreshCache(true); app_router.navigate('#categories', true); return false;">Refresh dictionary</a></li>
                                     <li class="dropdown-header">Word details in:</li>
                                     <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; return false;">diki.pl</a></li>
                                     <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo; return false;">forvo.pl</a></li>
                                     <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; return false;">m.getionary.pl</a></li>
+                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.wiktionary; return false;">en.m.wiktionary.org</a></li>
                                 </ul>
                             </li>
                             <li id='about'><a onclick="return go('#about');" href="#">About</a></li>
@@ -75,7 +76,8 @@
                 restUrl: window.location.protocol + '//' + window.location.host,
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
                 forvo: "http://pl.forvo.com/word/{0}/#en",
-                getionary: 'http://m.getionary.pl/search.html?query={0}'
+                getionary: 'http://m.getionary.pl/search.html?query={0}',
+                wiktionary: 'https://en.m.wiktionary.org/wiki/{0}'
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
                 window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
