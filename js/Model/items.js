@@ -11,7 +11,7 @@ Item = Backbone.Model.extend({
     },
     
     isNew: function() {
-        return this.get('Id') == null;
+        return this.get('Id') === null;
     },
     
     validate: function() {

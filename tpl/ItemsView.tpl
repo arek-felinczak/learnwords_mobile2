@@ -11,7 +11,7 @@
 {{/if}}
 <div id="CategoryListPanel" class='panel panel-default'>
     <div class="panel-heading">
-        <strong id="CategoryNameHeader"></strong>
+        <strong>{{categoryName}}</strong>
     </div>
     <div class="panel-body">
         <p>Tap on word to play audio file (internet connection needed).</p>

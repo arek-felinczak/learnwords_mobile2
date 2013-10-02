@@ -24,11 +24,10 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul id="main-navbar-nav" class="nav navbar-nav">
-                            <li onclick="return go('#categories');" id='categories'><a href="#"> Dictionary </a></li>
                             <li onclick="return go('#favourites/1');" id='favourites'><a href="#">Favourites</a></li>
                             <li class="divider"></li>
                             <li id="option-dd" class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Options <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" onClick="app_router.refreshCache(true); app_router.navigate('#categories', true); return false;">Refresh dictionary</a></li>
                                     <li class="dropdown-header">Word details in:</li>
@@ -53,9 +52,7 @@
             <div class="container">            
                 <div id="alert_placeholder"></div>
                 <div id="app" class="row">
-                    <div id="Breadcrumb"></div>
-                    <div id="content" style='margin: 4px'></div>
-                    <br /><br />
+                    <!-- Content goes here -->
                 </div>
                 <div class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
                     <span> &copy; Designed by Arek Felińczak &middot; </span> 

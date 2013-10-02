@@ -10,12 +10,10 @@ Vocabulary.Pager = function(collection, size) {
         return parseInt(this.collection.length / (this.pageSize + 1)) + 1;
     };
 
-    this.getPage = function(page) {
+    this.getPageArray = function(page) {
         var p = parseInt(page);
         var pageArray = this.collection.models.slice((p - 1) * this.pageSize, p * this.pageSize);
-        var res = this.collection.clone();
-        res.models = pageArray;
-        return res;
+        return pageArray;
     };
     
     this.pagerDataSource = function(baseUrl, page) {
