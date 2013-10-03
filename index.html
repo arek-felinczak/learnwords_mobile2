@@ -10,59 +10,95 @@
         <!-- Place favicon.ico in the root directory -->
     </head>
     <body>
-        <div id="page">
-            <div id="main-nav" class="navbar navbar-inverse">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" onclick="return go('#categories', this);" href="#categories"> Home </a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul id="main-navbar-nav" class="nav navbar-nav">
-                            <li onclick="return go('#favourites/1');" id='favourites'><a href="#">Favourites</a></li>
-                            <li class="divider"></li>
-                            <li id="option-dd" class="dropdown">
-                                <a href="#options" class="dropdown-toggle" data-toggle="dropdown">Options<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#" onClick="app_router.refreshCache(true); app_router.navigate('#categories', true); return false;">Refresh dictionary</a></li>
-                                    <li class="dropdown-header">Word details in:</li>
-                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; return false;">diki.pl</a></li>
-                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo; return false;">forvo.pl</a></li>
-                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; return false;">m.getionary.pl</a></li>
-                                    <li><a href="#" onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.wiktionary; return false;">en.m.wiktionary.org</a></li>
-                                </ul>
-                            </li>
-                            <li id='about'><a onclick="return go('#about');" href="#">About</a></li>
-                            <li id='contact'><a onclick="return go('#contact');" href="#">Contact</a></li>
-                            <li id='itemAddForm'><a onclick="return go('#itemAddForm');" href="#">Add word</a></li>
-                        </ul>
-                        <div class="navbar-form navbar-right">
-                            <div class="form-group">
-                                <input type="text" placeholder="search" id='searchWord' style="width:200px; display: inline-block" class="form-control" />
-                                <a onclick="return go('#search');" href="#" id="search-link" class="btn btn-success"> search </a>
-                            </div>                        
-                        </div>
-                    </div><!--/.navbar-collapse -->
-                </div>
+        <div class='container' id="page">
+            <div class="row" id='menuTop'>
+                <table class="table navigation" style='margin: 0px;' cellpadding="0" cellspacing="0">
+                     <colgroup>
+                        <col class="col-xs-3" />
+                        <col class="col-xs-3" />
+                        <col class="col-xs-3" />
+                        <col class="col-xs-3" />
+                    </colgroup>
+                    <tr>
+                        <td class='pointer' onClick="app_router.navigate('#', true); return false;">
+                            <span class="glyphicon glyphicon-home"></span><br />
+                            <span>Home</span>
+                        </td>                        
+                        <td class='pointer' onClick="app_router.navigate('#favourites/1', true); return false;">
+                            <span class="glyphicon glyphicon-star"></span><br />
+                            <span>Favourites</span>
+                        </td>
+                        <td class='pointer' onClick="$('#search').toggle(300); return false;">
+                            <span class="glyphicon glyphicon-search"></span><br />
+                            <span>Search</span>
+                        </td>
+                        <td class='pointer' onClick="app_router.navigate('#itemAddForm', true); return false;">
+                            <span class="glyphicon glyphicon-plus"></span><br />
+                            <span>Add</span>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div class="container">            
+            <div id="settings" class="" style="display: none;">
+                <select id="settingsDd">
+                    <option onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; return false;" >diki.pl </option>
+                    <option onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; return false;" >m.getionary.pl </option>
+                    <option onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo; return false;" >forvo.com </option>
+                </select>
+            </div>
+            <div id="search" class='row col-lg-12'>
+                <input type="text" placeholder="search" id='searchWord' class="center form-control" />
+                <a onclick="$('div#search').hide(300);return go('#search');" href="#" id="search-link" class="btn btn-success"> search </a>
+            </div>            
+            <div class="row">            
                 <div id="alert_placeholder"></div>
-                <div id="app" class="row">
+                <div id="app">
+                    <div id="Breadcrumb"></div>
+                    <div id="content"></div>
                     <!-- Content goes here -->
                 </div>
-                <div id="footer-div" class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
+                <div id="footer-div" class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8; padding:3px;">
                     <span> &copy; Designed by Arek Felińczak &middot; </span> 
                     <span> <a target='github' href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code </a> </span><br /> 
                     <span> <a target='forvo' href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
                     <span> <a target='diki' href="http://diki.pl/"> Diki.pl </a> </span> | 
                     <span> <a target='getionary' href="http://getionary.pl/"> Getionary.pl </a> </span>
                 </div>
+                <div id="menuBar" class="navbar navbar-fixed-bottom text-center" style="display:none ;">
+                    <table class="table navigation" style='margin: 0px;' cellpadding="0" cellspacing="0">
+                         <colgroup>
+                            <col class="col-xs-2" />
+                            <col class="col-xs-2" />
+                            <col class="col-xs-2" />
+                            <col class="col-xs-2" />
+                            <col class="col-xs-2" />
+                        </colgroup>
+                        <tr>
+                            <td class='pointer' onClick="return showRefreshButton();">
+                                <span class="glyphicon glyphicon-refresh"></span><br />
+                                <span>Data sync</span>
+                            </td>                        
+                            <td class='pointer' onClick="app_router.navigate('#about', true); return false;">
+                                <span class="glyphicon glyphicon-question-sign"></span><br />
+                                <span>Help</span>
+                            </td>
+                            <td class='pointer' onClick="app_router.navigate('#contact', true); return false;">
+                                <span class="glyphicon glyphicon-info-sign"></span><br />
+                                <span>About</span>
+                            </td>
+                            <td class='pointer' onClick="return showSettings();">
+                                <span class="glyphicon glyphicon-wrench"></span><br />
+                                <span>Dictionary</span>
+                            </td>
+                             <td class='pointer' onClick="return showExitConfirm();">
+                                <span class="glyphicon glyphicon-off"></span><br />
+                                <span>Exit</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div> <!-- /container -->
+            <br /><br /><br />
         </div>
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
         <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script> 
@@ -111,23 +147,12 @@
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/lib/fastclick.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
-        <script type="text/javascript" src="js/lib/OptionsMenu.js"></script>
         <!-- for adobe cloud build -->
         <script src="phonegap.js"></script>        
         <script type="text/javascript">
-            function rollUpNav(obj) {                
-                if ($(".navbar-collapse").hasClass("in") && $(obj).attr('data-toggle') !== "dropdown" ) {
-                    $(".navbar-toggle").click();
-                    $('#option-dd').removeClass('open');
-                }
-            }
-            // toggle collapsed menu after click
-            $('.navbar-collapse a').on('click', function() {
-                rollUpNav(this);
-            });
             $('input#searchWord').keyup(function(e) {
-                if(e.which === 13) { 
-                    rollUpNav(this);
+                if(e.which === 13) {
+                    $('div#search').hide(300);
                     app_router.navigate('#search', true);
                 };
             });            
@@ -142,59 +167,12 @@
             
             // for phonegap only
             document.addEventListener("deviceready", function() {                
-                document.addEventListener("backbutton", function showExitConfirm(e) {
-//                    navigator.notification.confirm(
-//                        'Do you want to exit?', // message
-//                        function(e) {if (e === 2) { navigator.app.exitApp(); }},
-//                        'Exit', // title
-//                        'Cancel,OK' // buttonLabels
-//                    );
+                document.addEventListener("backbutton", function() {
                     window.history.back();
-                    return false;
-                    
+                    return false;                    
                 }, false);
-                document.addEventListener("menubutton", function showRefreshButton(e) {
-                    navigator.notification.confirm(
-                        'Do you want to refresh data?', // message
-                        function(e) {if (e === 2) { app_router.refreshCache(true); }},
-                        'Exit', // title
-                        'Cancel,OK' // buttonLabels
-                    );
-                    return false;
-                }, false);
-                document.addEventListener("menubutton", function() {
-                    menuDiv = document.getElementById('optionsmenu');
-                    if (menuDiv.style.display === 'none') {
-                        menuDiv.style.display = 'block';
-                        document.getElementById('footer-div').style.display = 'none';
-                    } else {
-                        menuDiv.style.display = 'none';
-                        document.getElementById('footer-div').style.display = 'block';
-                    }
-                }, false);
-            }, false);      
-            
-            function onHelp(){
-                alert('ahoj');
-            }
-            var optionsmenu = new OptionsMenu({
-                id : "optionsmenu",
-                items : [ 
-                    [ {
-                        label : "Row 3",
-                        image : "images/settings.png",
-                        action : onHelp
-                    }, {
-                        label : "More Help",
-                        image : "images/help.png",
-                        action : onHelp
-                    }, {
-                        label : "Even More Help",
-                        image : "images/help.png",
-                        action : onHelp
-                    }]
-                ]
-            });
+                document.addEventListener("menubutton", toogleMenu , false);
+            }, false); 
         </script>        
     </body>
 </html>

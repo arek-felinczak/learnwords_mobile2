@@ -39,18 +39,18 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         var list = new ItemsCollection(this.manager.getFavouritesList());
         var favListView = new ItemsView({model: list});
-        this.content = favListView.render(0, "Favourite words", page);
+        $('#content').html(favListView.render(0, "Favourite words", page));
         this.navBar('static', "Favourites");
         this.transitionStop();  
     },
     
     about: function() {
-        this.content = new AboutView().render();
+        $('#content').html(new AboutView().render());
         this.navBar('static', 'About');
     },
     
     contact:function() {
-        this.content = new ContactView().render();
+        $('#content').html(new ContactView().render());
         this.navBar('static', 'Contact');
     },
     
@@ -60,7 +60,7 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getCategoryList(function(modelList) {
             var categoryListView = new CategoryItemsView({model: modelList});
-            self.content = categoryListView.render();
+            $('#content').html(categoryListView.render());
             self.navBar('');
             self.transitionStop();
         });
@@ -78,7 +78,7 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getItemList(id, function(categoryModel) {
             var view = new ItemsView({model: categoryModel});
             self.manager.getCategory(id, function(cat) {
-                self.content = view.render(id, cat.get('Name'), page);
+                $('#content').html(view.render(id, cat.get('Name'), page));
                 self.navBar('static', cat.get('Name'));
                 self.transitionStop();
             });            
@@ -91,7 +91,7 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getItem(catId, id, function(item) {
             var view = new ItemView({model: item});
-            self.content = view.render(nr);
+            $('#content').html(view.render(nr));
             self.manager.getCategory(catId, function(cat) {
                 self.navBar('item', item, cat);
                 self.transitionStop();
@@ -107,7 +107,7 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.manager.getCategoryList(function(modelList) {
             var formView = new ItemFormView({model: item});
-            self.content = formView.render(modelList);
+            $('#content').html(formView.render(modelList).el);
             self.navBar('static', "add word");
             self.transitionStop();
         });
@@ -120,7 +120,7 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getItem(catId, id, function(item){
             self.manager.getCategoryList(function(modelList) {
                 var formView = new ItemFormView({model: item});
-                self.content = formView.render(modelList);
+                $('#content').html(formView.render(modelList).el);
                 self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
                 formView.postRender();
                 self.transitionStop();                
@@ -141,7 +141,7 @@ var AppRouter = Backbone.Router.extend({
                 app_router.navigate('#', true);
                 return;
             }
-            self.content = new ItemsView({model: items}).render(-1, "Search results", 1);
+            $('#content').html(new ItemsView({model: items}).render(-1, "Search results", 1));
             self.navBar('static', 'Search results');
             self.transitionStop();            
         });
@@ -166,16 +166,47 @@ var AppRouter = Backbone.Router.extend({
     },
     
     navBar: function(page, model, param) {
-        this.breadcrumb = new Breadcrumb().render(page, model, param);
-        this.appendHtmlToDocument();
-    },
-    
-    content: '',
-    breadcrumb: '',
-    appendHtmlToDocument: function(){
-        document.getElementById('app').innerHTML = this.breadcrumb + this.content;
-        this.content = '';
-        this.breadcrumb = '';        
+        document.getElementById('Breadcrumb').innerHTML = new Breadcrumb().render(page, model, param);
     }
 });
 
+function showRefreshButton(e) {
+    if (navigator.notification) {
+        navigator.notification.confirm(
+            'Do you want to refresh data (required internet connection) ?',
+            function(e) {
+                if (e === 2) { app_router.refreshCache(true); }
+            },
+            'Exit', // title
+            'Cancel,OK' // buttonLabels
+            );
+    }
+    else{
+        app_router.refreshCache(true);
+    }
+    return false;
+}
+
+function showExitConfirm(e) {
+    navigator.notification.confirm(
+        'Do you want to exit?', // message
+        function(e) {if (e === 2) { navigator.app.exitApp(); }},
+        'Exit', // title
+        'Cancel,OK' // buttonLabels
+    );
+}
+
+function showSettings(e) {
+    $('#settingsDd').click();
+}
+
+function toogleMenu() {
+    menuDiv = document.getElementById('menuBar');
+    if (menuDiv.style.display === 'none') {
+        menuDiv.style.display = 'block';
+        document.getElementById('footer-div').style.display = 'none';
+    } else {
+        menuDiv.style.display = 'none';
+        document.getElementById('footer-div').style.display = 'block';
+    }
+}

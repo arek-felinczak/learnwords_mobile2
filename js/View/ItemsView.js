@@ -4,7 +4,7 @@ ItemsView = Backbone.View.extend({
     render:function (catId, catName, pageNum) {
         pageNum = parseInt(pageNum);
         var isFavouriteList = parseInt(catId) === 0;
-        var url = "#/category/" + catId + '/{page}';
+        var url = "#category/" + catId + '/{page}';
         
         var pageList = new Vocabulary.Pager(this.model, this.pageLength);
         var page = new ItemsCollection(pageList.getPageArray(pageNum));
@@ -16,7 +16,7 @@ ItemsView = Backbone.View.extend({
             pages: pagerData, 
             isFavouriteList: isFavouriteList,
             offset: (pageNum - 1) * this.pageLength,
-            showPager: pagerData.length > 3,
+            showPager: pageList.numOfPages() > 1,
             categoryName: catName
         };
 

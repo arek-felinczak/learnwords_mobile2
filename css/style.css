@@ -10,18 +10,8 @@
 .padding-medium {
     padding: 4px
 }
-.nav > li > a {
-    font-size: 16px;
-}
-ul#CategoryList li:hover {
+li:hover {
     background-color: #E8E8E8;
-}
-ul#CategoryList a:hover {
-    text-decoration: none;
-}
-.navbar {
-    min-height: 30px;
-    padding: 5px
 }
 .pointer {
     cursor: pointer;
@@ -33,15 +23,15 @@ div.blockUI {
     opacity:0.3;
     filter:alpha(opacity=30);
 }
-.breadcrumb {
-    margin: 5px 0px;
-    border-color: rgb(221, 221, 221);
-    border-style: solid;
-    border-width: 1px;
+.breadcrumb-buttons {
+    list-style: none outside none;
+    padding: 5px 0px 5px 0px;
 }
-.navbar {
-    margin-bottom: 0px;
+.breadcrumb-buttons li{
+    display: inline-block;
+    padding-right: 5px;
 }
+
 .pager {
     margin: 7px 0px;
 }
@@ -61,6 +51,9 @@ div.blockUI {
     margin-right: auto;
     display: block;
 }
+.text-center {
+    text-align: center;
+}
 
 table.table tr td.button {
     padding: 2px 0px;
@@ -68,4 +61,24 @@ table.table tr td.button {
 
 table.table tr td.text {
     padding: 6px 0px 6px 6px;
+}
+
+table.navigation tr td {
+    color: #EEEEEE; 
+    font-weight: bold; 
+    border: 1px solid grey;
+    background-color: black;
+    text-align: center;
+}
+
+.form-control {
+    width: 70%;
+    display: inline;
+    padding: 5px;
+}
+
+div#search {
+    display: none;
+    padding: 5px 0 10px 0;
+    text-align: center;
 }

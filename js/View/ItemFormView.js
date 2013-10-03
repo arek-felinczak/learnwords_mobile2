@@ -2,7 +2,8 @@ ItemFormView = Backbone.View.extend({
     
     render: function(categoryList) {
         this.template = window.templates['ItemFormView'];
-        return this.template({model: this.model.toJSON(), categories: categoryList.toJSON()});
+        $(this.el).html(this.template({model: this.model.toJSON(), categories: categoryList.toJSON()}));
+        return this;
     },
     
     postRender:function() {
@@ -10,8 +11,7 @@ ItemFormView = Backbone.View.extend({
     },
     
     events: {
-        "change": "change",
-        "click .save": "beforeSave"
+        "click a.save": "beforeSave"
     },
     
     change: function(event) {

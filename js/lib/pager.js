@@ -50,7 +50,7 @@ Vocabulary.Pager = function(collection, size) {
         currPage = (lastPage ? page : (page + 1));
         pagerDs.push({
             url: baseUrl.replace('{page}', useIdInsteadOfPage ? this.collection.models[currPage - 1].get('Id') : currPage),
-            page: ' > '+ ((this.pageSize === 1 && page < numOfPages) ? this.collection.models[page].get(attrName) : ""),
+            page: ((this.pageSize === 1 && page < numOfPages) ? this.collection.models[page].get(attrName) : "") + ' > ',
             active: false,
             disabled: lastPage,
             cssClass: 'btn-info'
