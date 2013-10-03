@@ -1,5 +1,5 @@
 <div>
-    <div class="col-xs-8 center">
+    <div class="col-xs-10 center">
         <ul class="pagination">
             {{#each pager}}
             <li onclick="return go('{{url}}');" class="pointer">

@@ -1,7 +1,7 @@
 <div>
     {{#if showPager}}
-    <div class="col-xs-8 center">
-        <ul class="pagination">
+    <div class="col-xs-10 center">
+        <ul class="center pagination">
             {{#each pages}}
                 <li onclick="return go('{{url}}');" class="pointer">
                     <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg"> {{page}} </button>
@@ -35,14 +35,14 @@
                 <td class='text'>
                     {{pagedGridIndex @index ../offset}}. {{Word}}
                 </td>
-                 <td class='text'>
-                     <p class="link pointer" onclick="return go('#item/{{CategoryId}}/{{Id}}/1');">
+                 <td class='button'>
+                     <button class="pointer btn btn-default" onclick="return go('#item/{{CategoryId}}/{{Id}}/1');">
                          {{Translation1}}
-                     </p>
-                      {{#if Translation2}}
-                      <p class="link pointer" onclick="return go('#item/{{CategoryId}}/{{Id}}/2');">
+                     </button>
+                     <br />{{#if Translation2}}
+                      <button class="btn btn-default pointer" onclick="return go('#item/{{CategoryId}}/{{Id}}/2');">
                          {{Translation2}}
-                      </p>
+                      </button>
                       {{/if}}
                 </td>
                 <td class='button'>
@@ -70,7 +70,7 @@
         </table>
     </div>    
     {{#if showPager}}
-    <div class="col-xs-8 center">
+    <div class="col-xs-10 center">
         <ul class="pagination">
             {{#each pages}}
                 <li onclick="return go('{{url}}');" class="pointer">

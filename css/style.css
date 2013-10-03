@@ -3,7 +3,7 @@
     font-weight:bold;
 }
 .margin-small {
-    margin: 2px
+    margin: 2px 0px
 }
 .padding-small {
     padding: 2px
@@ -12,7 +12,7 @@
     margin: 4px
 }
 .padding-medium {
-    padding: 4px
+    padding: 4px 0px
 }
 li.link:hover {
     background-color: #E8E8E8;
@@ -45,11 +45,17 @@ div.blockUI {
 .pagination {
     margin: 4px auto 4px auto;
 }
+.pagination li {
+    display: inline;
+    text-align: center;
+}
+
 .center {
     float: none;
     margin-left: auto;
     margin-right: auto;
     display: block;
+    text-align: center;
 }
 .text-center {
     text-align: center;
