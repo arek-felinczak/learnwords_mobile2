@@ -1,6 +1,6 @@
 ItemView = Backbone.View.extend({
       
-	 render:function(nr) {
+	 render:function(nr, navHtml) {
         var item = this.model; 
         var index = item.collection.indexOf(item);
         this.template = window.templates['ItemView'];
@@ -11,14 +11,16 @@ ItemView = Backbone.View.extend({
         var pager = pageList.pagerDataSource('#item/' + item.get("CategoryId") + '/{page}/' + nr, index + 1, 'Translation1', true);
         var vm = {
             src: url,
-            pager: pager
+            pager: pager,
+            breadcrumb: navHtml
         };
         var html = this.template(vm);
         if (window.localStorage['dictionaryLink'] === window.learnwordsConfig.getionary) {
             var waveFile = 'http://www.getionary.pl/speak.wav?text=' + encodeURI(word.replace(/(<([^>]+)>)/ig, ''));
             Forvo_Ext_Play(null, null, waveFile);
         }
-        return html;
+        $(this.el).html(html);
+        return this;
 	 },     
      buildLink:function (word, engineUrl) {
          return engineUrl.toString().format({ "0": word});         

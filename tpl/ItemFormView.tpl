@@ -1,5 +1,5 @@
 <div id="CategoryListPanel" class='panel panel-default'>
-    <div class="panel-heading"><strong>Add/Edit translation</strong></div>
+    <div class="panel-heading">{{{breadcrumb}}}</div>
     <br />
     <form role="form" class="form-horizontal">
         <fieldset>

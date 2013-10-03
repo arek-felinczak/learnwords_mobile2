@@ -1,8 +1,12 @@
 ItemFormView = Backbone.View.extend({
     
-    render: function(categoryList) {
+    render: function(categoryList, navHtml) {
         this.template = window.templates['ItemFormView'];
-        $(this.el).html(this.template({model: this.model.toJSON(), categories: categoryList.toJSON()}));
+        $(this.el).html(this.template({
+            model: this.model.toJSON(), 
+            breadcrumb: navHtml,
+            categories: categoryList.toJSON()
+        }));
         return this;
     },
     

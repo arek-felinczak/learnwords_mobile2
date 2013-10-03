@@ -1,3 +1,7 @@
+.link {
+    color: #2a6496;
+    font-weight:bold;
+}
 .margin-small {
     margin: 2px
 }
@@ -10,30 +14,26 @@
 .padding-medium {
     padding: 4px
 }
-li:hover {
+li.link:hover {
     background-color: #E8E8E8;
 }
 .pointer {
     cursor: pointer;
 }
-.pointer:hover {
+li.pointer:hover {
     background-color: rgb(232, 232, 232);
 }
 div.blockUI {
     opacity:0.3;
     filter:alpha(opacity=30);
 }
-.breadcrumb-buttons {
-    list-style: none outside none;
-    padding: 5px 0px 5px 0px;
-}
-.breadcrumb-buttons li{
-    display: inline-block;
-    padding-right: 5px;
-}
 
-.pager {
-    margin: 7px 0px;
+.breadcrumb {
+    padding: 5px 5px;
+    margin-bottom: 0px;
+}
+.breadcrumb li {
+    cursor:pointer;
 }
 .list-group-item {
     cursor: pointer;
@@ -60,7 +60,7 @@ table.table tr td.button {
 }
 
 table.table tr td.text {
-    padding: 6px 0px 6px 6px;
+    padding: 10px 0px 4px 6px;
 }
 
 table.navigation tr td {
@@ -81,4 +81,8 @@ div#search {
     display: none;
     padding: 5px 0 10px 0;
     text-align: center;
+}
+
+.btn {
+    padding: 6px 9px;
 }

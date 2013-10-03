@@ -39,19 +39,17 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         var list = new ItemsCollection(this.manager.getFavouritesList());
         var favListView = new ItemsView({model: list});
-        $('#content').html(favListView.render(0, "Favourite words", page));
-        this.navBar('static', "Favourites");
+        var nav = this.navBar('static', "Favourites");
+        $('#content').html(favListView.render(0, "Favourite words", page, nav).el);        
         this.transitionStop();  
     },
     
     about: function() {
         $('#content').html(new AboutView().render());
-        this.navBar('static', 'About');
     },
     
     contact:function() {
         $('#content').html(new ContactView().render());
-        this.navBar('static', 'Contact');
     },
     
     categoryList:function() {
@@ -60,8 +58,8 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getCategoryList(function(modelList) {
             var categoryListView = new CategoryItemsView({model: modelList});
-            $('#content').html(categoryListView.render());
-            self.navBar('');
+            var nav = self.navBar('');
+            $('#content').html(categoryListView.render(nav).el);            
             self.transitionStop();
         });
     },
@@ -78,8 +76,8 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getItemList(id, function(categoryModel) {
             var view = new ItemsView({model: categoryModel});
             self.manager.getCategory(id, function(cat) {
-                $('#content').html(view.render(id, cat.get('Name'), page));
-                self.navBar('static', cat.get('Name'));
+                var nav = self.navBar('static', cat.get('Name'));
+                $('#content').html(view.render(id, cat.get('Name'), page, nav).el);                
                 self.transitionStop();
             });            
         });         
@@ -91,9 +89,9 @@ var AppRouter = Backbone.Router.extend({
         this.transitionStart();
         this.manager.getItem(catId, id, function(item) {
             var view = new ItemView({model: item});
-            $('#content').html(view.render(nr));
             self.manager.getCategory(catId, function(cat) {
-                self.navBar('item', item, cat);
+                var nav = self.navBar('item', item, cat);
+                $('#content').html(view.render(nr, nav).el);
                 self.transitionStop();
             });                
         });
@@ -107,8 +105,8 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.manager.getCategoryList(function(modelList) {
             var formView = new ItemFormView({model: item});
-            $('#content').html(formView.render(modelList).el);
-            self.navBar('static', "add word");
+            var nav = self.navBar('static', "add word");
+            $('#content').html(formView.render(modelList, nav).el);            
             self.transitionStop();
         });
     },
@@ -120,8 +118,8 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getItem(catId, id, function(item){
             self.manager.getCategoryList(function(modelList) {
                 var formView = new ItemFormView({model: item});
-                $('#content').html(formView.render(modelList).el);
-                self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
+                var nav = self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
+                $('#content').html(formView.render(modelList, nav).el);
                 formView.postRender();
                 self.transitionStop();                
             });
@@ -141,8 +139,8 @@ var AppRouter = Backbone.Router.extend({
                 app_router.navigate('#', true);
                 return;
             }
-            $('#content').html(new ItemsView({model: items}).render(-1, "Search results", 1));
-            self.navBar('static', 'Search results');
+            var nav = self.navBar('static', 'Search results');
+            $('#content').html(new ItemsView({model: items}).render(-1, "Search results", 1, nav));            
             self.transitionStop();            
         });
     },    
@@ -166,7 +164,7 @@ var AppRouter = Backbone.Router.extend({
     },
     
     navBar: function(page, model, param) {
-        document.getElementById('Breadcrumb').innerHTML = new Breadcrumb().render(page, model, param);
+        return new Breadcrumb().render(page, model, param);
     }
 });
 

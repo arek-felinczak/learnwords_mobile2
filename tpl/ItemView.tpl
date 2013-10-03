@@ -1,4 +1,4 @@
-<div class='panel'>
+<div>
     <div class="col-md-4 center">
         <ul class="pagination">
             {{#each pager}}
@@ -8,5 +8,12 @@
             {{/each}}
         </ul>
     </div>
-    <iframe id='DictionaryItemView' src='{{src}}' frameBorder="0" style="width:100%; min-height: 480px;"></iframe>	 
+    <div id="CategoryListPanel" class='panel panel-default'>
+        <div class="panel-heading">
+            {{{breadcrumb}}}
+        </div>
+        <div class="panel-body">
+            <iframe id='DictionaryItemView' src='{{src}}' frameBorder="0" style="width:100%; min-height: 480px;"></iframe>	
+        </div>  
+    </div>
 </div>

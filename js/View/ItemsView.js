@@ -1,7 +1,7 @@
 ItemsView = Backbone.View.extend({
     pageLength: 30,	 
      
-    render:function (catId, catName, pageNum) {
+    render:function (catId, catName, pageNum, navHtml) {
         pageNum = parseInt(pageNum);
         var isFavouriteList = parseInt(catId) === 0;
         var url = "#category/" + catId + '/{page}';
@@ -17,10 +17,11 @@ ItemsView = Backbone.View.extend({
             isFavouriteList: isFavouriteList,
             offset: (pageNum - 1) * this.pageLength,
             showPager: pageList.numOfPages() > 1,
-            categoryName: catName
+            breadcrumb: navHtml
         };
 
 	    var html = this.template(vm);
-        return html;
+        $(this.el).html(html);
+        return this;
 	 }
 });
