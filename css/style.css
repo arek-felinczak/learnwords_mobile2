@@ -1,17 +1,17 @@
 .margin-small {
-    margin: 3px
+    margin: 2px
 }
 .padding-small {
-    padding: 3px
+    padding: 2px
 }
 .margin-medium {
-    margin: 6px
+    margin: 4px
 }
 .padding-medium {
-    padding: 6px
+    padding: 4px
 }
 .nav > li > a {
-    font-size:16px;
+    font-size: 16px;
 }
 ul#CategoryList li:hover {
     background-color: #E8E8E8;
@@ -63,5 +63,9 @@ div.blockUI {
 }
 
 table.table tr td.button {
-    padding: 2px;
+    padding: 2px 0px;
+}
+
+table.table tr td.text {
+    padding: 6px 0px 6px 6px;
 }

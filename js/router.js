@@ -121,7 +121,7 @@ var AppRouter = Backbone.Router.extend({
             self.manager.getCategoryList(function(modelList) {
                 var formView = new ItemFormView({model: item});
                 self.content = formView.render(modelList);
-                self.navBar('static', 'edit word');
+                self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
                 formView.postRender();
                 self.transitionStop();                
             });
@@ -178,9 +178,4 @@ var AppRouter = Backbone.Router.extend({
         this.breadcrumb = '';        
     }
 });
-	
-loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
-    app_router = new AppRouter();
-    app_router.refreshCache(false);
-    Backbone.history.start();
-});
+

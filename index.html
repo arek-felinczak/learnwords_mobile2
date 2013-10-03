@@ -55,7 +55,7 @@
                 <div id="app" class="row">
                     <!-- Content goes here -->
                 </div>
-                <div class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
+                <div id="footer-div" class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8;">
                     <span> &copy; Designed by Arek Felińczak &middot; </span> 
                     <span> <a target='github' href="https://github.com/arek-felinczak/learnwords_mobile2"> Source code </a> </span><br /> 
                     <span> <a target='forvo' href="http://www.forvo.com/"> Pronunciations by Forvo </a> </span> | 
@@ -111,6 +111,7 @@
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/lib/fastclick.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
+        <script type="text/javascript" src="js/lib/OptionsMenu.js"></script>
         <!-- for adobe cloud build -->
         <script src="phonegap.js"></script>        
         <script type="text/javascript">
@@ -129,36 +130,71 @@
                     rollUpNav(this);
                     app_router.navigate('#search', true);
                 };
-            });
-            
+            });            
             $(function() {
+                loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
+                    app_router = new AppRouter();
+                    app_router.refreshCache(false);
+                    Backbone.history.start();
+                });
                 FastClick.attach(document.body);
             });
+            
             // for phonegap only
-            function showExitConfirm(e) {
-                navigator.notification.confirm(
-                    'Do you want to exit?', // message
-                    function(e) {if (e === 2) { navigator.app.exitApp(); }},
-                    'Exit', // title
-                    'Cancel,OK' // buttonLabels
-                );
-                return false;
-            };
-
-            function showRefreshButton(e) {
-                navigator.notification.confirm(
-                    'Do you want to refresh data?', // message
-                    function(e) {if (e === 2) { app_router.refreshCache(true); }},
-                    'Exit', // title
-                    'Cancel,OK' // buttonLabels
-                );
-                return false;
-            };
-
-            document.addEventListener("deviceready", function(){
-                document.addEventListener("backbutton", showExitConfirm, false);
-                document.addEventListener("menubutton", showRefreshButton, false);
-            }, false);                
+            document.addEventListener("deviceready", function() {                
+                document.addEventListener("backbutton", function showExitConfirm(e) {
+//                    navigator.notification.confirm(
+//                        'Do you want to exit?', // message
+//                        function(e) {if (e === 2) { navigator.app.exitApp(); }},
+//                        'Exit', // title
+//                        'Cancel,OK' // buttonLabels
+//                    );
+                    window.history.back();
+                    return false;
+                    
+                }, false);
+                document.addEventListener("menubutton", function showRefreshButton(e) {
+                    navigator.notification.confirm(
+                        'Do you want to refresh data?', // message
+                        function(e) {if (e === 2) { app_router.refreshCache(true); }},
+                        'Exit', // title
+                        'Cancel,OK' // buttonLabels
+                    );
+                    return false;
+                }, false);
+                document.addEventListener("menubutton", function() {
+                    menuDiv = document.getElementById('optionsmenu');
+                    if (menuDiv.style.display === 'none') {
+                        menuDiv.style.display = 'block';
+                        document.getElementById('footer-div').style.display = 'none';
+                    } else {
+                        menuDiv.style.display = 'none';
+                        document.getElementById('footer-div').style.display = 'block';
+                    }
+                }, false);
+            }, false);      
+            
+            function onHelp(){
+                alert('ahoj');
+            }
+            var optionsmenu = new OptionsMenu({
+                id : "optionsmenu",
+                items : [ 
+                    [ {
+                        label : "Row 3",
+                        image : "images/settings.png",
+                        action : onHelp
+                    }, {
+                        label : "More Help",
+                        image : "images/help.png",
+                        action : onHelp
+                    }, {
+                        label : "Even More Help",
+                        image : "images/help.png",
+                        action : onHelp
+                    }]
+                ]
+            });
         </script>        
     </body>
 </html>
