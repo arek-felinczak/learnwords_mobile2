@@ -1,6 +1,6 @@
 <div>
     {{#if showPager}}
-    <div class="col-xs-7 center">
+    <div class="col-xs-8 center">
         <ul class="pagination">
             {{#each pages}}
                 <li onclick="return go('{{url}}');" class="pointer">
@@ -70,7 +70,7 @@
         </table>
     </div>    
     {{#if showPager}}
-    <div class="col-xs-7 center">
+    <div class="col-xs-8 center">
         <ul class="pagination">
             {{#each pages}}
                 <li onclick="return go('{{url}}');" class="pointer">

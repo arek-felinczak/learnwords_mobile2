@@ -12,7 +12,7 @@ VocabularyManager = function () {
                 if (window.debug_mode) console.log('VocabularyManager:getCategoryList ajax success');                
                 callback(res);
             },
-            error: function(err) {var_dump('Error in VocabularyManager.getCategoryList', err);}
+            error: function(err) {alert('Error loading category list. Check internet connection.');}
         });        
     };
     
@@ -61,7 +61,7 @@ VocabularyManager = function () {
                 if (window.debug_mode) console.log('VocabularyManager:getCategory ajax success');
                 callback(res);
             },
-            error: function(err) { var_dump('Error in VocabularyManager.getItemList', err); }
+            error: function(err) { alert('Error loading words list. Check internet connection.'); }
         });
     };
     
