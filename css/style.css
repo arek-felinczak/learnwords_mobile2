@@ -29,7 +29,7 @@ div.blockUI {
 }
 
 .breadcrumb {
-    padding: 5px 5px;
+    padding: 2px;
     margin-bottom: 0px;
 }
 .breadcrumb li {
@@ -60,7 +60,7 @@ table.table tr td.button {
 }
 
 table.table tr td.text {
-    padding: 10px 0px 4px 6px;
+    padding: 10px 0px 4px 5px;
 }
 
 table.navigation tr td {
@@ -84,5 +84,13 @@ div#search {
 }
 
 .btn {
+    padding: 6px 9px;
+}
+
+.panel-body {
+    padding: 6px;
+}
+
+.panel-heading {
     padding: 6px 9px;
 }

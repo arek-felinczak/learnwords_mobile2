@@ -9,6 +9,7 @@ var AppRouter = Backbone.Router.extend({
         "search": "wordSearch",
         "search/:query": "wordSearch",
         "about": "about",
+        "DictSelect": "dictSelect",
         "contact": "contact",
         "favourites/:page": "favourites",
         "favouritesAdd/:catId/:id": "favouritesAdd",
@@ -46,6 +47,10 @@ var AppRouter = Backbone.Router.extend({
     
     about: function() {
         $('#content').html(new AboutView().render());
+    },
+    
+    dictSelect: function() {
+        $('#content').html(new DictSelectView().render());
     },
     
     contact:function() {
@@ -140,7 +145,7 @@ var AppRouter = Backbone.Router.extend({
                 return;
             }
             var nav = self.navBar('static', 'Search results');
-            $('#content').html(new ItemsView({model: items}).render(-1, "Search results", 1, nav));            
+            $('#content').html(new ItemsView({model: items}).render(-1, "Search results", 1, nav).el);            
             self.transitionStop();            
         });
     },    
@@ -192,10 +197,6 @@ function showExitConfirm(e) {
         'Exit', // title
         'Cancel,OK' // buttonLabels
     );
-}
-
-function showSettings(e) {
-    $('#settingsDd').click();
 }
 
 function toogleMenu() {

@@ -16,7 +16,7 @@ Vocabulary.Pager = function(collection, size) {
         return pageArray;
     };
     
-    this.pagerDataSource = function(baseUrl, page, attrName, useIdInsteadOfPage) {
+    this.pagerDataSource = function(baseUrl, page, useIdInsteadOfPage) {
         var page = parseInt(page);
         var numOfPages = this.numOfPages();
         var pagerDs = [];
@@ -32,7 +32,7 @@ Vocabulary.Pager = function(collection, size) {
         currPage = useIdInsteadOfPage ? this.collection.models[currPage - 1].get('Id') : currPage;
         pagerDs.push({
             url: baseUrl.replace('{page}', currPage),
-            page: ' < '+ ((this.pageSize === 1 && page > 1) ? this.collection.models[page - 2].get(attrName) : ""),
+            page: ' < ',
             active: false,
             disabled: page === 1,
             cssClass: 'btn-info'
@@ -50,7 +50,7 @@ Vocabulary.Pager = function(collection, size) {
         currPage = (lastPage ? page : (page + 1));
         pagerDs.push({
             url: baseUrl.replace('{page}', useIdInsteadOfPage ? this.collection.models[currPage - 1].get('Id') : currPage),
-            page: ((this.pageSize === 1 && page < numOfPages) ? this.collection.models[page].get(attrName) : "") + ' > ',
+            page: ' > ',
             active: false,
             disabled: lastPage,
             cssClass: 'btn-info'

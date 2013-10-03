@@ -1,10 +1,10 @@
 <div>
     {{#if showPager}}
-    <div class="col-md-4 center">
+    <div class="col-xs-7 center">
         <ul class="pagination">
             {{#each pages}}
                 <li onclick="return go('{{url}}');" class="pointer">
-                    <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}}"> {{page}} </button>
+                    <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg"> {{page}} </button>
                 </li>
             {{/each}}
         </ul>
@@ -15,7 +15,9 @@
             <strong>{{{breadcrumb}}}</strong>
         </div>
         <div class="panel-body">
-            <p>Tap on word to play audio file (internet connection needed).</p>
+            <small>Tap on bullhorn icon to play audio file (internet connection needed). Use plus sign button to add
+                word to favourite list. Tap blue link to open word in external dictionary.</small>
+            
         </div>        
         <table id="items-table" class="table">
             <colgroup>
@@ -23,6 +25,11 @@
                 <col class="col-xs-2" />
                 <col class="col-xs-4" />
             </colgroup>
+            {{#if emptyList}}
+             <tr colspan='3'>
+                <td class='text'><h4> List if empty. </h4></td>
+             </tr>
+            {{/if}}
             {{#each category}}
             <tr>
                 <td class='text'>
@@ -63,11 +70,11 @@
         </table>
     </div>    
     {{#if showPager}}
-    <div class="col-md-4 center">
+    <div class="col-xs-7 center">
         <ul class="pagination">
             {{#each pages}}
                 <li onclick="return go('{{url}}');" class="pointer">
-                    <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}}"> {{page}} </button>
+                    <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg"> {{page}} </button>
                 </li>
             {{/each}}
         </ul>

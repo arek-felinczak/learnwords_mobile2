@@ -27,7 +27,7 @@
                         </td>                        
                         <td style='cursor: pointer' onClick="app_router.navigate('#favourites/1', true); return false;">
                             <span class="glyphicon glyphicon-star"></span><br />
-                            <span>Favourites</span>
+                            <span>Repeat</span>
                         </td>
                         <td style='cursor: pointer' onClick="$('#search').toggle(300); return false;">
                             <span class="glyphicon glyphicon-search"></span><br />
@@ -43,13 +43,6 @@
                         </td>
                     </tr>
                 </table>
-            </div>
-            <div id="settings" style="display: none;">
-                <select id="settingsDd">
-                    <option onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; return false;" >diki.pl </option>
-                    <option onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; return false;" >m.getionary.pl </option>
-                    <option onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo; return false;" >forvo.com </option>
-                </select>
             </div>
             <div id="search" class='row'>
                 <input type="text" placeholder="search" id='searchWord' class="center form-control" />
@@ -80,9 +73,9 @@
                                 <span class="glyphicon glyphicon-refresh"></span><br />
                                 <span>Data sync</span>
                             </td>                        
-                            <td class='pointer' onClick="toogleMenu();return showSettings();">
-                                <span class="glyphicon glyphicon-wrench"></span><br />
-                                <span>Dictionary</span>
+                            <td class='pointer' onClick="toogleMenu();app_router.navigate('#DictSelect', true); return false;">
+                                <span class="glyphicon glyphicon-list-alt"></span><br />
+                                <span>Settings</span>
                             </td>
                         </tr>
                     </table>
@@ -158,7 +151,7 @@
         <script type="text/javascript" src="js/lib/fastclick.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
         <!-- for adobe cloud build -->
-        <script src="phonegap.js"></script>        
+        <script type="text/javascript" src="phonegap.js"></script>        
         <script type="text/javascript">
             $('input#searchWord').keyup(function(e) {
                 if(e.which === 13) {
@@ -167,7 +160,7 @@
                 };
             });            
             $(function() {
-                loadTemplate(['CategoryItemsView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
+                loadTemplate(['CategoryItemsView', 'DictSelectView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
                     app_router = new AppRouter();
                     app_router.refreshCache(false);
                     Backbone.history.start();

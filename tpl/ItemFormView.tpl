@@ -1,7 +1,7 @@
 <div id="CategoryListPanel" class='panel panel-default'>
     <div class="panel-heading">{{{breadcrumb}}}</div>
     <br />
-    <form role="form" class="form-horizontal">
+    <form role="form" class="form-horizontal margin-medium">
         <fieldset>
             <div class="form-group">
                 <input type="hidden" id="Id" name="Id" value="{{model.Id}}"/>

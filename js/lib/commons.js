@@ -49,10 +49,10 @@ function Forvo_Ext_Play(path_mp3, path_ogg, path_wav)
     else if (navigator.userAgent.toLowerCase().indexOf('iphone') !== -1) {
         window.location.href = path_mp3;
         return false;
-    } else if (canPlayMp3 && navigator.userAgent.toLowerCase().indexOf('chrome') == -1) {
-        var html = '<audio autoplay="true"><source src="' + path_mp3 + '"></audio>';
     } else if (canPlayOgg && navigator.userAgent.toLowerCase().indexOf('chrome') == -1) {
         var html = '<audio autoplay="true"><source src="' + path_ogg + '"></audio>';
+    } else if (canPlayMp3 && navigator.userAgent.toLowerCase().indexOf('chrome') == -1) {
+        var html = '<audio autoplay="true"><source src="' + path_mp3 + '"></audio>';
     } else {
         var html = '<object type="application/x-shockwave-flash" data="http://www.forvo.com/_ext/ext.swf" height="1" width="1">'
                 + '<param name="movie" value="http://www.forvo.com/_ext/ext.swf">'

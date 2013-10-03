@@ -15,6 +15,7 @@ ItemFormView = Backbone.View.extend({
     },
     
     events: {
+        "change": "change",
         "click a.save": "beforeSave"
     },
     
@@ -45,7 +46,7 @@ ItemFormView = Backbone.View.extend({
                 } else {
                     showAlert("New word has been added but needs to be validated.", 'success');
                 }
-                app_router.navigate('#category/' + model.get('CategoryId'), true);
+                app_router.navigate('#category/' + model.get('CategoryId') + '/1', true);
             },
             error: function(ex) {
                 alert('Error - An error occurred while trying to save this item');

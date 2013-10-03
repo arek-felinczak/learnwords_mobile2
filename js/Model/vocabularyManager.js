@@ -104,9 +104,11 @@ VocabularyManager = function () {
         this.getCategoryList(function(cats) {
             if (window.debug_mode) console.log('VocabularyManager:reloadCache');
             _.rest(cats.models).forEach(function(obj) {
+                self.storage.addItem('cachedItemList:' + obj.get('Id'), null);
                 self.getItemList(obj.get('Id'), function() {});
             });
             // last call will trigger callback
+            self.storage.addItem('cachedItemList:' + cats.models[0].get('Id'), null);
             self.getItemList((cats.models[0]).get('Id'), callback);
         });
     };

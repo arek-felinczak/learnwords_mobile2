@@ -17,7 +17,8 @@ ItemsView = Backbone.View.extend({
             isFavouriteList: isFavouriteList,
             offset: (pageNum - 1) * this.pageLength,
             showPager: pageList.numOfPages() > 1,
-            breadcrumb: navHtml
+            breadcrumb: navHtml,
+            emptyList: page.length == 0
         };
 
 	    var html = this.template(vm);

@@ -36,6 +36,6 @@ function Breadcrumb() {
     };
     this.renderEditItem = function(model) {
         var url = "#itemEditForm/" + model.get('CategoryId') + "/" + model.get('Id');
-        return '<li class="link padding-medium" onclick="app_router.navigate(\'' + url + '\',true);return false;"> &gt; edit</li>';
+        return '<li class="link padding-medium" onclick="app_router.navigate(\'' + url + '\',true);return false;"> <span class="glyphicon glyphicon-pencil"></span> edit</li>';
     };
 };
