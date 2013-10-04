@@ -11,6 +11,9 @@
 .margin-medium {
     margin: 4px
 }
+.padding-big {
+    padding: 8px;
+}
 .padding-medium {
     padding: 4px 0px
 }
@@ -94,7 +97,7 @@ div#search {
 }
 
 .panel-body {
-    padding: 6px;
+    padding: 5px;
 }
 
 .panel-heading {

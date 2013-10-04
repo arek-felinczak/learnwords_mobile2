@@ -1,12 +1,12 @@
 <div class='panel panel-default'>
-    <div class="panel-heading">About author</div>  
-    <div class="panel-body">
+    <div class="panel-heading">About author</div>
+    <div class="panel-body" style='padding:8px'>
         <h4>About me</h4>
         <p>
             My name is Arek Felińczak and I am software developer with 8 years’ experience in web applications development.<br />
             I'm expert in web technologies ASP MVC, C#, JavaScript, JQuery, HTML5, SQL. <br />
             Experienced with OOD, test driven development, IoC containers.
-            More information about me on <a target='linkedin' href='http://www.linkedin.com/in/arekf'>LinkedIn</a>
+            More information about me on <a target='linkedin' href='http://www.linkedin.com/in/arekf'>LinkedIn</a>.
         </p>
         <br />
         <h4>Contribution</h4>

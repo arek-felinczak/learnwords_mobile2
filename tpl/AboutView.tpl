@@ -1,6 +1,6 @@
 <div class='panel panel-default'>
     <div class="panel-heading">About Learnwords app</div>  
-    <div class="panel-body">
+    <div class="panel-body" style='padding:8px'>
          <h4> How to use this app</h4>
         <p>
             From main page (Home) select category to browse words. From here you can:<br />
