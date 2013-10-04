@@ -37,6 +37,8 @@ div.blockUI {
 }
 .breadcrumb li {
     cursor:pointer;
+    font-size: 16px;
+    padding: 4px 4px;
 }
 .list-group-item {
     cursor: pointer;

@@ -6,7 +6,7 @@
             Choose dictionary to open single word.<br/>
             Please note that diki.pl and getionary.pl apart from speech engine contain sample sentences.            
         </p><br />
-        <button type="button" class="btn btn-primary btn-lg btn-block" 
+        <button type="button" class="btn btn-default btn-lg btn-block" 
                 onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; app_router.navigate('#', true); return false;" >
                 Diki.pl (speech support)
         </button>

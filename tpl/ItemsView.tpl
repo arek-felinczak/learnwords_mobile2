@@ -36,11 +36,11 @@
                     {{pagedGridIndex @index ../offset}}. {{Word}}
                 </td>
                  <td class='button'>
-                     <button class="pointer btn btn-default margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/1');">
+                     <button class="link pointer btn btn-default margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/1');">
                          {{Translation1}}
                      </button>
                      <br />{{#if Translation2}}
-                      <button class="btn btn-default pointer margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/2');">
+                      <button class="link btn btn-default pointer margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/2');">
                          {{Translation2}}
                       </button>
                       {{/if}}
