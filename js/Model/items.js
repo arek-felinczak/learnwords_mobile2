@@ -7,7 +7,9 @@ Item = Backbone.Model.extend({
         Word: '',
         Translation1: '',
         Translation2: '',
-        Id: null
+        Id: null,
+        mp3: null,
+        ogg: null
     },
     
     isNew: function() {

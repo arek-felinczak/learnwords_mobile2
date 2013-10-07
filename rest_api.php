@@ -116,7 +116,9 @@ function updateWord() {
     $request = Slim::getInstance()->request();
     $body = $request->getBody();
     $item = json_decode($body);
-    $sql = "UPDATE Item SET CategoryId=:CategoryId, Word=:Word, Translation1=:Translation1, Translation2=:Translation2 WHERE Id=:Id";
+    $sql = "UPDATE Item SET CategoryId=:CategoryId, Word=:Word, 
+        Translation1=:Translation1, Translation2=:Translation2,
+        mp3=:mp3, ogg=:ogg WHERE Id=:Id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -125,6 +127,8 @@ function updateWord() {
         $stmt->bindParam("Word", $item->Word);
         $stmt->bindParam("Translation1", $item->Translation1);
         $stmt->bindParam("Translation2", $item->Translation2);
+        $stmt->bindParam("mp3", $item->mp3);
+        $stmt->bindParam("ogg", $item->ogg);
         $stmt->execute();
         $db = null;
         echo json_encode($item);
@@ -166,8 +170,8 @@ function findByName() {
  
 function getConnection() {
     $dbhost="mysql.cba.pl:3306";
-    $dbuser="afelin";
-    $dbpass="LEArnwords01";
+    $dbuser="";
+    $dbpass="";
     $dbname="vocabulary_cba_pl";
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
     $dbh->exec("set names utf8");

@@ -1,7 +1,9 @@
 <div id="CategoryListPanel" class='panel panel-default'>
     <div class="panel-heading">{{{breadcrumb}}}</div>
-    <div class="panel-body">
-        <small> Words are grouped into categories. Please select one to load list of words. </small>
+    <div class="panel-body hidden" id="helpDiv">
+        <p>
+            Words are grouped into categories. Please select one to load list of words. 
+        </p>
     </div>
     <ul class="list-group" id='CategoryList'>
         {{#each categories}}        

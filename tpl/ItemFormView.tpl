@@ -1,5 +1,14 @@
 <div id="CategoryListPanel" class='panel panel-default'>
-    <div class="panel-heading">{{{breadcrumb}}}</div>
+    <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-10">{{{breadcrumb}}}</div>
+                <div class="col-xs-2 text-right">
+                    <button style='cursor: pointer' onclick="app_router.navigate('#item/{{model.CategoryId}}/{{model.Id}}/1',true);return false;" class="btn btn-default">
+                        <span class="glyphicon glyphicon-arrow-left"> back</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     <div class="panel-body" style='padding:8px'>
         <form role="form" class="form-horizontal margin-medium">
             <fieldset>

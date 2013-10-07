@@ -66,7 +66,7 @@ VocabularyManager = function () {
     };
     
     this.getItem = function(catId, id, callback) {
-        this.getItemList(catId, function(model) {
+        return this.getItemList(catId, function(model) {
             var item = _.find(model.models, function(obj) {
                 return obj.attributes.Id === id.toString();
             });
@@ -104,12 +104,16 @@ VocabularyManager = function () {
         this.getCategoryList(function(cats) {
             if (window.debug_mode) console.log('VocabularyManager:reloadCache');
             _.rest(cats.models).forEach(function(obj) {
-                self.storage.addItem('cachedItemList:' + obj.get('Id'), null);
+                self.clearSingleCategoryCache(obj.get('Id'));
                 self.getItemList(obj.get('Id'), function() {});
             });
             // last call will trigger callback
-            self.storage.addItem('cachedItemList:' + cats.models[0].get('Id'), null);
+            self.clearSingleCategoryCache(cats.models[0].get('Id'));
             self.getItemList((cats.models[0]).get('Id'), callback);
         });
+    };
+    
+    this.clearSingleCategoryCache = function(catId) {
+        this.storage.addItem('cachedItemList:' + catId, null);
     };
 };

@@ -5,7 +5,7 @@ var AppRouter = Backbone.Router.extend({
         "categories" : "categoryList",
         "category/:id/:page" : "category",
         "item/:catId/:id/:nr" : "item",
-        "itemAddForm": "wordAddForm",
+        "itemAddForm/:catId": "wordAddForm",
         "search": "wordSearch",
         "search/:query": "wordSearch",
         "about": "about",
@@ -102,7 +102,7 @@ var AppRouter = Backbone.Router.extend({
         });
     },
     
-    wordAddForm: function() {
+    wordAddForm: function(catId) {
         if (window.debug_mode)
             console.log('AppRouter:wordAddForm');
         this.transitionStart();
@@ -110,8 +110,9 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.manager.getCategoryList(function(modelList) {
             var formView = new ItemFormView({model: item});
-            var nav = self.navBar('static', "add word");
-            $('#content').html(formView.render(modelList, nav).el);            
+            var nav = self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
+            $('#content').html(formView.render(modelList, nav).el);
+            formView.postRender();
             self.transitionStop();
         });
     },

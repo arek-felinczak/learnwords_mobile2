@@ -23,10 +23,10 @@
             - Chrome <br />
             - Internet Explorer 10
         </p><br />
-        Learnwords is also application for mobile phones.
         <p>
             Learnwords is mobile hybrid app designed to install on phones. <br />
             Android platform is supported via Phonegap and Adobe® PhoneGap™ Build. 
+            Download apk package <a href="http:\\learnwords.tk\Learnwords_signed.apk"> from here </a>.
             <br />
         </p>
     </div>
