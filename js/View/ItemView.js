@@ -43,6 +43,7 @@ function LoadForvoLink(word, catId, id) {
                 dataType: "jsonp",
                 type: "jsonp",
                 crossDomain: true,
+                timeout: 5000,
                 success: function(json) {
                     if (window.debug_mode) console.log('LoadForvoLink: ' + JSON.stringify(json));
                     if (json.items.length > 0) {

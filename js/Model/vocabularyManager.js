@@ -88,7 +88,7 @@ VocabularyManager = function () {
         itemsList.fetch({data: {query: query}, type: 'POST',
             success: callback, 
             error: function(err) {
-                var_dump('Error in VocabularyManager.itemListBySearch', err);
+                alert('Connection to search server failed. Check internet connection.');
             }});
     };
     

@@ -49,7 +49,7 @@ ItemFormView = Backbone.View.extend({
                 app_router.navigate('#category/' + model.get('CategoryId') + '/1', true);
             },
             error: function(ex) {
-                alert('Error - An error occurred while trying to save this item');
+                alert('An error occurred while trying to save this item. Check internet connection');
             }
         });
     }

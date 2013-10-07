@@ -165,8 +165,7 @@ var AppRouter = Backbone.Router.extend({
     busyStop: function() {
          if (navigator.notification) 
              navigator.notification.activityStop(); 
-         else 
-             $('#app').removeClass('blockUI');
+         $('#app').removeClass('blockUI');
     },
     
     navBar: function(page, model, param) {
