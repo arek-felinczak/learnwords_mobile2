@@ -14,13 +14,14 @@
                 <div class="col-xs-10">{{{breadcrumb}}}</div>
                 <div class="col-xs-2 text-right">
                     <button style='cursor: pointer' onclick="app_router.navigate('#itemEditForm/{{model.CategoryId}}/{{model.Id}}',true);return false;" class="btn btn-default">
-                        <span class="glyphicon glyphicon-edit"> edit</span>
+                        <span class="glyphicon glyphicon-edit"></span>
                     </button>
                 </div>
             </div>
         </div>
-        <div class="panel-body">
-            <iframe id='DictionaryItemView' src='{{src}}' frameBorder="0" style="width:100%; min-height: 480px;"></iframe>	
-        </div>  
+        <div class="panel-body hidden" id="helpDiv">
+            <p> Tap on <span class="glyphicon glyphicon-edit"></span> to fix translation errors.</p>
+        </div>    
+        <iframe id='DictionaryItemView' src='{{src}}' frameBorder="0" style="width:100%; min-height: 480px;"></iframe>	
     </div>
 </div>

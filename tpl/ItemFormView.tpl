@@ -1,15 +1,19 @@
 <div id="CategoryListPanel" class='panel panel-default'>
     <div class="panel-heading">
-            <div class="row">
-                <div class="col-xs-10">{{{breadcrumb}}}</div>
-                <div class="col-xs-2 text-right">
-                    <button style='cursor: pointer' onclick="app_router.navigate('#item/{{model.CategoryId}}/{{model.Id}}/1',true);return false;" class="btn btn-default">
-                        <span class="glyphicon glyphicon-arrow-left"> back</span>
-                    </button>
-                </div>
+        <div class="row">
+            <div class="col-xs-10">{{{breadcrumb}}}</div>
+            <div class="col-xs-2 text-right">
+                <button style='cursor: pointer' onclick="app_router.navigate('#item/{{model.CategoryId}}/{{model.Id}}/1',true);return false;" class="btn btn-default">
+                    <span class="glyphicon glyphicon-arrow-left"> back</span>
+                </button>
             </div>
         </div>
+    </div>
     <div class="panel-body" style='padding:8px'>
+         <div class="hidden" id="helpDiv">
+            Use breadcrumb above or <span class="glyphicon glyphicon-back"></span> button to return to translation.
+            <hr />
+        </div> 
         <form role="form" class="form-horizontal margin-medium">
             <fieldset>
                 <div class="form-group">
@@ -44,9 +48,9 @@
                 </div>
             </fieldset>
         <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
-        <a href="#" class="btn btn-default save"> Save </a>
-        </div>
+            <div class="col-lg-offset-2 col-lg-10">
+                <a href="#" class="btn btn-default save"> Save </a>
+            </div>
         </div>                         
         </form>
     </div>

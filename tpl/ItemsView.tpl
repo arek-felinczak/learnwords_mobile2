@@ -16,7 +16,7 @@
                 <div class="col-xs-10">{{{breadcrumb}}}</div>
                 <div class="col-xs-2 text-right">
                     <button style='cursor: pointer' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}', true); return false;" class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus"> add</span>
+                        <span class="glyphicon glyphicon-plus"> </span>
                     </button>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <p> Tap on <span class="glyphicon glyphicon-bullhorn"></span> to play audio file.</p>
             <p> Tap on <span class="glyphicon glyphicon-folder-open"></span> to open word in external dictionary.</p>
             <p> Use <span class="glyphicon glyphicon-plus-sign"></span> to add word to favourite list.</p>
-            <p> Button with label <span class="glyphicon glyphicon-plus"></span> new opens add new word form.</p>                
+            <p> Button above list <span class="glyphicon glyphicon-plus"></span> opens add new word form.</p>                
         </div>        
         <table id="items-table" class="table">
             <colgroup>
