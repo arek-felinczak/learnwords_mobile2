@@ -81,7 +81,7 @@
     <div class="col-xs-10 center">
         <ul class="pagination">
             {{#each pages}}
-                <li onclick="return go('{{url}}');" class="pointer">
+                <li onclick="$('html, body').animate({scrollTop: 0}, 1000); return go('{{url}}');" class="pointer">
                     <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg"> {{page}} </button>
                 </li>
             {{/each}}

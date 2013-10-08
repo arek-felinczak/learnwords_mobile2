@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.learnwords" version="0.31">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="tk.learnwords" version="0.32">
     <name>Learnwords - vocabulary builder</name>
     <description>
-       Learnwords app will help you improve your english vocabulary. It consits more than 3000 words grouped into categories and connected to speech engine.
+        Learnwords app will help you improve your english vocabulary. 
+        It contains  more than 3000 words grouped into categories and connected to speech engine (Forvo).
+        App allows to build own learning list and open words in external dictionaries (diki.pl, getionary.pl).
+        For some features (search, speech, external dictionaries) internet connection is required.
     </description>
-    <author href="http://phonegap.com" email="arek_felinczak@wemail.me">
+    <author href="http://learnwords.tk" email="arek_felinczak@hushmail.com">
         Arek Felinczak
     </author>
 	<feature name="http://api.phonegap.com/1.0/network"/>
