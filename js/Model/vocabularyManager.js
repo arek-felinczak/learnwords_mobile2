@@ -1,13 +1,22 @@
 VocabularyManager = function () {
-    
+    window.AppCache = {};
     this.storage = new Vocabulary.Storage.API().open();
+    
     this.getCategoryList = function(callback) {
+        // in memory cache Backbone collections
+        var cachedInMemory = window.AppCache['cachedCategoryList'];
+        if (cachedInMemory !== undefined) return callback(cachedInMemory);
+        // local storage cache - serialized objects
         var cached = this.storage.getItem('cachedCategoryList');
-        if (cached !== null) return callback(new CategoryCollection(cached));
+        if (cached !== null) {
+            window.AppCache['cachedCategoryList'] = new CategoryCollection(cached);
+            return callback(window.AppCache['cachedCategoryList']);
+        }
         var self = this;
         var categoryList = new CategoryCollection();
         categoryList.fetch({
             success: function(res){
+                window.AppCache['cachedCategoryList'] = res;
                 self.storage.addItem('cachedCategoryList', res.models);
                 if (window.debug_mode) console.log('VocabularyManager:getCategoryList ajax success');                
                 callback(res);
@@ -49,15 +58,24 @@ VocabularyManager = function () {
     };
     
     this.getItemList = function (id, callback) {
-        var cached = this.storage.getItem('cachedItemList:' + id);
+        var cacheKey = 'cachedItemList:' + id;
+        // in memory cache Backbone collections
+        var cachedInMemory = window.AppCache[cacheKey];
+        if (cachedInMemory !== undefined) return callback(cachedInMemory);
+        
+        var cached = this.storage.getItem(cacheKey);
         if (cached !== null)
-            return callback(new ItemsCollection(cached));
+        {
+            window.AppCache[cacheKey] = new CategoryCollection(cached);
+            return callback(window.AppCache[cacheKey]);
+        }
         var self = this;
         var itemsList = new ItemsCollection();
         itemsList.setCategoryId(id);
         itemsList.fetch({
             success: function(res) {
-                self.storage.addItem('cachedItemList:' + id, res.models);
+                window.AppCache[cacheKey] = res;
+                self.storage.addItem(cacheKey, res.models);
                 if (window.debug_mode) console.log('VocabularyManager:getCategory ajax success');
                 callback(res);
             },
@@ -82,24 +100,27 @@ VocabularyManager = function () {
         });        
     };
     
-    this.itemListBySearch = function(query, callback) {
+    this.itemListBySearch = function(query, callback, callbackFailed) {
         var itemsList = new ItemsCollection();
         itemsList.setQueryUrl();
         itemsList.fetch({data: {query: query}, type: 'POST',
             success: callback, 
-            error: function(err) {
-                alert('Connection to search server failed. Check internet connection.');
-            }});
+            error: function() {
+                if (callbackFailed !== undefined) callbackFailed();
+                else alert("Error occured while search. Check internet connection.");
+            }
+        });
     };
     
     this.reloadCache = function(force, callback) {
-        if (force === false){
+        if (force === false) {
             if (this.storage.getItem('cachedCategoryList') !== null) {
                 callback();
                 return;            
             };
         }
         var self = this;
+        window.AppCache = {};
         this.storage.addItem('cachedCategoryList', null);
         this.getCategoryList(function(cats) {
             if (window.debug_mode) console.log('VocabularyManager:reloadCache');

@@ -46,7 +46,7 @@
             </div>
             <div id="search" class='row'>
                 <input type="text" placeholder="search" id='searchWord' class="center form-control" />
-                <a onclick="$('div#search').hide(300);return go('#search');" href="#" id="search-link" class="btn btn-success"> search </a>
+                <a onclick="$('div#search').hide(); return go('#search/' + $('#searchWord').val());" href="#" id="search-link" class="btn btn-success"> search </a>
             </div>            
             <div class="row">            
                 <div id="alert_placeholder"></div>
@@ -105,7 +105,12 @@
             <br /><br /><br /><br />
         </div>
         <span id="forvo_ext_player" style="position:absolute;left:-99999px;top:-99999px;"></span>
-        <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script> 
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script> 
+        <![endif]-->
+        <!--[if (gte IE 9) | (!IE)]><!-->
+            <script type="text/javascript" src="js/lib/jquery-2.0.3.min.js"></script> 
+        <!--<![endif]-->        
         <script type="text/javascript">
             $('#reklamacba').remove();
             

@@ -133,21 +133,25 @@ var AppRouter = Backbone.Router.extend({
     },
     
     wordSearch: function() {
-        if (window.debug_mode)
-            console.log('AppRouter:wordSearch');
+        if (window.debug_mode) console.log('AppRouter:wordSearch');
         this.transitionStart();
-        var query = $.trim($('#searchWord').val());
-        app_router.navigate('#search/' + query, false);
+        var query = ' ' + $.trim($('#searchWord').val()).toLowerCase();
         var self = this;
-        this.manager.itemListBySearch(query, function(items) {
-            if (items.models.length === 0) {
-                showAlert("No items found.", 'warning');
-                app_router.navigate('#', true);
-                return;
+        self.manager.getCategoryList(function(cats) {
+            var res = [];
+            for (var i=0; i < cats.length; i++) {
+                var catItems = self.manager.getItemList(cats.models[i].get('Id'), function(items) {
+                    var stop = items.models.length;
+                    for(var i=0; i<stop; i++) {
+                        var indexString = ' ' + items.models[i].get('Word') + ' ' + items.models[i].get('Translation1') + ' ' + items.models[i].get('Translation2');
+                        indexString = indexString.replace(',', ' ').toLowerCase();
+                        if (indexString.indexOf(query) > -1) res.push(items.models[i]);
+                    }   
+                });
             }
             var nav = self.navBar('static', 'Search results');
-            $('#content').html(new ItemsView({model: items}).render(-1, "Search results", 1, nav).el);            
-            self.transitionStop();            
+            $('#content').html(new ItemsView({model: new ItemsCollection(res)}).render(-1, "Search results", 1, nav).el);            
+            self.transitionStop();
         });
     },    
     transitionStart: function() {
