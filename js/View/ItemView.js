@@ -1,6 +1,6 @@
 ItemView = Backbone.View.extend({
       
-	 render:function(nr, navHtml) {
+	 render:function(nr, navHtml, cat) {
         var item = this.model; 
         var index = item.collection.indexOf(item);
         this.template = window.templates['ItemView'];
@@ -13,7 +13,8 @@ ItemView = Backbone.View.extend({
             src: url,
             pager: pager,
             breadcrumb: navHtml,
-            model: item.toJSON()
+            model: item.toJSON(),
+            category: cat.toJSON()
         };
         var html = this.template(vm);
         if (window.localStorage['dictionaryLink'] === window.learnwordsConfig.getionary) {

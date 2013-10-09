@@ -20,8 +20,8 @@ var AppRouter = Backbone.Router.extend({
     manager: new VocabularyManager(),
     
     refreshCache: function(force) {
-        this.busyStart();
-        this.manager.reloadCache(force === undefined ? true : force, this.busyStop);        
+        this.transitionStart();
+        this.manager.reloadCache(force === undefined ? true : force, this.transitionStop);        
     },
     
     favouritesRemove: function(id) {
@@ -96,7 +96,7 @@ var AppRouter = Backbone.Router.extend({
             var view = new ItemView({model: item});
             self.manager.getCategory(catId, function(cat) {
                 var nav = self.navBar('item', item, cat);
-                $('#content').html(view.render(nr, nav).el);
+                $('#content').html(view.render(nr, nav, cat).el);
                 self.transitionStop();
             });                
         });
@@ -154,19 +154,14 @@ var AppRouter = Backbone.Router.extend({
             self.transitionStop();
         });
     },    
+    
     transitionStart: function() {
-        $('#app').addClass('blockUI');
-    },
-    transitionStop: function() {
-        $('#app').removeClass('blockUI');
-    },
-    busyStart: function() {
          if (navigator.notification) 
              navigator.notification.activityStart();
          else 
              $('#app').addClass('blockUI');
     },
-    busyStop: function() {
+    transitionStop: function() {
          if (navigator.notification) 
              navigator.notification.activityStop(); 
          $('#app').removeClass('blockUI');

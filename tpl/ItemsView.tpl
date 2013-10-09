@@ -15,17 +15,19 @@
             <div class="row">
                 <div class="col-xs-10">{{{breadcrumb}}}</div>
                 <div class="col-xs-2 text-right">
-                    <button style='cursor: pointer' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}', true); return false;" class="btn btn-default btn-lg">
-                        <span class="glyphicon glyphicon-plus"> </span>
+                    <button style='cursor: pointer' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}', true); return false;" 
+                            class="btn btn-default btn-lg btn-text">
+                        <span class="glyphicon glyphicon-plus"><br/>
+                            <span class="text-small">new</span></span>
                     </button>
                 </div>
             </div>
         </div>
         <div class="panel-body hidden" id="helpDiv">
-            <p> Tap on <span class="glyphicon glyphicon-bullhorn"></span> to play audio file.</p>
-            <p> Tap on <span class="glyphicon glyphicon-folder-open"></span> to open word in external dictionary.</p>
-            <p> Use <span class="glyphicon glyphicon-plus-sign"></span> to add word to favourite list.</p>
-            <p> Button above list <span class="glyphicon glyphicon-plus"></span> opens add new word form.</p>                
+            <p> Tap on <span class="glyphicon glyphicon-bullhorn padding-small"></span> to play audio file.</p>
+            <p> Tap on <span class="glyphicon glyphicon-folder-open padding-small"></span> to open word in external dictionary.</p>
+            <p> Use <span class="glyphicon glyphicon-plus-sign padding-small"></span> to add word to favourite list.</p>
+            <p> Button above list <span class="glyphicon glyphicon-plus padding-small"></span> opens add new word form.</p>                
         </div>        
         <table id="items-table" class="table">
             <colgroup>
@@ -47,40 +49,57 @@
                 </td>
                 <td class='button'>
                     {{#if ../isFavouriteList}}
-                        <button onclick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove(); return false;" type="button" class="pointer btn btn-default btn-lg margin-small">
-                            <span class="glyphicon glyphicon-minus-sign"></span>
+                        <button onclick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove(); return false;" 
+                                type="button" class="pointer btn btn-text btn-default btn-lg margin-small">
+                            <span class="glyphicon glyphicon-minus-sign"><br />
+                            <span class="text-small">rem.</span></span>
                         </button>
                         {{else}}
-                        <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden'); return false;" type="button" class="pointer btn btn-default btn-lg margin-small">
-                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden'); return false;" 
+                                type="button" class="pointer btn btn-text btn-default btn-lg margin-small">
+                            <span class="glyphicon glyphicon-plus-sign"><br />
+                            <span class="text-small">add </span></span>
                         </button>
                     {{/if}}
                 </td>
                 <td class='button'>
-                    <button class="pointer btn btn-default btn-lg margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/1');">
-                        <span class="glyphicon glyphicon-folder-open"></span>
+                    <button class="pointer btn btn-text btn-default btn-lg margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/1');">
+                        <span class="glyphicon glyphicon-folder-open"><br />
+                            <span class="text-small">open</span>
+                        </span>
                     </button>
                     {{#if Translation2}}
                     <br />
-                    <button class="btn btn-default btn-lg pointer margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/2');">
-                        <span class="glyphicon glyphicon-folder-open"></span>
+                    <button class="btn btn-default btn-text btn-lg pointer margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/2');">
+                        <span class="glyphicon glyphicon-folder-open"><br />
+                            <span class="text-small">open</span></span>
                     </button>
                     {{/if}}                         
                 </td>
                 <td class='button'>
-                    <button onclick="LoadForvoLink('{{Translation1}}', {{CategoryId}}, {{Id}}); return false;" class="pointer btn btn-default btn-lg margin-small">
-                        <span class="glyphicon glyphicon-bullhorn"></span>
+                    <button onclick="LoadForvoLink('{{Translation1}}', {{CategoryId}}, {{Id}}); return false;" 
+                            class="pointer btn btn-text btn-default btn-lg margin-small">
+                        <span class="glyphicon glyphicon-bullhorn"><br />
+                            <span class="text-small">play</span></span>
                     </button>               
                     {{#if Translation2}}
                     <br />
-                    <button onclick="LoadForvoLink('{{Translation2}}', {{CategoryId}}, {{Id}}); return false;" class="pointer btn btn-default btn-lg margin-small"> 
-                        <span class="glyphicon glyphicon-bullhorn"></span>
+                    <button onclick="LoadForvoLink('{{Translation2}}', {{CategoryId}}, {{Id}}); return false;" 
+                            class="pointer btn btn-text btn-default btn-lg margin-small"> 
+                        <span class="glyphicon glyphicon-bullhorn"><br />
+                            <span class="text-small">play</span></span>
                     </button>
                     {{/if}}                         
                 </td>
                 <td class='text margin-small'>
-                    {{Translation1}} <br />
+                    <p>
+                        {{Translation1}}
+                    </p>
+                    {{#if Translation2}}<br />
+                    <p>
                     {{Translation2}}
+                    </p>
+                    {{/if}} 
                 </td>
             </tr>
             {{/each}}

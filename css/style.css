@@ -32,13 +32,13 @@ div.blockUI {
 }
 
 .breadcrumb {
-    padding: 2px;
-    margin-bottom: 0px;
+    padding: 6px 2px;
+    margin: 0px;
 }
 .breadcrumb li {
     cursor:pointer;
-    font-size: 16px;
-    padding: 4px 4px;
+    font-size: 18px;
+    padding: 3px 2px 3px 0px;
 }
 .list-group-item {
     cursor: pointer;
@@ -99,10 +99,18 @@ div#search {
     padding: 6px 9px;
 }
 
+.btn-text {
+    padding: 2px 9px;
+}
+
 .panel-body {
     padding: 5px;
 }
 
 .panel-heading {
     padding: 6px 9px;
+}
+
+.text-small {
+    font-size: 80%;
 }
