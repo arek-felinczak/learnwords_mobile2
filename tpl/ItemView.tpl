@@ -1,6 +1,6 @@
 <div>
-    <div class="col-xs-10 center">
-        <ul class="pagination">
+    <div class="col-xs-12">
+        <ul class="pagination center">
             {{#each pager}}
             <li onclick="return go('{{url}}');" class="pointer">
                 <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg">{{page}}</button>

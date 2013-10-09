@@ -37,12 +37,10 @@ var AppRouter = Backbone.Router.extend({
     
     favourites: function(page) {
         if (window.debug_mode) console.log('AppRouter:favourites');
-        this.transitionStart();
         var list = new ItemsCollection(this.manager.getFavouritesList());
         var favListView = new ItemsView({model: list});
         var nav = this.navBar('static', "Favourites");
         $('#content').html(favListView.render(0, "Favourite words", page, nav).el);        
-        this.transitionStop();  
     },
     
     about: function() {
@@ -60,12 +58,10 @@ var AppRouter = Backbone.Router.extend({
     categoryList:function() {
         if (window.debug_mode) console.log('AppRouter:categoryList');
         var self = this;
-        this.transitionStart();
         this.manager.getCategoryList(function(modelList) {
             var categoryListView = new CategoryItemsView({model: modelList});
             var nav = self.navBar('');
             $('#content').html(categoryListView.render(nav).el);            
-            self.transitionStop();
         });
     },
  
@@ -77,13 +73,11 @@ var AppRouter = Backbone.Router.extend({
         }
         if (window.debug_mode) console.log('AppRouter:category');
         var self = this;
-        this.transitionStart();
         this.manager.getItemList(id, function(categoryModel) {
             var view = new ItemsView({model: categoryModel});
             self.manager.getCategory(id, function(cat) {
                 var nav = self.navBar('static', cat.get('Name'));
                 $('#content').html(view.render(id, cat.get('Name'), page, nav).el);                
-                self.transitionStop();
             });            
         });         
     },
@@ -91,13 +85,11 @@ var AppRouter = Backbone.Router.extend({
     item:function (catId, id, nr) {
         if (window.debug_mode) console.log('AppRouter:item');
         var self = this;
-        this.transitionStart();
         this.manager.getItem(catId, id, function(item) {
             var view = new ItemView({model: item});
             self.manager.getCategory(catId, function(cat) {
                 var nav = self.navBar('item', item, cat);
                 $('#content').html(view.render(nr, nav, cat).el);
-                self.transitionStop();
             });                
         });
     },
@@ -105,7 +97,6 @@ var AppRouter = Backbone.Router.extend({
     wordAddForm: function(catId) {
         if (window.debug_mode)
             console.log('AppRouter:wordAddForm');
-        this.transitionStart();
         var item = new Item();
         var self = this;
         this.manager.getCategoryList(function(modelList) {
@@ -113,13 +104,11 @@ var AppRouter = Backbone.Router.extend({
             var nav = self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
             $('#content').html(formView.render(modelList, nav).el);
             formView.postRender();
-            self.transitionStop();
         });
     },
     
     wordEditForm: function(catId, id) {
         if (window.debug_mode) console.log('AppRouter:wordEditForm');
-        this.transitionStart();
         var self = this;
         this.manager.getItem(catId, id, function(item){
             self.manager.getCategoryList(function(modelList) {
@@ -127,7 +116,6 @@ var AppRouter = Backbone.Router.extend({
                 var nav = self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
                 $('#content').html(formView.render(modelList, nav).el);
                 formView.postRender();
-                self.transitionStop();                
             });
         });
     },

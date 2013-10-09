@@ -1,7 +1,7 @@
 <div>
     {{#if showPager}}
-    <div class="col-xs-10 center">
-        <ul class="center pagination">
+    <div class="col-xs-12">
+        <ul class="pagination center">
             {{#each pages}}
                 <li onclick="return go('{{url}}');" class="pointer">
                     <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg"> {{page}} </button>
@@ -106,8 +106,8 @@
         </table>
     </div>    
     {{#if showPager}}
-    <div class="col-xs-10 center">
-        <ul class="pagination">
+    <div class="col-xs-12">
+        <ul class="pagination center">
             {{#each pages}}
                 <li onclick="$('html, body').animate({scrollTop: 0}, 1000); return go('{{url}}');" class="pointer">
                     <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg"> {{page}} </button>

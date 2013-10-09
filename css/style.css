@@ -55,7 +55,9 @@ div.blockUI {
     display: inline;
     text-align: center;
 }
-
+.pagination li button {
+    width: 18%;
+}
 .center {
     float: none;
     margin-left: auto;
@@ -66,15 +68,12 @@ div.blockUI {
 .text-center {
     text-align: center;
 }
-
 table.table tr td.button {
     padding: 2px 0px 2px 4px;
 }
-
 table.table tr td.text {
     padding: 10px 0px 4px 5px;
 }
-
 table.navigation tr td {
     color: #EEEEEE; 
     font-weight: bold; 
@@ -82,35 +81,31 @@ table.navigation tr td {
     background-color: black;
     text-align: center;
 }
-
 .form-control {
     width: 70%;
     display: inline;
     padding: 5px;
 }
-
 div#search {
     display: none;
     padding: 5px 0 10px 0;
     text-align: center;
 }
-
 .btn {
     padding: 6px 9px;
 }
-
 .btn-text {
     padding: 2px 9px;
 }
-
+.btn[disabled]{
+    opacity: 0.40;
+}
 .panel-body {
     padding: 5px;
 }
-
 .panel-heading {
     padding: 6px 9px;
 }
-
 .text-small {
     font-size: 80%;
 }
