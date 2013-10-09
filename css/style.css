@@ -42,6 +42,7 @@ div.blockUI {
 }
 .list-group-item {
     cursor: pointer;
+    padding: 12px 15px;
 }
 .alert {
     margin-bottom: 6px;
@@ -67,7 +68,7 @@ div.blockUI {
 }
 
 table.table tr td.button {
-    padding: 2px 0px;
+    padding: 2px 0px 2px 4px;
 }
 
 table.table tr td.text {

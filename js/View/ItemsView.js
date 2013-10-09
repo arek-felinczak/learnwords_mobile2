@@ -1,5 +1,5 @@
 ItemsView = Backbone.View.extend({
-    pageLength: 30,	 
+    pageLength: 20,	 
      
     render:function (catId, catName, pageNum, navHtml) {
         pageNum = parseInt(pageNum);

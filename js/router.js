@@ -155,10 +155,10 @@ var AppRouter = Backbone.Router.extend({
         });
     },    
     transitionStart: function() {
-        //$('#app').addClass('blockUI');
+        $('#app').addClass('blockUI');
     },
     transitionStop: function() {
-        //$('#app').removeClass('blockUI');
+        $('#app').removeClass('blockUI');
     },
     busyStart: function() {
          if (navigator.notification) 
