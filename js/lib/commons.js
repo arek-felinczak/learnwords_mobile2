@@ -6,15 +6,6 @@ String.prototype.format = function (args) {
     return newStr;
 };
 
-
-function var_dump(mess, obj) {
-	var result = [];
-	$.each(obj, function (key, value) { 
-		result.push('"' + key + '":"' + value + '"'); 
-	});
-	alert( mess + ' var_dump \n' + result.join(',\n') );
-};
-
 function showAlert(message, alertType) {
     if (alertType === undefined) alertType = 'success';
     if (alertType === 'success') var icon = 'glyphicon-ok-circle';

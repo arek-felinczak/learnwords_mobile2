@@ -36,7 +36,6 @@ function LoadForvoLink(word, catId, id) {
 //        }
 //        else {
             app_router.transitionStart();
-            url = window.learnwordsConfig.forvo.replace('{0}', word);
             var url = 'http://apifree.forvo.com/key/fecc801770209d5b7b0ed138946d6bd3/format/json/callback/pronounce/action/standard-pronunciation/word/' + encodeURI(word) + '/language/en/order/rate-desc/limit/2';
             $.ajax({
                 url: url,
@@ -55,7 +54,7 @@ function LoadForvoLink(word, catId, id) {
 //                      if (word === item.get('Translation1'))
 //                          item.save({mp3: mp3 , ogg: ogg});
                         // clear category cache
-                        app_router.manager.clearSingleCategoryCache(catId);
+                        //app_router.manager.clearSingleCategoryCache(catId);
                     }
                     else if (navigator.notification !== undefined) {
                         navigator.notification.beep();
