@@ -11,6 +11,10 @@
                 Diki.pl (speech support)
         </button>
         <button type="button" class="btn btn-default btn-lg btn-block" 
+                onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.macmillandictionary; app_router.navigate('#', true); return false;" >
+                MacmillanDictionary.com (speech support)
+        </button>
+        <button type="button" class="btn btn-default btn-lg btn-block" 
                 onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; app_router.navigate('#', true); return false;" >
                 Getionary.pl (speech support) 
         </button>

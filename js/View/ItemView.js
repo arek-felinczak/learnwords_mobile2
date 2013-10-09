@@ -17,10 +17,6 @@ ItemView = Backbone.View.extend({
             category: cat.toJSON()
         };
         var html = this.template(vm);
-        if (window.localStorage['dictionaryLink'] === window.learnwordsConfig.getionary) {
-            var waveFile = 'http://www.getionary.pl/speak.wav?text=' + encodeURI(word.replace(/(<([^>]+)>)/ig, ''));
-            Forvo_Ext_Play(null, null, waveFile);
-        }
         $(this.el).html(html);
         return this;
 	 },     

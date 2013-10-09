@@ -20,24 +20,18 @@ function showAlert(message, alertType) {
 }
 
 // This method is taken from Forvo website
-function Forvo_Ext_Play(path_mp3, path_ogg, path_wav)
+function Forvo_Ext_Play(path_mp3, path_ogg)
 {
     var audioTagSupport = !!(document.createElement('audio').canPlayType);
     if (audioTagSupport) {
         myAudio = new Audio();
         canPlayMp3 = ("no" !== myAudio.canPlayType("audio/mpeg")) && ("" !== myAudio.canPlayType("audio/mpeg"));
         canPlayOgg = ("no" !== myAudio.canPlayType("audio/ogg")) && ("" !== myAudio.canPlayType("audio/ogg"));
-        canPlayWav = ("no" !== myAudio.canPlayType("audio/wav")) && ("" !== myAudio.canPlayType("audio/wav"));
     } else {
         canPlayMp3 = false;
         canPlayOgg = false;
-        canPlayWav = false;
     }
-    
-    if (canPlayWav && path_wav !== undefined) {
-        var html = '<audio autoplay="true"><source src="' + path_wav + '"></audio>';
-    }    
-    else if (navigator.userAgent.toLowerCase().indexOf('iphone') !== -1) {
+   if (navigator.userAgent.toLowerCase().indexOf('iphone') !== -1) {
         window.location.href = path_mp3;
         return false;
     } else if (canPlayOgg && navigator.userAgent.toLowerCase().indexOf('chrome') == -1) {

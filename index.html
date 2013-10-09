@@ -29,7 +29,7 @@
                             <span class="glyphicon glyphicon-star"></span><br />
                             <span>Repeat</span>
                         </td>
-                        <td style='cursor: pointer' onClick="$('#search').toggle(300); return false;">
+                        <td style='cursor: pointer' onClick="$('#search').toggle(); return false;">
                             <span class="glyphicon glyphicon-search"></span><br />
                             <span>Search</span>
                         </td>
@@ -44,7 +44,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="search" class='row'>
+            <div id="search" class='row margin-medium'>
                 <input type="text" placeholder="search" id='searchWord' class="center form-control" />
                 <a onclick="$('div#search').hide(); return go('#search/' + $('#searchWord').val());" href="#" id="search-link" class="btn btn-success"> search </a>
             </div>            
@@ -121,7 +121,8 @@
                 restUrl: window.location.protocol + '//' + window.location.host,
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
                 forvo: "http://pl.forvo.com/word/{0}/#en",
-                getionary: 'http://m.getionary.pl/search.html?query={0}'
+                getionary: 'http://m.getionary.pl/search.html?query={0}',
+                macmillandictionary: 'http://www.macmillandictionary.com/dictionary/british/{0}'
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
                 window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
