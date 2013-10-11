@@ -128,14 +128,15 @@
                 speechEngines: ['forvo', 'cambridge', 'macMillan', 'wordNik']
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
-                window.learnwordsConfig['restUrl'] = "http://arekf.onuse.pl";
+                window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
             
+            window.learnwordsConfig['proxyUrl'] = "http://arekf.onuse.pl";
             window.debug_mode = false;
             if (!window.console) window.console = {};
             if (!window.localStorage['dictionaryLink'])
                 window.localStorage['dictionaryLink'] = window.learnwordsConfig.diki;
             if (!window.localStorage['speechEngine'])
-                window.localStorage['speechEngine'] = window.learnwordsConfig.speechEngines[3];
+                window.localStorage['speechEngine'] = window.learnwordsConfig.speechEngines[2];
         </script>
         <script type="text/javascript" src="js/lib/underscore-min.js"></script> 
         <script type="text/javascript" src="js/lib/backbone-min.js"></script>

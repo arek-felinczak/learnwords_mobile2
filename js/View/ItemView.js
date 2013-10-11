@@ -28,7 +28,7 @@ ItemView = Backbone.View.extend({
 function LoadSpeechLink(word, catId, id) {
     app_router.transitionStart();
     
-    var url = window.learnwordsConfig['restUrl'] + "/getSpeechData.php?dict=" + window.localStorage.speechEngine + "&word=" + encodeURI(word);
+    var url = window.learnwordsConfig['proxyUrl'] + "/getSpeechData.php?dict=" + window.localStorage.speechEngine + "&word=" + encodeURI(word);
     $.ajax({
         url: url,
         jsonpCallback: "pronounce",
