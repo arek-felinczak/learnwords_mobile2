@@ -119,18 +119,23 @@
            
             window.learnwordsConfig = {
                 restUrl: window.location.protocol + '//' + window.location.host,
+                //dict
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
                 forvo: "http://pl.forvo.com/word/{0}/#en",
                 getionary: 'http://m.getionary.pl/search.html?query={0}',
-                macmillandictionary: 'http://www.macmillandictionary.com/dictionary/british/{0}'
+                macMillan: 'http://www.macmillandictionary.com/dictionary/british/{0}',
+                dictionaries: ['diki', 'forvo', 'macMillan', 'getionary'],
+                speechEngines: ['forvo', 'cambridge', 'macMillan', 'wordNik']
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
-                window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
+                window.learnwordsConfig['restUrl'] = "http://arekf.onuse.pl";
             
             window.debug_mode = false;
             if (!window.console) window.console = {};
             if (!window.localStorage['dictionaryLink'])
                 window.localStorage['dictionaryLink'] = window.learnwordsConfig.diki;
+            if (!window.localStorage['speechEngine'])
+                window.localStorage['speechEngine'] = window.learnwordsConfig.speechEngines[3];
         </script>
         <script type="text/javascript" src="js/lib/underscore-min.js"></script> 
         <script type="text/javascript" src="js/lib/backbone-min.js"></script>

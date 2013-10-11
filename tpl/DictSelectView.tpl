@@ -1,28 +1,35 @@
 <div class='panel panel-default'>
     <div class="panel-heading">Settings</div>  
     <div class="panel-body">
-        <h3>Choose external dictionary</h3>
-        <p>
-            Choose dictionary to open single word.<br/>
-            Please note that diki.pl and getionary.pl apart from speech engine contain sample sentences.            
-        </p><br />
-        <button type="button" class="btn btn-default btn-lg btn-block" 
-                onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.diki; app_router.navigate('#', true); return false;" >
-                Diki.pl (speech support)
-        </button>
-        <button type="button" class="btn btn-default btn-lg btn-block" 
-                onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.macmillandictionary; app_router.navigate('#', true); return false;" >
-                MacmillanDictionary.com (speech support)
-        </button>
-        <button type="button" class="btn btn-default btn-lg btn-block" 
-                onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.getionary; app_router.navigate('#', true); return false;" >
-                Getionary.pl (speech support) 
-        </button>
-        <button type="button" class="btn btn-default btn-lg btn-block" 
-                onClick="window.localStorage['dictionaryLink']=window.learnwordsConfig.forvo; app_router.navigate('#', true); return false;" >
-                Forvo.com (speech support)
-        </button>
-        <br /><br />
+        <div id='dictDiv'>
+            <h4>Choose external dictionary (open word)</h4>
+            {{#each dictList}}
+            <div class='padding-small' style="width:48%; display: inline-block">
+                <button type="button" class="btn {{cssClass}} btn-lg btn-block" 
+                        onClick="window.localStorage['dictionaryLink']='{{url}}'; return selectButtonInGroup(this, 'dictDiv');" >
+                    {{name}}
+                </button>
+            </div>
+            {{/each}}
+        </div>
+        <div id='speechDiv'>
+            <h4>Choose Speech engine (pronunciation)</h4>            
+            {{#each speechList}}
+            <div class='padding-small' style="width:48%; display: inline-block">
+                <button type="button" class="btn {{cssClass}} btn-lg btn-block" 
+                        onClick="window.localStorage['speechEngine']='{{name}}'; return selectButtonInGroup(this, 'speechDiv');" >
+                    {{name}}
+                </button>
+            </div>
+            {{/each}}
+            <div class="col-xs-6 center padding-big">
+                <button type="button" class="btn btn-default btn-lg btn-block" 
+                        onClick="window.history.back(); return false;" >
+                    Save
+                </button>
+            </div>
+        </div>
+        <br />
     </div>
 </div>
 
