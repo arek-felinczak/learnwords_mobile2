@@ -125,7 +125,7 @@
                 getionary: 'http://m.getionary.pl/search.html?query={0}',
                 macMillan: 'http://www.macmillandictionary.com/dictionary/british/{0}',
                 dictionaries: ['diki', 'forvo', 'macMillan', 'getionary'],
-                speechEngines: ['forvo', 'cambridge', 'macMillan', 'wordNik']
+                speechEngines: ['forvo', 'cambridge', 'macMillan'] // , 'wordNik'
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
                 window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
@@ -174,7 +174,7 @@
             $(function() {
                 loadTemplate(['CategoryItemsView', 'DictSelectView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
                     app_router = new AppRouter();
-                    app_router.refreshCache(false);
+                    window.setTimeout("app_router.refreshCache(false);", 50);
                     Backbone.history.start();
                 });
                 FastClick.attach(document.body);

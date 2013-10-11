@@ -15,11 +15,13 @@
             <div class="row">
                 <div class="col-xs-10">{{{breadcrumb}}}</div>
                 <div class="col-xs-2 text-right">
+                    {{#if isFavouriteList}} {{else}}
                     <button style='cursor: pointer' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}', true); return false;" 
                             class="btn btn-default btn-lg btn-text">
                         <span class="glyphicon glyphicon-plus"><br/>
                             <span class="text-small">new</span></span>
                     </button>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -59,7 +61,7 @@
                         <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden'); return false;" 
                                 type="button" class="pointer btn btn-text btn-default btn-lg margin-small">
                             <span class="glyphicon glyphicon-plus-sign"><br />
-                            <span class="text-small">add </span></span>
+                            <span class="text-small">add</span></span>
                         </button>
                     {{/if}}
                 </td>

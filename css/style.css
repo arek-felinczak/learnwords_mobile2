@@ -69,11 +69,19 @@ div.blockUI {
     text-align: center;
 }
 table.table tr td.button {
-    padding: 2px 0px 2px 4px;
+    padding: 2px 0px 2px 2px;
 }
 table.table tr td.text {
-    padding: 10px 0px 4px 5px;
+    padding: 10px 0px 4px 4px;
+    font-size: 16px;
 }
+@media(max-width: 480px) {
+    table.table tr td.text {
+        padding: 10px 0px 4px 4px;
+        font-size: 13px;
+    }
+}
+
 table.navigation tr td {
     color: #EEEEEE; 
     font-weight: bold; 
@@ -106,6 +114,12 @@ div#search {
 .panel-heading {
     padding: 6px 9px;
 }
+
 .text-small {
-    font-size: 80%;
+    font-size:90%;
+}
+@media(max-width: 480px) {
+    .text-small {
+        font-size: 70%;
+    }
 }
