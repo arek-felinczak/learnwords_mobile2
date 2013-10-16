@@ -138,7 +138,7 @@
             if (!window.localStorage['speechEngine'])
                 window.localStorage['speechEngine'] = window.learnwordsConfig.speechEngines[2];
         </script>
-        <script type="text/javascript" src="js/lib/underscore-min.js"></script> 
+        <script type="text/javascript" src="js/lib/lodash.min.js"></script> 
         <script type="text/javascript" src="js/lib/backbone-min.js"></script>
         <script type="text/javascript" src="js/lib/handlebars.min.js"></script>
         <script type="text/javascript">
@@ -160,7 +160,6 @@
         <script type="text/javascript" src="js/View/DictSelectView.js"></script>
         <script type="text/javascript" src="js/View/ContactView.js"></script>        
         <script type="text/javascript" src="js/View/Breadcrumb.js"></script>
-        <script type="text/javascript" src="js/lib/fastclick.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
         <!-- for adobe cloud build -->
         <script type="text/javascript" src="phonegap.js"></script>        
@@ -177,7 +176,6 @@
                     window.setTimeout("app_router.refreshCache(false);", 50);
                     Backbone.history.start();
                 });
-                FastClick.attach(document.body);
             });
             
             // for phonegap only

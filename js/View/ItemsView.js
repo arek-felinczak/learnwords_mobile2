@@ -24,6 +24,20 @@ ItemsView = Backbone.View.extend({
 
 	    var html = this.template(vm);
         $(this.el).html(html);
+        
+        $(this.el).on("click", "button[name=play-audio]", function(ev) {
+            var target = ev.currentTarget;
+            ev.stopPropagation();
+            LoadSpeechLink($(target).attr("data-word"), $(target).attr("data-category-id"), $(target).attr("data-item-id"));
+            return false;
+        });
+        $(this.el).on("click", "button[name=open-dict]", function(ev) {
+            var target = ev.currentTarget;
+            ev.stopPropagation();
+            app_router.navigate('#item/' + $(target).attr("data-category-id") + '/' + 
+                $(target).attr("data-item-id") + '/' + $(target).attr("data-word-num"), true);
+            return false;
+        });
         return this;
 	 }
 });

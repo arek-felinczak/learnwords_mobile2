@@ -12,18 +12,14 @@
     {{/if}}
     <div id="CategoryListPanel" class='panel panel-default'>
         <div class="panel-heading">
-            <div class="row">
-                <div class="col-xs-10">{{{breadcrumb}}}</div>
-                <div class="col-xs-2 text-right">
-                    {{#if isFavouriteList}} {{else}}
-                    <button style='cursor: pointer' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}', true); return false;" 
-                            class="btn btn-default btn-lg btn-text">
-                        <span class="glyphicon glyphicon-plus"><br/>
-                            <span class="text-small">new</span></span>
-                    </button>
-                    {{/if}}
-                </div>
-            </div>
+            {{{breadcrumb}}}           
+            {{#if isFavouriteList}} {{else}}
+            <button style='cursor: pointer; float: right' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}', true); return false;" 
+                    class="btn btn-default btn-lg btn-text text-right">
+                <span class="glyphicon glyphicon-plus"><br/>
+                    <span class="text-small">new</span></span>
+            </button>
+            {{/if}}
         </div>
         <div class="panel-body hidden" id="helpDiv">
             <button class="btn btn-default btn-lg btn-block" onClick="app_router.navigate('#DictSelect', true); return false;"> <span class="glyphicon glyphicon-list-alt padding-small"></span> change speech engine </button>
@@ -34,11 +30,9 @@
         </div>        
         <table id="items-table" class="table">
             <colgroup>
-                <col class="col-xs-5" />
-                <col />
-                <col />
-                <col />
-                <col class="col-xs-4" />
+                <col class="col-xs-6" />
+                <col class="col-xs-3" />
+                <col class="col-xs-3" />
             </colgroup>
             {{#if emptyList}}
              <tr colspan='3'>
@@ -47,62 +41,52 @@
             {{/if}}
             {{#each category}}
             <tr>
-                <td class='text margin-small'>
-                    {{pagedGridIndex @index ../offset}}. {{Word}}
-                </td>
-                <td class='button'>
-                    {{#if ../isFavouriteList}}
+                <td class='text'>
+                    {{pagedGridIndex @index ../offset}}. {{Word}} <br/>
+                     {{#if ../isFavouriteList}}
                         <button onclick="app_router.favouritesRemove({{Id}}); $(this).parents('tr').remove(); return false;" 
                                 type="button" class="pointer btn btn-text btn-default btn-lg margin-small">
-                            <span class="glyphicon glyphicon-minus-sign"><br />
-                            <span class="text-small">rem.</span></span>
+                            <span class="glyphicon glyphicon-minus-sign"><span class="text-small" style="padding-left: 3px">rem.</span></span>
                         </button>
                         {{else}}
                         <button onClick="app_router.favouritesAdd({{CategoryId}}, {{Id}}); $(this).css('visibility', 'hidden'); return false;" 
                                 type="button" class="pointer btn btn-text btn-default btn-lg margin-small">
-                            <span class="glyphicon glyphicon-plus-sign"><br />
-                            <span class="text-small">add</span></span>
+                            <span class="glyphicon glyphicon-plus-sign"><span class="text-small" style="padding-left: 3px">add</span></span>
                         </button>
                     {{/if}}
                 </td>
-                <td class='button'>
-                    <button class="pointer btn btn-text btn-default btn-lg margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/1');">
-                        <span class="glyphicon glyphicon-folder-open"><br />
-                            <span class="text-small">open</span>
-                        </span>
+                <td class='button' style="min-width: 120px">
+                    <button name="open-dict" data-word-num="1" data-category-id="{{CategoryId}}" data-item-id="{{Id}}"
+                             class="pointer btn btn-text btn-default btn-lg margin-small">
+                         <span class="glyphicon glyphicon-folder-open"><br />
+                             <span class="text-small">open</span>
+                         </span>
                     </button>
-                    {{#if Translation2}}
-                    <br />
-                    <button class="btn btn-default btn-text btn-lg pointer margin-small" onclick="return go('#item/{{CategoryId}}/{{Id}}/2');">
-                        <span class="glyphicon glyphicon-folder-open"><br />
-                            <span class="text-small">open</span></span>
-                    </button>
-                    {{/if}}                         
-                </td>
-                <td class='button'>
-                    <button onclick="LoadSpeechLink('{{Translation1}}', {{CategoryId}}, {{Id}}); return false;" 
+                    <button name="play-audio" data-word="{{Translation1}}" data-category-id="{{CategoryId}}" data-item-id="{{Id}}" 
                             class="pointer btn btn-text btn-default btn-lg margin-small">
                         <span class="glyphicon glyphicon-bullhorn"><br />
                             <span class="text-small">play</span></span>
-                    </button>               
+                    </button> 
                     {{#if Translation2}}
-                    <br />
-                    <button onclick="LoadSpeechLink('{{Translation2}}', {{CategoryId}}, {{Id}}); return false;" 
+                    <br />                    
+                    <button name="open-dict" data-word-num="2" data-category-id="{{CategoryId}}" data-item-id="{{Id}}"
+                            class="btn btn-default btn-text btn-lg pointer margin-small">
+                        <span class="glyphicon glyphicon-folder-open"><br />
+                            <span class="text-small">open</span></span>
+                    </button>
+                    <button name="play-audio" data-word="{{Translation2}}" data-category-id="{{CategoryId}}" data-item-id="{{Id}}" 
                             class="pointer btn btn-text btn-default btn-lg margin-small"> 
                         <span class="glyphicon glyphicon-bullhorn"><br />
                             <span class="text-small">play</span></span>
                     </button>
-                    {{/if}}                         
-                </td>
-                <td class='text margin-small'>
-                    <p>
-                        {{Translation1}}
-                    </p>
+                    {{/if}}                    
+                 </td>
+                 
+                <td class='text'>
+                    <p>{{Translation1}}</p>
                     {{#if Translation2}}<br />
-                    <p>
-                    {{Translation2}}
-                    </p>
-                    {{/if}} 
+                     <p>{{Translation2}}</p>
+                    {{/if}}  
                 </td>
             </tr>
             {{/each}}

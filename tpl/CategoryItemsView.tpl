@@ -7,7 +7,7 @@
     </div>
     <ul class="list-group" id='CategoryList'>
         {{#each categories}}        
-        <li onclick="return go('#category/{{Id}}/1');" class="link list-group-item">
+        <li class="link list-group-item" data-category-id="{{Id}}">
             {{Name}} 
         </li>               
         {{/each}}

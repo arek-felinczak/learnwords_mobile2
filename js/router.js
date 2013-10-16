@@ -18,6 +18,12 @@ var AppRouter = Backbone.Router.extend({
         "itemEditForm/:catId/:id": "wordEditForm"
     },
     manager: new VocabularyManager(),
+    lastView: null,
+    
+    removeZombieView: function(view) {
+        if (this.lastView !== null) this.lastView.remove();
+        this.lastView = view;
+    },
     
     refreshCache: function(force) {
         this.transitionStart();
@@ -40,29 +46,42 @@ var AppRouter = Backbone.Router.extend({
         var list = new ItemsCollection(this.manager.getFavouritesList());
         var favListView = new ItemsView({model: list});
         var nav = this.navBar('static', "Favourites");
-        $('#content').html(favListView.render(0, "Favourite words", page, nav).el);        
+        $('#content').html(favListView.render(0, "Favourite words", page, nav).el);
+        this.removeZombieView(favListView);
     },
     
     about: function() {
-        $('#content').html(new AboutView().render());
+        var view = new AboutView();
+        $('#content').html(view.render());
+        this.removeZombieView(view);
     },
     
     dictSelect: function() {
-        $('#content').html(new DictSelectView().render());
+        var view = new DictSelectView();
+        $('#content').html(view.render());
+        this.removeZombieView(view);
     },
     
     contact:function() {
-        $('#content').html(new ContactView().render());
+        var view = new ContactView();
+        $('#content').html(view.render());
+        this.removeZombieView(view);
     },
     
     categoryList:function() {
         if (window.debug_mode) console.log('AppRouter:categoryList');
-        var self = this;
-        this.manager.getCategoryList(function(modelList) {
-            var categoryListView = new CategoryItemsView({model: modelList});
-            var nav = self.navBar('');
-            $('#content').html(categoryListView.render(nav).el);            
-        });
+        var nav = this.navBar('categoryList');
+        if (this.categoryItemsView !== undefined) {
+            $('#content').html(this.categoryItemsView.render(nav).el);
+        }
+        else {
+             var self = this;
+             this.manager.getCategoryList(function(modelList) {
+                var categoryListView = new CategoryItemsView({model: modelList});
+                self.categoryItemsView = categoryListView;
+                $('#content').html(categoryListView.render(nav).el);
+            });
+        }
     },
  
     category:function (id, page) {
@@ -77,7 +96,8 @@ var AppRouter = Backbone.Router.extend({
             var view = new ItemsView({model: categoryModel});
             self.manager.getCategory(id, function(cat) {
                 var nav = self.navBar('static', cat.get('Name'));
-                $('#content').html(view.render(id, cat.get('Name'), page, nav).el);                
+                $('#content').html(view.render(id, cat.get('Name'), page, nav).el);   
+                self.removeZombieView(view);
             });            
         });         
     },
@@ -90,6 +110,7 @@ var AppRouter = Backbone.Router.extend({
             self.manager.getCategory(catId, function(cat) {
                 var nav = self.navBar('item', item, cat);
                 $('#content').html(view.render(nr, nav, cat).el);
+                self.removeZombieView(view);
             });                
         });
     },
@@ -104,6 +125,7 @@ var AppRouter = Backbone.Router.extend({
             var nav = self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
             $('#content').html(formView.render(modelList, nav).el);
             formView.postRender();
+            self.removeZombieView(formView);
         });
     },
     
@@ -116,6 +138,7 @@ var AppRouter = Backbone.Router.extend({
                 var nav = self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
                 $('#content').html(formView.render(modelList, nav).el);
                 formView.postRender();
+                self.removeZombieView(formView);
             });
         });
     },
@@ -138,7 +161,9 @@ var AppRouter = Backbone.Router.extend({
                 });
             }
             var nav = self.navBar('static', 'Search results');
-            $('#content').html(new ItemsView({model: new ItemsCollection(res)}).render(-1, "Search results", 1, nav).el);            
+            var view = new ItemsView({model: new ItemsCollection(res)});
+            $('#content').html(view.render(-1, "Search results", 1, nav).el);            
+            self.removeZombieView(view);
             self.transitionStop();
         });
     },    

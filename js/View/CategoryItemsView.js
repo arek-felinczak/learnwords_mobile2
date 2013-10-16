@@ -5,6 +5,12 @@ CategoryItemsView = Backbone.View.extend({
 	    var vm = {categories: this.model.toJSON(), breadcrumb: navHtml};
 	    var html = this.template(vm);
 	    $(this.el).html(html);
+        
+        $(this.el).on("click", "li", function(ev) {
+            var catId = $(ev.currentTarget).attr("data-category-id");
+            ev.stopPropagation();
+            return go('#category/' + catId + '/1'); 
+        });
         return this;
 	 }    
 });
