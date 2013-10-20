@@ -10,7 +10,7 @@
         <!-- Place favicon.ico in the root directory -->
     </head>
     <body>
-        <div class='container' id="page">
+        <div class='container' id="fastclick">
             <div class="row" id='menuTop'>
                 <table class="table navigation" style='margin: 0px;' cellpadding="0" cellspacing="0">
                      <colgroup>
@@ -56,11 +56,13 @@
                     <!-- Content goes here -->
                 </div>
                 <div id="footer-div" class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8; padding:3px;">
-                    <span> &copy; Designed by Arek Felińczak &middot; </span> 
-                    <span> <a href="#" onclick="window.open('https://github.com/arek-felinczak/learnwords_mobile2', '_system');"> Source code </a> </span><br /> 
-                    <span> <a href="#" onclick="window.open('http://www.forvo.com/', '_system');"> Pronunciations by Forvo </a> </span> | 
-                    <span> <a href="#" onclick="window.open('http://diki.pl/', '_system');"> Diki.pl </a> </span> | 
-                    <span> <a href="#" onclick="window.open('http://getionary.pl/', '_system');"> Getionary.pl </a> </span>
+                    <span> &copy; Arek Felińczak | </span> 
+                    <span><a href="#" onclick="window.open('https://github.com/arek-felinczak/learnwords_mobile2', '_system');"> Source code </a> </span><br /> 
+                    <span><a href="#" onclick="window.open('http://www.forvo.com/', '_system');"> Forvo </a> </span> |
+                    <span><a href="#" onclick="window.open('http://www.macmillandictionary.com/', '_system');"> Macmillan </a> </span> |
+                    <span><a href="#" onclick="window.open('http://dictionary-api.cambridge.org', '_system');"> Cambridge </a> </span> |
+                    <span><a href="#" onclick="window.open('http://diki.pl/', '_system');"> Diki </a> </span> | 
+                    <span><a href="#" onclick="window.open('http://getionary.pl/', '_system');"> Getionary </a> </span>
                 </div>
                 <div id="menuBar" class="navbar navbar-fixed-bottom text-center" style="display:none ;">
                     <table class="table navigation" style='margin: 0px;' cellpadding="0" cellspacing="0">
@@ -121,10 +123,9 @@
                 restUrl: window.location.protocol + '//' + window.location.host,
                 //dict
                 diki: "http://www.diki.pl/slownik-angielskiego/?q={0}",
-                forvo: "http://pl.forvo.com/word/{0}/#en",
                 getionary: 'http://m.getionary.pl/search.html?query={0}',
                 macMillan: 'http://www.macmillandictionary.com/dictionary/british/{0}',
-                dictionaries: ['diki', 'forvo', 'macMillan', 'getionary'],
+                dictionaries: ['diki', 'macMillan', 'getionary'],
                 speechEngines: ['forvo', 'cambridge', 'macMillan'] // , 'wordNik'
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
@@ -161,6 +162,7 @@
         <script type="text/javascript" src="js/View/ContactView.js"></script>        
         <script type="text/javascript" src="js/View/Breadcrumb.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
+        <script type="text/javascript" src="js/lib/fastclick.js"></script>
         <!-- for adobe cloud build -->
         <script type="text/javascript" src="phonegap.js"></script>        
         <script type="text/javascript">

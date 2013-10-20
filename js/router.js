@@ -5,7 +5,7 @@ var AppRouter = Backbone.Router.extend({
         "categories" : "categoryList",
         "category/:id/:page" : "category",
         "item/:catId/:id/:nr" : "item",
-        "itemAddForm/:catId": "wordAddForm",
+        "itemAddForm/:catId/:pageNum": "wordAddForm",
         "search": "wordSearch",
         "search/:query": "wordSearch",
         "about": "about",
@@ -23,6 +23,7 @@ var AppRouter = Backbone.Router.extend({
     removeZombieView: function(view) {
         if (this.lastView !== null) this.lastView.remove();
         this.lastView = view;
+        initFastButtons();
     },
     
     refreshCache: function(force) {
@@ -80,6 +81,7 @@ var AppRouter = Backbone.Router.extend({
                 var categoryListView = new CategoryItemsView({model: modelList});
                 self.categoryItemsView = categoryListView;
                 $('#content').html(categoryListView.render(nav).el);
+                self.removeZombieView(categoryListView);
             });
         }
     },
@@ -115,7 +117,7 @@ var AppRouter = Backbone.Router.extend({
         });
     },
     
-    wordAddForm: function(catId) {
+    wordAddForm: function(catId, page) {
         if (window.debug_mode)
             console.log('AppRouter:wordAddForm');
         var item = new Item();
@@ -123,7 +125,7 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getCategoryList(function(modelList) {
             var formView = new ItemFormView({model: item});
             var nav = self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
-            $('#content').html(formView.render(modelList, nav).el);
+            $('#content').html(formView.render(modelList, catId, nav, page).el);
             formView.postRender();
             self.removeZombieView(formView);
         });
@@ -136,7 +138,7 @@ var AppRouter = Backbone.Router.extend({
             self.manager.getCategoryList(function(modelList) {
                 var formView = new ItemFormView({model: item});
                 var nav = self.navBar('ItemFormView', item, self.manager.indexOfById(catId, modelList.models));
-                $('#content').html(formView.render(modelList, nav).el);
+                $('#content').html(formView.render(modelList, catId, nav).el);
                 formView.postRender();
                 self.removeZombieView(formView);
             });

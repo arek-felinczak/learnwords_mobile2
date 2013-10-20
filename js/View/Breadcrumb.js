@@ -13,7 +13,6 @@ function Breadcrumb() {
         }        
         else if (page === 'ItemFormView') {
             html += this.renderCategory(param);
-            html += this.renderItem(model);
         }
         else if (model !== undefined && model !== null) {
             html += '<li>' + model + '</li>';

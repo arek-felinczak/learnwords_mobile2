@@ -14,7 +14,7 @@
         <div class="panel-heading">
             {{{breadcrumb}}}           
             {{#if isFavouriteList}} {{else}}
-            <button style='cursor: pointer; float: right' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}', true); return false;" 
+            <button style='cursor: pointer; float: right' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}/{{page}}', true); return false;" 
                     class="btn btn-default btn-lg btn-text text-right">
                 <span class="glyphicon glyphicon-plus"><br/>
                     <span class="text-small">new</span></span>

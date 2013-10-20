@@ -66,7 +66,7 @@ VocabularyManager = function () {
         var cached = this.storage.getItem(cacheKey);
         if (cached !== null)
         {
-            window.AppCache[cacheKey] = new CategoryCollection(cached);
+            window.AppCache[cacheKey] = new ItemsCollection(cached);
             return callback(window.AppCache[cacheKey]);
         }
         var self = this;

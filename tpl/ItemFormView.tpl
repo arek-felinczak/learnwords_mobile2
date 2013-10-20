@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xs-10">{{{breadcrumb}}}</div>
             <div class="col-xs-2 text-right">
-                <button style='cursor: pointer' onclick="app_router.navigate('#item/{{model.CategoryId}}/{{model.Id}}/1',true);return false;" class="btn btn-default">
+                <button style='cursor: pointer' onclick="{{linkBack}} return false;" class="btn btn-default">
                     <span class="glyphicon glyphicon-arrow-left"><br />back</span>
                 </button>
             </div>

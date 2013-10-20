@@ -14,6 +14,7 @@ ItemsView = Backbone.View.extend({
 	    var vm = {
             category: page.toJSON(), 
             pages: pagerData, 
+            page: pageNum,
             isFavouriteList: isFavouriteList,
             offset: (pageNum - 1) * this.pageLength,
             showPager: pageList.numOfPages() > 1,

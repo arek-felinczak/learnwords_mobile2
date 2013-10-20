@@ -1,5 +1,5 @@
 <div class='panel panel-default'>
-    <div class="panel-heading">About author</div>
+    <div class="panel-heading"><h4>About author</h4></div>
     <div class="panel-body" style='padding:8px'>
         <h4>About me</h4>
         <p>
@@ -17,7 +17,7 @@
 
             If you have any ideas how to improve this app or want to know more about me - please do not hesitate to 
             contact me via <a target='linkedin' href='http://www.linkedin.com/in/arekf'>LinkedIn</a>.<br />
-            Source code is available on <a target='github' href='https://github.com/arek-felinczak/learnwords_mobile2'>github</a>.
+            Source code is available on <a target='github' href='https://github.com/arek-felinczak/learnwords_mobile2'>github</a> and you can reach me here as well.
         </p>
     </div>
 </div>

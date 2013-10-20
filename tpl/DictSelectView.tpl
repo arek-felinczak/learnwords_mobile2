@@ -1,5 +1,5 @@
 <div class='panel panel-default'>
-    <div class="panel-heading">Settings</div>  
+    <div class="panel-heading"><h4>Settings</h4></div>  
     <div class="panel-body">
         <div id='dictDiv'>
             <h4>Choose external dictionary (open word)</h4>
