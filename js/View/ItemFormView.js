@@ -3,7 +3,7 @@ ItemFormView = Backbone.View.extend({
     render: function(categoryList, catId, navHtml, page) {
         this.template = window.templates['ItemFormView'];
         var linkBack = this.model.get('Id') !== null ? 
-            "app_router.navigate('#item/" + catId + "/" + this.model.get('Id') + "/1',true);'" : 
+            "app_router.navigate('#item/" + catId + "/" + this.model.get('Id') + "/1',true);" : 
             "app_router.navigate('#category/" + catId + "/" + page + "', true);";
         if (this.model.get('CategoryId') === 0)
             this.model.set('CategoryId', catId);

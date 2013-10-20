@@ -12,7 +12,7 @@
         <div class="panel-heading">
             {{{breadcrumb}}}
             <button style='cursor: pointer; float: right' onclick="app_router.navigate('#itemEditForm/{{model.CategoryId}}/{{model.Id}}',true);return false;" 
-                    class="pointer btn btn-text btn-default btn-lg text-right">
+                    class="pointer btn btn-default btn-lg text-right">
                 <span class="glyphicon glyphicon-edit"><br />
                     <span class="text-small">edit</span>
                 </span>

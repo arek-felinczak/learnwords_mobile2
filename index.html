@@ -10,7 +10,7 @@
         <!-- Place favicon.ico in the root directory -->
     </head>
     <body>
-        <div class='container' id="fastclick">
+        <div class='container' id="page">
             <div class="row" id='menuTop'>
                 <table class="table navigation" style='margin: 0px;' cellpadding="0" cellspacing="0">
                      <colgroup>
@@ -173,6 +173,7 @@
                 };
             });            
             $(function() {
+                FastClick.attach(document.body);
                 loadTemplate(['CategoryItemsView', 'DictSelectView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
                     app_router = new AppRouter();
                     window.setTimeout("app_router.refreshCache(false);", 50);

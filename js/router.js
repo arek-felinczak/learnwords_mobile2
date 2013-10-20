@@ -23,7 +23,7 @@ var AppRouter = Backbone.Router.extend({
     removeZombieView: function(view) {
         if (this.lastView !== null) this.lastView.remove();
         this.lastView = view;
-        initFastButtons();
+        FastClick.attach(document.getElementById('content'));
     },
     
     refreshCache: function(force) {

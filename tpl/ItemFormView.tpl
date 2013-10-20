@@ -1,13 +1,9 @@
 <div id="CategoryListPanel" class='panel panel-default'>
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-xs-10">{{{breadcrumb}}}</div>
-            <div class="col-xs-2 text-right">
-                <button style='cursor: pointer' onclick="{{linkBack}} return false;" class="btn btn-default">
-                    <span class="glyphicon glyphicon-arrow-left"><br />back</span>
-                </button>
-            </div>
-        </div>
+    <div class="panel-heading">        
+        {{{breadcrumb}}}           
+        <button style='cursor: pointer; float: right' onclick="{{linkBack}} return false;" class="btn btn-default btn-lg text-right">
+            <span class="glyphicon glyphicon-arrow-left"><br />back</span>
+        </button>
     </div>
     <div class="panel-body" style='padding:8px'>
          <div class="hidden" id="helpDiv">
