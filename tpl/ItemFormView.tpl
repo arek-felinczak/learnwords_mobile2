@@ -10,7 +10,7 @@
             Use breadcrumb above or <span class="glyphicon glyphicon-back"></span> button to return to translation.
             <hr />
         </div> 
-        <form role="form" class="form-horizontal margin-medium">
+        <form role="form" class="form-horizontal padding-big">
             <fieldset>
                 <div class="form-group">
                     <input type="hidden" id="Id" name="Id" value="{{model.Id}}"/>
