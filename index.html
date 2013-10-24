@@ -114,8 +114,6 @@
             <script type="text/javascript" src="js/lib/jquery-2.0.3.min.js"></script> 
         <!--<![endif]-->        
         <script type="text/javascript">
-            $('#reklamacba').remove();
-            
             $.support.cors = true;
             $.ajaxSettings.xhr = function() {return new window.XMLHttpRequest({mozSystem: true});};
            
@@ -129,9 +127,9 @@
                 speechEngines: ['forvo', 'cambridge', 'macMillan'] // , 'wordNik'
             };
             if (window.location.host.indexOf('localhost') === 0 || window.location.protocol.indexOf('http:') === -1)
-                window.learnwordsConfig['restUrl'] = "http://vocabulary.cba.pl";
+                window.learnwordsConfig['restUrl'] = "http://learnwords.sanfre.eu";
             
-            window.learnwordsConfig['proxyUrl'] = "http://arekf.onuse.pl";
+            window.learnwordsConfig['proxyUrl'] = "http://learnwords.sanfre.eu";
             window.debug_mode = false;
             if (!window.console) window.console = {};
             if (!window.localStorage['dictionaryLink'])
