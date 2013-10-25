@@ -1,5 +1,4 @@
 ItemView = Backbone.View.extend({
-      
 	 render:function(nr, navHtml, cat) {
         var item = this.model; 
         var index = item.collection.indexOf(item);
@@ -27,8 +26,10 @@ ItemView = Backbone.View.extend({
 
 function LoadSpeechLink(word, catId, id) {
     app_router.transitionStart();
+    var player = detectAudioSupport();
+    if (player === 'flash') player = 'mp3';
     
-    var url = window.learnwordsConfig['proxyUrl'] + "/getSpeechData.php?dict=" + window.localStorage.speechEngine + "&word=" + encodeURI(word);
+    var url = window.learnwordsConfig['proxyUrl'] + "/getSpeechData.php?type=" + player + "&dict=" + window.localStorage.speechEngine + "&word=" + encodeURI(word);
     $.ajax({
         url: url,
         jsonpCallback: "pronounce",
@@ -38,11 +39,9 @@ function LoadSpeechLink(word, catId, id) {
         timeout: 6000,
         success: function(json) {
             if (window.debug_mode) console.log('LoadSpeechLink: ' + JSON.stringify(json));
-            var mp3 = json.mp3;
-            var ogg = json.ogg;
-            var duration = json.duration;
-            if (mp3 != "" || ogg != "")
-                Forvo_Ext_Play(mp3, ogg);
+            var audio = json.audio;
+            if (audio !== "" && audio !== null)
+                Forvo_Ext_Play(audio);
             else if (navigator.notification !== undefined) {
                 navigator.notification.beep();
             }
@@ -51,6 +50,5 @@ function LoadSpeechLink(word, catId, id) {
         app_router.transitionStop();
         alert('Connection to Speech engine failed. Check internet connection.');
     });
-       
     return false;
 }
