@@ -7,7 +7,7 @@ ItemView = Backbone.View.extend({
         var url = this.buildLink(word, window.localStorage['dictionaryLink']);
         
         var pageList = new Vocabulary.Pager(item.collection, 1);
-        var pager = pageList.pagerDataSource('#item/' + item.get("CategoryId") + '/{page}/' + nr, index + 1, 'Translation1', true);
+        var pager = pageList.render('#item/' + item.get("CategoryId") + '/{page}/' + nr, index + 1, 'Translation1', true);
         var vm = {
             src: url,
             pager: pager,
@@ -36,19 +36,19 @@ function LoadSpeechLink(word, catId, id) {
         dataType: "jsonp",
         type: "jsonp",
         crossDomain: true,
-        timeout: 6000,
+        timeout: 8000,
         success: function(json) {
             if (window.debug_mode) console.log('LoadSpeechLink: ' + JSON.stringify(json));
             var audio = json.audio;
             if (audio !== "" && audio !== null)
                 Forvo_Ext_Play(audio);
-            else if (navigator.notification !== undefined) {
-                navigator.notification.beep();
+            else {
+                Forvo_Ext_Play('themes/beep.' + player);
             }
             app_router.transitionStop();
         }}).error(function(qXHR, status, err) {
         app_router.transitionStop();
-        alert('Connection to Speech engine failed. Check internet connection.');
+        Forvo_Ext_Play('themes/beep.' + player);
     });
     return false;
 }
