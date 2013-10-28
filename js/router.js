@@ -87,7 +87,6 @@ var AppRouter = Backbone.Router.extend({
     },
  
     category:function (id, page) {
-        this.fadeStart();
         // category = 0 = favourites list
         if (id === "0") {
             this.navigate('#favourites', true);
@@ -101,7 +100,6 @@ var AppRouter = Backbone.Router.extend({
                 var nav = self.navBar('static', cat.get('Name'));
                 $('#content').html(view.render(id, cat.get('Name'), page, nav).el);   
                 self.removeZombieView(view);
-                self.fadeStop();
             });            
         });         
     },
@@ -183,14 +181,7 @@ var AppRouter = Backbone.Router.extend({
              navigator.notification.activityStop(); 
          $('#app').removeClass('blockUI');
     },
-    
-    fadeStart: function() {
-         $('#app').addClass('blockUI');
-    },
-    fadeStop: function() {
-         $('#app').removeClass('blockUI');
-    },
-    
+   
     navBar: function(page, model, param) {
         return new Breadcrumb().render(page, model, param);
     }
