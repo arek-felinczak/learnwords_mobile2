@@ -17,7 +17,7 @@ Vocabulary.Pager = function(collection, size) {
     };
     
     this.buttonTemplate = "<button {0} class='btn btn-info btn-lg'>{1}</button>";
-    this.dropdownTemplate = "<option onclick=\"$('html, body').animate({scrollTop: 0}, 500); return go('{0}');\" {2}> {1} </option>";
+    this.dropdownTemplate = "<option {2} value='{0}'> {1} </option>";
     this.listItemTemplate = "<li onclick=\"$('html, body').animate({scrollTop: 0}, 500); return go('{0}');\" class=\"pointer\"> ";
     
     this.buildOptions = function(baseUrl, lastPage, page) {
@@ -29,7 +29,7 @@ Vocabulary.Pager = function(collection, size) {
                 "2": page === i ? 'selected=selected' : ''
             });
         }
-        return ' <select class="form-control" style="width: 17%;">' + res + '</select> ';
+        return ' <select class="form-control goToPage" style="width: 20%;">' + res + '</select> ';
     },
     
     this.render = function(baseUrl, page, useIdInsteadOfPage) {

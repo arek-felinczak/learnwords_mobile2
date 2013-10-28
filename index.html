@@ -176,6 +176,11 @@
                     app_router = new AppRouter();
                     window.setTimeout("app_router.refreshCache(false);", 50);
                     Backbone.history.start();
+                    $(document).on('change','select.goToPage',function(dd) {
+                        var url = dd.currentTarget.value;                        
+                        $('html, body').animate({scrollTop: 0}, 500); 
+                        return go(url);
+                    });
                 });
             });
             
