@@ -3,7 +3,7 @@
         <ul class="pagination center">
             {{#each pager}}
             <li onclick="$('#DictionaryItemView').remove(); return go('{{url}}');" class="pointer">
-                <button {{#if disabled}} disabled="disabled" {{/if}} class="btn {{cssClass}} btn-lg">{{page}}</button>
+                {{{inputHtml}}}
             </li>
             {{/each}}
         </ul>

@@ -8,7 +8,7 @@
     <ul class="list-group" id='CategoryList'>
         {{#each categories}}        
         <li class="link list-group-item" data-category-id="{{Id}}">
-            <span class="glyphicon glyphicon-chevron-right"></span> {{Name}} 
+            <span class="glyphicon glyphicon-chevron-right" style="margin-right: 8px" ></span> {{Name}} 
         </li>               
         {{/each}}
     </ul>
