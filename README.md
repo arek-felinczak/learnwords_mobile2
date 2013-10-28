@@ -9,6 +9,7 @@ PhoneGap android version is available to download from:
 
  - [Learnwords homepage](http://learnwords.tk/learnwords_signed.apk)
 
+ - [Last Beta](https://build.phonegap.com/apps/565874)
 
 License
 -------------------------------------------------

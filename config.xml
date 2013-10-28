@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="tk.learnwords" version="0.39">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="tk.learnwords" version="0.4">
     <name>Learnwords - vocabulary builder</name>
     <description>
         Learnwords app will help you improve your english vocabulary. 
@@ -14,6 +14,7 @@
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="org.apache.cordova.media" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <preference name="phonegap-version" value="3.0.0" />
     <preference name="orientation" value="default" />
