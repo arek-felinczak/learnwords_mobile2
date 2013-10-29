@@ -39,7 +39,7 @@ function LoadSpeechLink(word, catId, id) {
         timeout: 8000,
         success: function(json) {
             if (window.debug_mode) console.log('LoadSpeechLink: ' + JSON.stringify(json));
-            var audio = json.audio;
+            var audio = json[player];
             if (audio !== "" && audio !== null)
                 Forvo_Ext_Play(audio);
             else {
