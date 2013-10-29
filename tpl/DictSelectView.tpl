@@ -2,7 +2,7 @@
     <div class="panel-heading"><h4>Settings</h4></div>  
     <div class="panel-body">
         <div id='dictDiv'>
-            <h4>Choose external dictionary (open word)</h4>
+            <h4>Choose dictionary (open word)</h4>
             {{#each dictList}}
             <div class='padding-small' style="width:48%; display: inline-block">
                 <button type="button" class="btn {{cssClass}} btn-lg btn-block" 
@@ -13,7 +13,7 @@
             {{/each}}
         </div>
         <div id='speechDiv' style="padding-top:15px">
-            <h4>Choose Speech engine (pronunciation)</h4>            
+            <h4>Speech API (audio)</h4>            
             {{#each speechList}}
             <div class='padding-small' style="width:48%; display: inline-block">
                 <button type="button" class="btn {{cssClass}} btn-lg btn-block" 
