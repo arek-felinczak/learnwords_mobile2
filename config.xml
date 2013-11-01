@@ -5,7 +5,7 @@
         Learnwords app will help you improve your english vocabulary. 
         It contains  more than 3000 words grouped into categories and connected to speech engine (Forvo, macMillan, Cambridge).
         App allows to build own learning list and open words in external dictionaries (diki.pl, macMillan, getionary.pl).
-        For some features (search, speech, external dictionaries) internet connection is required.
+        For some features (speech, external dictionaries) internet connection is required.
     </description>
     <author href="http://learnwords.tk" email="arek_felinczak@hushmail.com">
         Arek Felinczak
