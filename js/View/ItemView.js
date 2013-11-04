@@ -36,7 +36,7 @@ function LoadSpeechLink(word, catId, id) {
         dataType: "jsonp",
         type: "jsonp",
         crossDomain: true,
-        timeout: 8000,
+        timeout: 10000,
         success: function(json) {
             if (window.debug_mode) console.log('LoadSpeechLink: ' + JSON.stringify(json));
             var audio = json[player];
