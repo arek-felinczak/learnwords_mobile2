@@ -25,10 +25,15 @@ ItemView = Backbone.View.extend({
 });
 
 function LoadSpeechLink(word, catId, id) {
+    var words = word.split(" ");
+    if (words.length > 1) {
+        // take longest one
+        word = _.last(_.sortBy(words, function(w){ return w.length; }));
+    }
+    
     app_router.transitionStart();
     var player = detectAudioSupport();
     if (player === 'flash') player = 'mp3';
-    
     var url = window.learnwordsConfig['proxyUrl'] + "/getSpeechData.php?type=" + player + "&dict=" + window.localStorage.speechEngine + "&word=" + encodeURI(word);
     $.ajax({
         url: url,
@@ -43,12 +48,12 @@ function LoadSpeechLink(word, catId, id) {
             if (audio !== "" && audio !== null)
                 Forvo_Ext_Play(audio);
             else {
-                Forvo_Ext_Play('themes/beep.' + player);
+                Forvo_Ext_Play(window.location.origin + window.location.pathname + 'themes/beep.' + player);
             }
             app_router.transitionStop();
         }}).error(function(qXHR, status, err) {
         app_router.transitionStop();
-        Forvo_Ext_Play('themes/beep.' + player);
+        Forvo_Ext_Play(window.location.origin + window.location.pathname + 'themes/beep.' + player);
     });
     return false;
 }

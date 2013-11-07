@@ -23,7 +23,8 @@ ItemFormView = Backbone.View.extend({
     
     events: {
         "change": "change",
-        "click a.save": "beforeSave"
+        "click a.save": "beforeSave",
+        "submit form" : "beforeSave"
     },
     
     change: function(event) {

@@ -45,7 +45,7 @@
             </fieldset>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
-                <a href="#" class="btn btn-default save"> Save </a>
+                <button type="submit" class="btn btn-primary btn-lg col-lg-3 save"> Save </button>
             </div>
         </div>                         
         </form>
