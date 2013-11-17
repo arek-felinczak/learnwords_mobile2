@@ -54,6 +54,7 @@ function LoadSpeechLink(word, catId, id) {
         }}).error(function(qXHR, status, err) {
         app_router.transitionStop();
         alert('Cannot play audio file. Check internet connection or change speech engine.');
+        app_router.transitionStop();
     });
     return false;
 }
