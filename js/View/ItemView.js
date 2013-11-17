@@ -53,7 +53,7 @@ function LoadSpeechLink(word, catId, id) {
             app_router.transitionStop();
         }}).error(function(qXHR, status, err) {
         app_router.transitionStop();
-        Forvo_Ext_Play(window.location.origin + window.location.pathname + 'themes/beep.' + player);
+        alert('Cannot play audio file. Check internet connection or change speech engine.');
     });
     return false;
 }
