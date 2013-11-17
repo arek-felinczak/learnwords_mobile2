@@ -6,7 +6,7 @@ CategoryItemsView = Backbone.View.extend({
 	    var html = this.template(vm);
 	    $(this.el).html(html);
         
-        $(this.el).on("click", "li", function(ev) {
+        $(this.el).on("click", "ul#CategoryList li", function(ev) {
             var catId = $(ev.currentTarget).attr("data-category-id");
             ev.stopPropagation();
             return go('#category/' + catId + '/1'); 

@@ -7,6 +7,7 @@
             I'm expert in web technologies ASP MVC, C#, JavaScript, JQuery, HTML5, SQL. <br />
             Experienced with OOD, test driven development, IoC containers.
             More information about me on <a target='linkedin' href='http://www.linkedin.com/in/arekf'>LinkedIn</a>.
+            Do not forget to visit my <a target='afelin' href='http://afelin.tk'> blog </a>.
         </p>
         <br />
         <h4>Contribution</h4>
@@ -17,7 +18,7 @@
 
             If you have any ideas how to improve this app or want to know more about me - please do not hesitate to 
             contact me via <a target='linkedin' href='http://www.linkedin.com/in/arekf'>LinkedIn</a>.<br />
-            Source code is available on <a target='github' href='https://github.com/arek-felinczak/learnwords_mobile2'>github</a> and you can reach me here as well.
+            Source code is available on <a target='github' href='https://github.com/arek-felinczak/learnwords_mobile2'>github</a> and you can submit bugs there.
         </p>
     </div>
 </div>

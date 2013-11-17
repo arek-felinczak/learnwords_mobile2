@@ -17,6 +17,11 @@ var AppRouter = Backbone.Router.extend({
         "refreshCache": "refreshCache",
         "itemEditForm/:catId/:id": "wordEditForm"
     },
+    
+    initialize: function() {
+        console.log('router contructor');
+    },
+    
     manager: new VocabularyManager(),
     lastView: null,
     

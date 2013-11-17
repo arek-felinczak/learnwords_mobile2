@@ -22,13 +22,13 @@ function Breadcrumb() {
     },
             
     this.renderHome = function(iconOnly) {
-        return '<li class="link" onclick="app_router.navigate(\'#\',true);return false;"> &nbsp; <span class="glyphicon glyphicon-home"></span> ' + (iconOnly === false ?  ' &nbsp; Home' : '') + ' &nbsp; </li>';
+        return '<li class="link" onclick="return go(\'#\');"> &nbsp; <span class="glyphicon glyphicon-home"></span> ' + (iconOnly === false ?  ' &nbsp; Home' : '') + ' &nbsp; </li>';
     },
     this.renderCategory = function(model) {
-        return '<li class="link" onclick="app_router.navigate(\'#category/' + model.get('Id') + '/1\',true);return false;">' + model.get('Name') + '</li>';
+        return '<li class="link" onclick="return go(\'#category/' + model.get('Id') + '/1\')">' + model.get('Name') + '</li>';
     };
     this.renderItem = function(model) {
         var url = "#item/" + model.get('CategoryId') + "/" + model.get('Id') + "/1";
-        return '<li class="link" onclick="app_router.navigate(\'' + url + '\',true);return false;">' + model.get('Translation1') + '</li>';
+        return '<li class="link" onclick="return go(\'' + url + '\');">' + model.get('Translation1') + '</li>';
     };
 };

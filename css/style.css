@@ -56,7 +56,7 @@ div.blockUI {
 }
 .pagination li button {
     width: 18%;
-    padding: 6px 0px 6px 0px;
+    padding: 8px 0px;
 }
 .center {
     float: none;
@@ -93,6 +93,7 @@ table.navigation tr td {
     width: 70%;
     display: inline;
     padding: 5px;
+    height: 38px;
 }
 div#search {
     display: none;
