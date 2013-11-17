@@ -20,7 +20,7 @@
             Learnwords is mobile hybrid app designed to install on phones. <br />
             Android platform is supported via Phonegap and Adobe® PhoneGap™ Build. 
             Download apk or xap (Windows Phone) package
-            <a onclick="return app_router.externalPage('https://build.phonegap.com/apps/565874');" href="#"> from here </a>.
+            <a href="#" onclick="window.open('https://build.phonegap.com/apps/565874', '_system'); return false;"> from here </a>.
             <br />
             App has been built in HTML5 and Javascript. Web version is available under http://learnwords.tk/m.<br />
             It uses Backbone, Handlebars, JQuery and Bootstrap on client side and SLIM framework and MySQL as Rest Server.           
