@@ -6,8 +6,8 @@
             My name is Arek Felińczak and I am software developer with 8 years’ experience in web applications development.<br />
             I'm expert in web technologies ASP MVC, C#, JavaScript, JQuery, HTML5, SQL. <br />
             Experienced with OOD, test driven development, IoC containers.
-            More information about me on <a target='linkedin' href='http://www.linkedin.com/in/arekf'>LinkedIn</a>.
-            Do not forget to visit my <a target='afelin' href='http://afelin.tk'> blog </a>.
+            More information about me on <a href="http://www.linkedin.com/in/arekf">LinkedIn</a>.
+            Do not forget to visit my <a onclick="return app_router.externalPage('http://www.linkedin.com/in/arekf');" href='#'> blog </a>.
         </p>
         <br />
         <h4>Contribution</h4>
@@ -17,8 +17,8 @@
             for creating new category.<br />        
 
             If you have any ideas how to improve this app or want to know more about me - please do not hesitate to 
-            contact me via <a target='linkedin' href='http://www.linkedin.com/in/arekf'>LinkedIn</a>.<br />
-            Source code is available on <a target='github' href='https://github.com/arek-felinczak/learnwords_mobile2'>github</a> and you can submit bugs there.
+            contact me via <a href="http://www.linkedin.com/in/arekf">LinkedIn</a>.<br />
+            Source code is available on github (http://github.com/arek-felinczak/learnwords_mobile2) and you can submit bugs there.
         </p>
     </div>
 </div>

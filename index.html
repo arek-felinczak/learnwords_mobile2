@@ -53,13 +53,12 @@
                     <div id="content"></div>
                 </div>
                 <div id="footer-div" class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8; padding:3px;">
-                    <span> &copy; Arek Felińczak | </span> 
-                    <span><a href="#" onclick="window.open('https://github.com/arek-felinczak/learnwords_mobile2', '_system'); return false;"> Source code </a> </span><br /> 
-                    <span><a href="#" onclick="window.open('http://www.forvo.com/', '_system');"> Forvo </a> </span> |
-                    <span><a href="#" onclick="window.open('http://www.macmillandictionary.com/', '_system');"> Macmillan </a> </span> |
-                    <span><a href="#" onclick="window.open('http://dictionary-api.cambridge.org', '_system');"> Cambridge </a> </span> |
-                    <span><a href="#" onclick="window.open('http://diki.pl/', '_system');"> Diki </a> </span> | 
-                    <span><a href="#" onclick="window.open('http://getionary.pl/', '_system');"> Getionary </a> </span>
+                    <span> &copy; Arek Felińczak </span><br /> 
+                    <span><a href="#" onclick="return app_router.externalPage('http://www.forvo.com/');"> Forvo </a> </span> |
+                    <span><a href="#" onclick="return app_router.externalPage('http://www.macmillandictionary.com/');"> Macmillan </a> </span> |
+                    <span><a href="#" onclick="return app_router.externalPage('http://dictionary-api.cambridge.org');"> Cambridge </a> </span> |
+                    <span><a href="#" onclick="return app_router.externalPage('http://diki.pl/');"> Diki </a> </span> | 
+                    <span><a href="#" onclick="return app_router.externalPage('http://getionary.pl/');"> Getionary </a> </span>
                 </div>
                 <div id="menuBar" class="navbar navbar-fixed-bottom text-center" style="display:none ;">
                     <table class="table navigation" style='margin: 0px;' cellpadding="0" cellspacing="0">
@@ -156,6 +155,7 @@
         <script type="text/javascript" src="js/View/DictSelectView.js"></script>
         <script type="text/javascript" src="js/View/ContactView.js"></script>        
         <script type="text/javascript" src="js/View/Breadcrumb.js"></script>
+        <script type="text/javascript" src="js/View/ExternalPage.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="js/lib/fastclick.js"></script>
         <!-- for adobe cloud build -->
@@ -169,7 +169,7 @@
             });            
             $(function() {
                 FastClick.attach(document.body);
-                loadTemplate(['CategoryItemsView', 'DictSelectView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView'], function() {
+                loadTemplate(['CategoryItemsView', 'DictSelectView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView', 'ExternalPage'], function() {
                     app_router = new AppRouter();
                     window.setTimeout("app_router.refreshCache(false);", 50);
                     Backbone.history.start();

@@ -1,7 +1,6 @@
 // Router
 var AppRouter = Backbone.Router.extend({ 
     routes: {
-        "": "categoryList",
         "categories" : "categoryList",
         "category/:id/:page" : "category",
         "item/:catId/:id/:nr" : "item",
@@ -15,11 +14,16 @@ var AppRouter = Backbone.Router.extend({
         "favouritesAdd/:catId/:id": "favouritesAdd",
         "favouritesRemove/:id": "favouritesRemove",
         "refreshCache": "refreshCache",
-        "itemEditForm/:catId/:id": "wordEditForm"
+        "itemEditForm/:catId/:id": "wordEditForm",
+        "*path": "categoryList"        
     },
     
-    initialize: function() {
-        console.log('router contructor');
+    externalPage: function(url) {
+        var pageView = new ExteranlPageView();
+        $('#content').html(pageView.render(url).el);
+        this.removeZombieView(pageView);
+        app_router.navigate('#link');
+        return false;
     },
     
     manager: new VocabularyManager(),
