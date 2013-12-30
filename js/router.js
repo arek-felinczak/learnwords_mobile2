@@ -15,6 +15,8 @@ var AppRouter = Backbone.Router.extend({
         "favouritesRemove/:id": "favouritesRemove",
         "refreshCache": "refreshCache",
         "itemEditForm/:catId/:id": "wordEditForm",
+        "test" : "test",
+        "results/:catId" : "testResults",
         "*path": "categoryList"        
     },
     
@@ -28,6 +30,7 @@ var AppRouter = Backbone.Router.extend({
     
     manager: new VocabularyManager(),
     lastView: null,
+    lastCategoryId: 1,
     
     removeZombieView: function(view) {
         if (this.lastView !== null) this.lastView.remove();
@@ -78,21 +81,52 @@ var AppRouter = Backbone.Router.extend({
         this.removeZombieView(view);
     },
     
+    test:function () {
+        var catId = this.lastCategoryId;
+        var self = this;
+        this.manager.getCategory(catId, function(cat) {
+            self.manager.getItemList(catId, function(categoryModel) {
+                var test = new Test().buildTest(categoryModel, catId);
+                var nav = self.navBar('TestView', cat);
+                var view = new TestView({model: test, category: cat, nav: nav});                
+                $('#content').html(view.render().el);   
+                self.removeZombieView(view);
+                view.on("save-test-result", function(res) {
+                    self.manager.addTestResult(res);
+                    self._testResults(cat, res);
+                });
+            });  
+        });           
+    },
+    
+    testResults: function(catId) {
+        this.lastCategoryId = catId;
+        var self = this;
+        this.manager.getCategory(catId, function(cat) {
+            var res = _.find(self.manager.getTestResults().models, function(r) {
+                return r.get('CategoryId') === catId;
+            });
+            self._testResults(cat, res);
+        });          
+    },
+    
+    _testResults: function(cat, res) {
+        var view = new TestResultView({model: res, category: cat});
+        var nav = this.navBar('TestResultView', cat);
+        $('#content').html(view.render(nav).el);
+        this.removeZombieView(view);
+    },
+    
     categoryList:function() {
         if (window.debug_mode) console.log('AppRouter:categoryList');
         var nav = this.navBar('categoryList');
-        if (this.categoryItemsView !== undefined) {
-            $('#content').html(this.categoryItemsView.render(nav).el);
-        }
-        else {
-             var self = this;
-             this.manager.getCategoryList(function(modelList) {
-                var categoryListView = new CategoryItemsView({model: modelList});
-                self.categoryItemsView = categoryListView;
-                $('#content').html(categoryListView.render(nav).el);
-                self.removeZombieView(categoryListView);
-            });
-        }
+        var self = this;             
+        this.manager.getCategoryList(function(modelList) {
+           var results = self.manager.getTestResults().models;
+           var categoryListView = new CategoryItemsView({model: modelList});
+           $('#content').html(categoryListView.render(nav, results).el);
+           self.removeZombieView(categoryListView);
+       });
     },
  
     category:function (id, page) {
@@ -101,6 +135,7 @@ var AppRouter = Backbone.Router.extend({
             this.navigate('#favourites', true);
             return;
         }
+        this.lastCategoryId = id;
         if (window.debug_mode) console.log('AppRouter:category');
         var self = this;
         this.manager.getItemList(id, function(categoryModel) {

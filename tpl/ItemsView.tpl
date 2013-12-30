@@ -15,12 +15,6 @@
             </button>
             {{/if}}
         </div>
-        <div class="panel-body hidden" id="helpDiv">
-            <p> Tap on <span class="glyphicon glyphicon-bullhorn padding-small"></span> to play audio file.</p>
-            <p> Tap on <span class="glyphicon glyphicon-folder-open padding-small"></span> to open word in external dictionary.</p>
-            <p> Use <span class="glyphicon glyphicon-plus-sign padding-small"></span> to add word to favourite list.</p>
-            <p> Button above list <span class="glyphicon glyphicon-plus padding-small"></span> opens add new word form.</p>                
-        </div>        
         <table id="items-table" class="table">
             <colgroup>
                 <col class="col-xs-5" />

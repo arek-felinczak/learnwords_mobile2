@@ -25,6 +25,25 @@ VocabularyManager = function () {
         });        
     };
     
+    this.getTestResults = function() {
+        var res = this.storage.getItem('testResults');
+        return new TestCollection(res);
+    },
+            
+    this.addTestResult = function(item) {
+        var res = this.getTestResults();
+        var prevRes = _.find(res.models, function(i){
+            return i.get('CategoryId') === item.get('CategoryId');
+        });
+        if (! prevRes) res.add(item);
+        else { 
+            var prevResOnIndex = _.indexOf(res.models, prevRes);
+            res.models[prevResOnIndex] = item;
+        }
+        this.storage.addItem('testResults', res);
+        if (window.debug_mode) console.log('VocabularyManager:addTestResult');
+    },
+    
     this.getFavouritesList = function() {
         var list = this.storage.getItem('favouritesList');
         if (list === null) return [];

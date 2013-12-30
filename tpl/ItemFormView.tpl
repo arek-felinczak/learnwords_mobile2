@@ -6,10 +6,6 @@
         </button>
     </div>
     <div class="panel-body" style='padding:8px'>
-         <div class="hidden" id="helpDiv">
-            Use breadcrumb above or <span class="glyphicon glyphicon-back"></span> button to return to translation.
-            <hr />
-        </div> 
         <form role="form" class="form-horizontal padding-big">
             <fieldset>
                 <div class="form-group">

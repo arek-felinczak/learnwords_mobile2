@@ -19,17 +19,18 @@
             </button>
         </div>
         <div class="panel-body">
-            <div class="hidden" id="helpDiv">
-                <p> Tap on <span class="glyphicon glyphicon-edit"></span> to fix translation errors.</p>
+            <div class="row padding-big">
+                <span class="col-xs-4"><strong>Word:</strong></span>
+                <span class="col-xs-8">{{model.Word}}</span>
             </div>
-            <span class="col-xs-4"><strong>Word:</strong></span>
-            <span class="col-xs-8">{{model.Word}}</span>
-            <br />
-            <span class="col-xs-4"><strong>Translation:</strong></span>
-            <span class="col-xs-8">{{model.Translation1}} {{model.Translation2}} </span>
-            <br />
-            <span class="col-xs-4"><strong>Category:</strong></span>
-            <span class="col-xs-8">{{category.Name}}</span>           
+            <div class="row padding-big">
+                <span class="col-xs-4"><strong>Translation:</strong></span>
+                <span class="col-xs-8">{{model.Translation1}} {{model.Translation2}} </span>
+            </div>
+            <div class="row padding-big">
+                <span class="col-xs-4"><strong>Category:</strong></span>
+                <span class="col-xs-8">{{category.Name}}</span>  
+            </div>
         </div>  
         <iframe id='DictionaryItemView' src='{{src}}' class="col-xs-12" onLoad="$(this).show()" 
                 frameBorder="0" style="min-height: 480px; display:none; overflow: scroll"></iframe>	

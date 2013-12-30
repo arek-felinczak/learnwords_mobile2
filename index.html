@@ -32,9 +32,9 @@
                             <span class="glyphicon glyphicon-search"></span><br />
                             <span>Search</span>
                         </td>
-                        <td style='cursor: pointer' onClick="$('#helpDiv').toggleClass('hidden'); return false;">
+                        <td style='cursor: pointer' onClick="app_router.navigate('#test', true); return false;">
                             <span class="glyphicon glyphicon-question-sign"></span><br />
-                            <span>Help</span>
+                            <span>Test</span>
                         </td>
                         <td style='cursor: pointer' onClick="toogleMenu(); return false;">
                             <span class="glyphicon glyphicon-list-alt"></span><br />
@@ -58,7 +58,7 @@
                     <span><a href="#" onclick="return app_router.externalPage('http://www.macmillandictionary.com/');"> Macmillan </a> </span> |
                     <span><a href="#" onclick="return app_router.externalPage('http://dictionary-api.cambridge.org');"> Cambridge </a> </span> |
                     <span><a href="#" onclick="return app_router.externalPage('http://diki.pl/');"> Diki </a> </span> | 
-                    <span><a href="#" onclick="return app_router.externalPage('http://getionary.pl/');"> Getionary </a> </span>
+                    <span><a href="#" onclick="return app_router.externalPage('http://m.getionary.pl/');"> Getionary </a> </span>
                 </div>
                 <div id="menuBar" class="navbar navbar-fixed-bottom text-center" style="display:none ;">
                     <table class="table navigation" style='margin: 0px;' cellpadding="0" cellspacing="0">
@@ -140,12 +140,16 @@
             Handlebars.registerHelper('pagedGridIndex', function(value, start){
                 return Number(start + value + 1);
             });
+            Handlebars.registerHelper('ObjectAtKey', function(o, key) {
+                return o && o[key] ? o[key] : "";
+            });
         </script>
         <script type="text/javascript" src="js/lib/commons.js"></script>
         <script type="text/javascript" src="js/lib/storage.js"></script>
         <script type="text/javascript" src="js/lib/pager.js"></script>     
         <script type="text/javascript" src="js/Model/category.js"></script> 
         <script type="text/javascript" src="js/Model/items.js"></script> 
+        <script type="text/javascript" src="js/Model/test.js"></script> 
         <script type="text/javascript" src="js/Model/vocabularyManager.js"></script>
         <script type="text/javascript" src="js/View/CategoryItemsView.js"></script>     
         <script type="text/javascript" src="js/View/ItemsView.js"></script>
@@ -153,7 +157,9 @@
         <script type="text/javascript" src="js/View/ItemFormView.js"></script>
         <script type="text/javascript" src="js/View/AboutView.js"></script>
         <script type="text/javascript" src="js/View/DictSelectView.js"></script>
-        <script type="text/javascript" src="js/View/ContactView.js"></script>        
+        <script type="text/javascript" src="js/View/ContactView.js"></script> 
+        <script type="text/javascript" src="js/View/TestView.js"></script>
+        <script type="text/javascript" src="js/View/TestResultView.js"></script>        
         <script type="text/javascript" src="js/View/Breadcrumb.js"></script>
         <script type="text/javascript" src="js/View/ExternalPage.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
@@ -169,7 +175,7 @@
             });            
             $(function() {
                 FastClick.attach(document.body);
-                loadTemplate(['CategoryItemsView', 'DictSelectView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView', 'ExternalPage'], function() {
+                loadTemplate(['CategoryItemsView', 'DictSelectView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView', 'ExternalPage', 'TestView', 'ResultView'], function() {
                     app_router = new AppRouter();
                     window.setTimeout("app_router.refreshCache(false);", 50);
                     Backbone.history.start();

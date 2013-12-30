@@ -14,6 +14,14 @@ function Breadcrumb() {
         else if (page === 'ItemFormView') {
             html += this.renderCategory(param);
         }
+        else if (page === 'TestResultView') {
+            html += this.renderCategory(model);
+            html += '<li> Results </li>';
+        }
+        else if (page === 'TestView') {
+            html += this.renderCategory(model);
+            html += '<li> Test </li>';
+        }
         else if (model !== undefined && model !== null) {
             html += '<li>' + model + '</li>';
         }        
