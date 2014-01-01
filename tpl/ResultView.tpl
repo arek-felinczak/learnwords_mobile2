@@ -21,12 +21,10 @@
                 {{/each}}
             </ul>
             <div class="row" style="margin-bottom: 10px">
-                <div class="col-lg-offset-3 col-lg-10">
-                    <button class="btn btn-default btn-lg col-lg-6" onclick="return go('#category/{{Category.Id}}/1')">
-                        back 
-                    </button>
-                </div>
-            </div>
+                <button class="center btn btn-default btn-lg col-xs-9" onclick="return go('#category/{{Category.Id}}/1')">
+                    back 
+                </button>
+             </div>
         </div>        
     </div>
 </div>

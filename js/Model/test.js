@@ -12,6 +12,10 @@ Test = Backbone.Model.extend({
     },
     buildTest: function(itemCollection, catId) {
         this.set('CategoryId', catId);
+        if (itemCollection.models.length < this.TestLength) {
+            alert("Not enough words in category to create a test.")
+            return;
+        }
         var i = 0;
         var questions = [];
         var answers = [];
@@ -30,7 +34,6 @@ Test = Backbone.Model.extend({
     },
     _getFakeAnswers: function(itemCollection, question) {
         var answers = [question];
-
         do {
             var answer = this._getRandomItem(itemCollection);
             if (_.indexOf(answers, answer) === -1)

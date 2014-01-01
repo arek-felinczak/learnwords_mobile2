@@ -87,6 +87,9 @@ var AppRouter = Backbone.Router.extend({
         this.manager.getCategory(catId, function(cat) {
             self.manager.getItemList(catId, function(categoryModel) {
                 var test = new Test().buildTest(categoryModel, catId);
+                if (! test) {
+                    return;
+                }                
                 var nav = self.navBar('TestView', cat);
                 var view = new TestView({model: test, category: cat, nav: nav});                
                 $('#content').html(view.render().el);   
@@ -104,7 +107,7 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.manager.getCategory(catId, function(cat) {
             var res = _.find(self.manager.getTestResults().models, function(r) {
-                return r.get('CategoryId') === catId;
+                return r.get('CategoryId') === parseInt(catId);
             });
             self._testResults(cat, res);
         });          
