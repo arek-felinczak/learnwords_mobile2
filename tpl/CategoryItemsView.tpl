@@ -12,7 +12,7 @@
             </td>
             <td class="{{ObjectAtKey ../scoresCss Id}} link pointer test-result-link" 
                 data-result='{{ObjectAtKey ../scores Id}}' data-category-id="{{Id}}">
-                <span class="badge col-xs-2 center">{{ObjectAtKey ../scores Id}}</span>
+                <span class="badge col-xs-6 center">{{ObjectAtKey ../scores Id}}</span>
             </td>
          </tr>
         {{/each}}

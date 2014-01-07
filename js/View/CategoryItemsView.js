@@ -8,7 +8,7 @@ CategoryItemsView = Backbone.View.extend({
         for (var i=0; i<results.length; i++) {
             resultsPerCategory[results[i].get('CategoryId')] = results[i].get('Score');
             resultsPerCategoryCssClass[results[i].get('CategoryId')] = results[i].get('Score') > 8 ? 
-                "success" : "";
+                "success" : "danger";
         }
         
         var vm = { categories: this.model.toJSON(), 
