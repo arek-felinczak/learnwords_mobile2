@@ -1,13 +1,20 @@
 <div id="CategoryListPanel" class='panel panel-default'>
     <div class="panel-heading">{{{breadcrumb}}}</div>
-    <ul class="list-group" id='CategoryList'>
-        {{#each categories}}        
-        <li class="link list-group-item" style="height: 44px;" data-category-id="{{Id}}">
-            <div class="col-xs-12">
-                <span class="col-xs-11 glyphicon glyphicon-chevron-right category-link" style="height: 26px;"> {{Name}} </span>
-                <span class="badge test-result-link col-xs-1 padding-medium" style="float: right">{{ObjectAtKey ../scores Id}}</span>
-            </div>
-        </li>               
+    <table class="table CategoryList">
+        <colgroup>
+            <col class="col-xs-9" />
+            <col class="col-xs-3" />
+        </colgroup>
+        {{#each categories}}  
+        <tr>
+            <td class="link pointer category-link" data-category-id="{{Id}}">
+                <span class="glyphicon glyphicon-chevron-right "> {{Name}} </span>
+            </td>
+            <td class="{{ObjectAtKey ../scoresCss Id}} link pointer test-result-link" 
+                data-result='{{ObjectAtKey ../scores Id}}' data-category-id="{{Id}}">
+                <span class="badge col-xs-2 center">{{ObjectAtKey ../scores Id}}</span>
+            </td>
+         </tr>
         {{/each}}
-    </ul>
+    </table>
 </div>        

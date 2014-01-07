@@ -33,7 +33,14 @@ TestResultView = Backbone.View.extend({
         }
         
         var html = this.template(vm);
+        
         $(this.el).html(html);
+        $(this.el).on("click", "li.list-group-item", function(ev) {
+            var link = $(ev.currentTarget).attr("data-link");
+            ev.stopPropagation();
+            return go('#' + link); 
+        });
+        
         return this;
     }
 });

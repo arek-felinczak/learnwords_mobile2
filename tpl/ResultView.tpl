@@ -9,10 +9,11 @@
         <div>        
             <ul class="list-group" id='ResultList'>
                 {{#each Results}}        
-                <li class="link list-group-item" data-category-id="{{Id}}">
+                <li class="link list-group-item" data-link="item/{{Question.CategoryId}}/{{Question.Id}}/1">
                     <div class="row">
-                        <div class="col-xs-5"> {{Question.Word}} </div> 
-                        <div class="col-xs-5">{{Answer.Translation1}}</div>
+                        <div class="col-xs-4">{{Question.Word}}</div> 
+                        <div class="col-xs-4">{{Answer.Translation1}}</div>
+                        <div class="col-xs-3">{{Question.Translation1}}</div>
                         <div class="col-xs-1"> 
                             <span class="glyphicon glyphicon-{{# if isCorrect}}chevron-down{{else}}minus-sign{{/if}}"></span> 
                         </div>

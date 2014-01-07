@@ -107,7 +107,7 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.manager.getCategory(catId, function(cat) {
             var res = _.find(self.manager.getTestResults().models, function(r) {
-                return r.get('CategoryId') === parseInt(catId);
+                return parseInt(r.get('CategoryId')) === parseInt(catId);
             });
             self._testResults(cat, res);
         });          
