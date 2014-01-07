@@ -21,7 +21,7 @@
                 </li>               
                 {{/each}}
             </ul>
-            <div class="row" style="margin-bottom: 10px">
+            <div style="margin-bottom: 10px">
                 <button class="center btn btn-default btn-lg col-xs-9" onclick="return go('#category/{{Category.Id}}/1')">
                     back 
                 </button>
