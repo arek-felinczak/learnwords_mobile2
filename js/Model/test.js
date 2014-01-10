@@ -18,13 +18,15 @@ Test = Backbone.Model.extend({
         }
         var i = 0;
         var questions = [];
+        var questionIds=[];
         var answers = [];
         do {
             var question = this._getRandomItem(itemCollection);
-            if (_.indexOf(questions, question) !== -1)
+            if (_.indexOf(questionIds, question.get('Id')) !== -1)
                 continue;
 
             questions[i] = question.toJSON();
+            questionIds.push(question.get('Id'));
             answers[i] = this._getFakeAnswers(itemCollection, question);
             i++;
         } while (questions.length < this.TestLength);
