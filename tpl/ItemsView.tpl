@@ -7,7 +7,7 @@
     <div id="CategoryListPanel" class='panel panel-default'>
         <div class="panel-heading">
             {{{breadcrumb}}}           
-            {{#if isFavouriteList}} {{else}}
+            {{#if isFavouriteListOrSearchResult}} {{else}}
             <button style='cursor: pointer; float: right' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}/{{page}}', true); return false;" 
                     class="btn btn-default btn-lg text-right">
                 <span class="glyphicon glyphicon-plus"><br/>

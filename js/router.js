@@ -200,7 +200,7 @@ var AppRouter = Backbone.Router.extend({
         self.manager.getCategoryList(function(cats) {
             var res = [];
             for (var i=0; i < cats.length; i++) {
-                var catItems = self.manager.getItemList(cats.models[i].get('Id'), function(items) {
+                self.manager.getItemList(cats.models[i].get('Id'), function(items) {
                     var stop = items.models.length;
                     for(var i=0; i<stop; i++) {
                         var indexString = ' ' + items.models[i].get('Word') + ' ' + items.models[i].get('Translation1') + ' ' + items.models[i].get('Translation2');
