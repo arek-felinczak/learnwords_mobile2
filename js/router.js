@@ -203,7 +203,7 @@ var AppRouter = Backbone.Router.extend({
                 self.manager.getItemList(cats.models[i].get('Id'), function(items) {
                     var stop = items.models.length;
                     for(var i=0; i<stop; i++) {
-                        var indexString = ' ' + items.models[i].get('Word') + ' ' + items.models[i].get('Translation1') + ' ' + items.models[i].get('Translation2');
+                        var indexString = items.models[i].attributes.Word + ' ' + items.models[i].attributes.Translation1 + ' ' + items.models[i].attributes.Translation2;
                         indexString = indexString.replace(',', ' ').toLowerCase();
                         if (indexString.indexOf(query) > -1) res.push(items.models[i]);
                     }   
