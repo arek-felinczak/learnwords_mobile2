@@ -9,7 +9,7 @@
             {{#each Answers}}
             <div class='padding-big' style="width:48%; display: inline-block">
                 <button type="button" data-index='{{@index}}' class="btn answer btn-lg btn-block" style='padding:10px'>
-                    {{Translation1}}
+                    <small>{{Translation1}}</small>
                 </button>
             </div>
             {{/each}}
