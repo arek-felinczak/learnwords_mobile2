@@ -9,7 +9,7 @@
         <div>        
             <ul class="list-group" id='ResultList'>
                 {{#each Results}}        
-                <li class="link list-group-item" data-link="item/{{Question.CategoryId}}/{{Question.Id}}/1">
+                <li class="list-group-item" data-link="item/{{Question.CategoryId}}/{{Question.Id}}/1">
                     <div class="row">
                         <div class="col-xs-5"><small>{{Question.Word}}</small></div> 
                         <div class="col-xs-3"><small>{{Answer.Translation1}}</small></div>
