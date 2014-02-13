@@ -18,7 +18,7 @@
     
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     
-    <preference name="phonegap-version" value="3.1.0" />
+    <preference name="phonegap-version" value="3.3.0" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
