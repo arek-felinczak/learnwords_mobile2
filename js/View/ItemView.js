@@ -32,9 +32,7 @@ function LoadSpeechLink(word, catId, id) {
     }
     
     app_router.transitionStart();
-    var player = detectAudioSupport();
-    if (player === 'flash') player = 'mp3';
-    var url = window.learnwordsConfig['proxyUrl'] + "/getSpeechData.php?type=" + player + "&dict=" + window.localStorage.speechEngine + "&word=" + encodeURI(word);
+    var url = window.learnwordsConfig['proxyUrl'] + "/getSpeechData.php?type=mp3&dict=" + window.localStorage.speechEngine + "&word=" + encodeURI(word);
     $.ajax({
         url: url,
         jsonpCallback: "pronounce",
@@ -44,7 +42,7 @@ function LoadSpeechLink(word, catId, id) {
         timeout: 10000,
         success: function(json) {
             if (window.debug_mode) console.log('LoadSpeechLink: ' + JSON.stringify(json));
-            var audio = json[player];
+            var audio = json['mp3'];
             if (audio !== "" && audio !== null)
                 Forvo_Ext_Play(audio);
             else {

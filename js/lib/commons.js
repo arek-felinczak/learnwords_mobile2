@@ -19,77 +19,24 @@ function showAlert(message, alertType) {
     }, 5000);
 }
 
-// This method is taken from Forvo website
-function Forvo_Ext_Play(path_mp3, path_ogg)
-{
-    var audioTagSupport = !!(document.createElement('audio').canPlayType);
-    if (audioTagSupport) {
-        myAudio = new Audio();
-        canPlayMp3 = ("no" !== myAudio.canPlayType("audio/mpeg")) && ("" !== myAudio.canPlayType("audio/mpeg"));
-        canPlayOgg = ("no" !== myAudio.canPlayType("audio/ogg")) && ("" !== myAudio.canPlayType("audio/ogg"));
-    } else {
-        canPlayMp3 = false;
-        canPlayOgg = false;
-    }
-   if (navigator.userAgent.toLowerCase().indexOf('iphone') !== -1) {
-        window.location.href = path_mp3;
-        return false;
-    } else if (canPlayMp3 && path_mp3 != "" && navigator.userAgent.toLowerCase().indexOf('chrome') === -1) {
-        var html = '<audio autoplay="true"><source src="' + path_mp3 + '"></audio>';
-    } else if (canPlayOgg && path_ogg != "" && navigator.userAgent.toLowerCase().indexOf('chrome') === -1) {
-        var html = '<audio autoplay="true"><source src="' + path_ogg + '"></audio>';
-    } else {
-        var html = '<object type="application/x-shockwave-flash" data="http://www.forvo.com/_ext/ext.swf" height="1" width="1">'
-                + '<param name="movie" value="http://www.forvo.com/_ext/ext.swf">'
-                + '<param name="flashvars" value="path=' + path_mp3 + '&amp;_SERVER_HTTP_HOST=www.forvo.com">'
-                + '</object>';
-    }
-    var container = document.getElementById('forvo_ext_player');
-    container.innerHTML = html;
-    return true;
-}
-
-// This method is taken from Forvo website
 function Forvo_Ext_Play(path)
 {
     if (path === null) {
         alert('Playing audio files is not supported by your device.');
         return;
     }
-    var player = detectAudioSupport();
-    if (player !== 'flash') {
-        var html = '<audio autoplay="true"><source src="' + path + '"></audio>';
-    } else {
-        var html = '<object type="application/x-shockwave-flash" data="http://www.forvo.com/_ext/ext.swf" height="1" width="1">'
-                + '<param name="movie" value="http://www.forvo.com/_ext/ext.swf">'
-                + '<param name="flashvars" value="path=' + path_mp3 + '&amp;_SERVER_HTTP_HOST=www.forvo.com">'
-                + '</object>';
-    }
+    
+    try {
+        var audio = new Media(path);
+        audio.play();
+        return true;
+    } catch (err) { }
+ 
+    var html = '<audio autoplay="true"><source src="' + path + '"></audio>';   
     var container = document.getElementById('forvo_ext_player');
     container.innerHTML = html;
     return true;
 }
-
-
-function detectAudioSupport()
-{
-    var audioTagSupport = !!(document.createElement('audio').canPlayType);
-    if (audioTagSupport) {
-        myAudio = new Audio();
-        canPlayMp3 = ("no" !== myAudio.canPlayType("audio/mpeg")) && ("" !== myAudio.canPlayType("audio/mpeg"));
-        canPlayOgg = ("no" !== myAudio.canPlayType("audio/ogg")) && ("" !== myAudio.canPlayType("audio/ogg"));
-    } else {
-        canPlayMp3 = false;
-        canPlayOgg = false;
-    }
-   if (navigator.userAgent.toLowerCase().indexOf('iphone') !== -1 || canPlayMp3) {
-        return 'mp3';
-   } else if (canPlayOgg) {
-        return 'ogg';
-   }
-   return 'flash';
-}
-
 
 // Asynchronously load templates located in separate .html files
 // Method from backbone-cellar author: (Christophe Coenraets)
