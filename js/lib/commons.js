@@ -30,7 +30,9 @@ function Forvo_Ext_Play(path)
         var audio = new Media(path);
         audio.play();
         return true;
-    } catch (err) { }
+    } catch (err) { 
+        alert('Playing audio files is not supported by your device - media object not found.');    
+    }
  
     var html = '<audio autoplay="true"><source src="' + path + '"></audio>';   
     var container = document.getElementById('forvo_ext_player');
