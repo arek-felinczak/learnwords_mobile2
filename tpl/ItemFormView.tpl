@@ -10,26 +10,26 @@
             <fieldset>
                 <div class="form-group">
                     <input type="hidden" id="Id" name="Id" value="{{model.Id}}"/>
-                    <label for="Word" class="col-xs-2 control-label">Word:</label>
-                    <div class="col-xs-10">
+                    <label for="Word" class="col-xs-3 control-label">Word:</label>
+                    <div class="col-xs-9">
                         <input type="text" id="Word" name="Word" class="form-control" value="{{model.Word}}"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="Translation1" class="col-xs-2 control-label">Translation:</label>
-                    <div class="col-xs-10">
+                    <label for="Translation1" class="col-xs-3 control-label">Translation:</label>
+                    <div class="col-xs-9">
                         <input type="text" id="Translation1" name="Translation1" class="form-control" value="{{model.Translation1}}"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="Translation2" class="col-xs-2 control-label">Translation:</label>
-                    <div class="col-xs-10">
+                    <label for="Translation2" class="col-xs-3 control-label">Translation:</label>
+                    <div class="col-xs-9">
                         <input type="text" id="Translation2" name="Translation2" class="form-control" value="{{model.Translation2}}"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="CategoryId" class="col-xs-2 control-label">Category:</label>
-                    <div class="col-xs-10">
+                    <label for="CategoryId" class="col-xs-3 control-label">Category:</label>
+                    <div class="col-xs-9">
                         <select id="CategoryId" class="form-control" name="CategoryId">
                             <option value="0">Choose category</option>
                             {{#each categories}}
