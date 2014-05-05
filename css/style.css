@@ -57,6 +57,7 @@ div.blockUI {
 .pagination li button {
     width: 18%;
     padding: 8px 0px;
+    margin: 0px 3px;
 }
 .center {
     float: none;

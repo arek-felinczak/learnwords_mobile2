@@ -4,6 +4,7 @@ var AppRouter = Backbone.Router.extend({
         "categories" : "categoryList",
         "category/:id/:page" : "category",
         "item/:catId/:id/:nr" : "item",
+        "item/:catId/:id/:nr/:isFav" : "item",
         "itemAddForm/:catId/:pageNum": "wordAddForm",
         "search": "wordSearch",
         "search/:query": "wordSearch",
@@ -151,17 +152,26 @@ var AppRouter = Backbone.Router.extend({
         });         
     },
     
-    item:function (catId, id, nr) {
+    item:function (catId, id, nr, isFav) {
         if (window.debug_mode) console.log('AppRouter:item');
         var self = this;
-        this.manager.getItem(catId, id, function(item) {
+        var viewItemFunc = function(item) {
             var view = new ItemView({model: item});
             self.manager.getCategory(catId, function(cat) {
                 var nav = self.navBar('item', item, cat);
-                $('#content').html(view.render(nr, nav, cat).el);
+                $('#content').html(view.render(nr, nav, cat, item.collection).el);
                 self.removeZombieView(view);
-            });                
-        });
+            });
+        };
+        var viewFavFunc = function(item) {
+            var favCategory = new Category({Id: 0, Name: "Favourites"});
+            var list = new ItemsCollection(self.manager.getFavouritesList());
+            var view = new ItemView({model: item});
+            var nav = self.navBar('category', favCategory);
+            $('#content').html(view.render(nr, nav, favCategory, list).el);
+            self.removeZombieView(view);
+        };
+        this.manager.getItem(catId, id, isFav ? viewFavFunc : viewItemFunc);         
     },
     
     wordAddForm: function(catId, page) {

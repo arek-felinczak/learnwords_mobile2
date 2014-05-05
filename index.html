@@ -53,7 +53,7 @@
                     <div id="content"></div>
                 </div>
                 <div id="footer-div" class="navbar navbar-fixed-bottom text-center" style="background-color: #E8E8E8; padding:3px 0px">
-                    <span> &copy; Arek Felińczak ver. 0.57</span><br /> 
+                    <span> &copy; Arek Felińczak ver. 0.60</span><br /> 
                     <span><a href="#" onclick="return app_router.externalPage('http://www.forvo.com/');"> Forvo </a> </span> |
                     <span><a href="#" onclick="return app_router.externalPage('http://www.macmillandictionary.com/');"> Macmillan </a> </span> |
                     <span><a href="#" onclick="return app_router.externalPage('http://dictionary-api.cambridge.org');"> Cambridge </a> </span> |
@@ -172,18 +172,18 @@
                     $('div#search').hide(300);
                     app_router.navigate('#search', true);
                 };
-            });            
+            });
+            function onPageChange(dd) {
+                var url = dd.value;                        
+                $('html, body').animate({scrollTop: 0}, 500); 
+                return go(url);
+            }
             $(function() {
                 FastClick.attach(document.body);
                 loadTemplate(['CategoryItemsView', 'DictSelectView', 'ItemView', 'ItemsView', 'ItemFormView', 'AboutView', 'ContactView', 'ExternalPage', 'TestView', 'ResultView'], function() {
                     app_router = new AppRouter();
                     window.setTimeout("app_router.refreshCache(false);", 50);
                     Backbone.history.start();
-                    $(document).on('change','select.goToPage',function(dd) {
-                        var url = dd.currentTarget.value;                        
-                        $('html, body').animate({scrollTop: 0}, 500); 
-                        return go(url);
-                    });
                 });
             });
             

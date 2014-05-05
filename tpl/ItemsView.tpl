@@ -8,7 +8,7 @@
         <div class="panel-heading">
             {{{breadcrumb}}}           
             {{#if isFavouriteListOrSearchResult}} {{else}}
-            <button style='cursor: pointer; float: right' onClick="app_router.navigate('#itemAddForm/{{CategoryId}}/{{page}}', true); return false;" 
+            <button style='cursor: pointer; float: right' onClick="app_router.navigate('#itemAddForm/{{catId}}/{{page}}', true); return false;" 
                     class="btn btn-default btn-lg text-right">
                 <span class="glyphicon glyphicon-plus"><br/>
                     <span class="text-small">new</span></span>
@@ -43,7 +43,8 @@
                     {{/if}}
                 </td>
                 <td class='button' style="min-width: 120px">
-                    <button name="open-dict" data-word-num="1" data-category-id="{{CategoryId}}" data-item-id="{{Id}}"
+                    <button name="open-dict" data-word-num="1" 
+                        data-category-id="{{CategoryId}}" data-item-id="{{Id}}" data-from-favourites="{{../isFavouritesList}}"
                              class="pointer btn btn-default btn-lg margin-small">
                          <span class="glyphicon glyphicon-folder-open"><br />
                              <span class="text-small">open</span>

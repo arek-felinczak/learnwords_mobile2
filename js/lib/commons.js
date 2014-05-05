@@ -31,7 +31,9 @@ function Forvo_Ext_Play(path)
         audio.play();
         return true;
     } catch (err) { 
-        alert('Playing audio files is not supported by your device - media object not found.');    
+        if (document.URL.indexOf('http://') === -1) {
+            alert('Playing audio files is not supported by your device - media object not found.');
+        }
     }
  
     var html = '<audio autoplay="true"><source src="' + path + '"></audio>';   

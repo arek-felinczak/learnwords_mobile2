@@ -22,10 +22,11 @@ ItemsView = Backbone.View.extend({
             showPager: pageList.numOfPages() > 1,
             breadcrumb: navHtml,
             emptyList: page.length === 0,
-            CategoryId: catId
+            catId: catId,
+            isFavouritesList: catId !== 0 ? "0" : "1"
         };
 
-	    var html = this.template(vm);
+	var html = this.template(vm);
         $(this.el).html(html);
         
         $(this.el).on("click", "button[name=play-audio]", function(ev) {
@@ -37,10 +38,11 @@ ItemsView = Backbone.View.extend({
         $(this.el).on("click", "button[name=open-dict]", function(ev) {
             var target = ev.currentTarget;
             ev.stopPropagation();
+            var favParam = $(target).attr("data-from-favourites") === "1" ? "/fav" : "";
             app_router.navigate('#item/' + $(target).attr("data-category-id") + '/' + 
-                $(target).attr("data-item-id") + '/' + $(target).attr("data-word-num"), true);
+                $(target).attr("data-item-id") + '/' + $(target).attr("data-word-num") + favParam, true);
             return false;
         });
         return this;
-	 }
+    }
 });

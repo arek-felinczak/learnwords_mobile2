@@ -1,13 +1,9 @@
 <div>
+    {{#if showPager}}
     <div class="col-xs-12">
-        <ul class="pagination center">
-            {{#each pager}}
-            <li onclick="$('#DictionaryItemView').remove(); return go('{{url}}');" class="pointer">
-                {{{inputHtml}}}
-            </li>
-            {{/each}}
-        </ul>
+        {{{pagerHtml}}}
     </div>
+    {{/if}}
     <div id="CategoryListPanel" class='panel panel-default'>
         <div class="panel-heading">
             {{{breadcrumb}}}

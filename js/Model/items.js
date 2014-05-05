@@ -8,9 +8,9 @@ Item = Backbone.Model.extend({
         Translation1: '',
         Translation2: '',
         Id: null
-        //mp3: null,
-        //ogg: null
     },
+    
+    idAttribute: "Id",
     
     isNew: function() {
         return this.get('Id') === null;
