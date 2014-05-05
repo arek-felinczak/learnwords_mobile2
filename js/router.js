@@ -195,18 +195,20 @@ var AppRouter = Backbone.Router.extend({
     wordSearch: function() {
         if (window.debug_mode) console.log('AppRouter:wordSearch');
         this.transitionStart();
-        var query = ' ' + $.trim($('#searchWord').val()).toLowerCase();
+        var query = $.trim($('#searchWord').val()).toLowerCase();
         var self = this;
+        var res = [];
         self.manager.getCategoryList(function(cats) {
-            var res = [];
             for (var i=0; i < cats.length; i++) {
                 self.manager.getItemList(cats.models[i].get('Id'), function(items) {
                     var stop = items.models.length;
-                    for(var i=0; i<stop; i++) {
-                        var indexString = items.models[i].attributes.Word + ' ' + items.models[i].attributes.Translation1 + ' ' + items.models[i].attributes.Translation2;
-                        indexString = indexString.replace(',', ' ').toLowerCase();
-                        if (indexString.indexOf(query) > -1) res.push(items.models[i]);
-                    }   
+                    for(var ii=0; ii<stop; ii++) {
+                        var indexString = items.models[ii].attributes.Word + ' ' + items.models[ii].attributes.Translation1 + ' ' + items.models[ii].attributes.Translation2;
+                        indexString = indexString.replace(',', ' ').toLowerCase();                        
+                        if (indexString.indexOf(query) > -1) {
+                            res.push(items.models[ii]);
+                        }
+                    }
                 });
             }
             var nav = self.navBar('static', 'Search results');
