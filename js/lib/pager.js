@@ -35,6 +35,9 @@ Vocabulary.Pager = function(collection, size) {
     },
     
     this.render = function(baseUrl, page, useIdInsteadOfPage) {
+        if (this.collection.models.length === 0) {
+            return "";
+        }
         var page = parseInt(page);
         var numOfPages = this.numOfPages();
         var html = '<ul class="pagination center">';
