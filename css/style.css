@@ -55,9 +55,9 @@ div.blockUI {
     text-align: center;
 }
 .pagination li button {
-    width: 18%;
+    width: 17%;
     padding: 8px 0px;
-    margin: 0px 3px;
+    margin: 0px;
 }
 .center {
     float: none;
@@ -93,8 +93,8 @@ table.navigation tr td {
 .form-control {
     width: 70%;
     display: inline;
-    padding: 5px;
     height: 38px;
+    margin-left: 4px;
 }
 div#search {
     display: none;
